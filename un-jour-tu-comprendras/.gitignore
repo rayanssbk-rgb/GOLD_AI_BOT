@@ -1,0 +1,8 @@
+node_modules/
+out/frames/
+out/master.mp4
+out/master_video.mp4
+out/part*.mp4
+out/*.log
+out/parts.txt
+out/test.mp4
