@@ -1,0 +1,24 @@
+{
+  "name": "les-deux-echelles",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "audio": "node scripts/generate-audio.mjs",
+    "studio": "remotion studio src/index.ts",
+    "render:master": "remotion render src/index.ts DeuxEchelles out/master.mp4 --codec=h264 --crf=16 --audio-codec=aac --audio-bitrate=320k",
+    "render:social": "ffmpeg -y -i out/master.mp4 -vf \"scale=in_range=full:out_range=tv,format=yuv420p\" -c:v libx264 -preset slow -crf 17 -profile:v high -level 4.2 -colorspace bt709 -color_primaries bt709 -color_trc bt709 -color_range tv -c:a aac -b:a 320k -ar 44100 -movflags +faststart out/les-deux-echelles.mp4",
+    "render": "npm run audio && npm run render:master && npm run render:social",
+    "typecheck": "tsc -p ."
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.290",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.290"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "typescript": "5.6.3"
+  },
+  "type": "module"
+}
