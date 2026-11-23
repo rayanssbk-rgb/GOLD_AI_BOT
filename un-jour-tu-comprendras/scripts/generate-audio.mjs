@@ -494,6 +494,7 @@ const duck = new Float32Array(LEN);
     duck[i] = e;
   }
 }
+const MUSIC = process.env.NO_MUSIC ? 0 : 1; // NO_MUSIC=1: voice + sound effects only
 const L = new Float32Array(LEN);
 const R = new Float32Array(LEN);
 for (let i = 0; i < LEN; i++) {
@@ -504,8 +505,8 @@ for (let i = 0; i < LEN; i++) {
   // two seconds of true silence before "Commence aujourd'hui"
   const pre = 1 - sm(env(t, T_SIL0 - 0.9, T_SIL0));
   const gate = t < T_SIL0 ? pre : t < T_SIL1 + 0.05 ? 0 : 1;
-  L[i] = (mR[0][i] * g * lift + fR[0][i] * 0.9 * g) * gate + vR[0][i] * 1.5 * (t < T_SIL0 || t >= T_SIL1 ? 1 : 0);
-  R[i] = (mR[1][i] * g * lift + fR[1][i] * 0.9 * g) * gate + vR[1][i] * 1.5 * (t < T_SIL0 || t >= T_SIL1 ? 1 : 0);
+  L[i] = (MUSIC * mR[0][i] * g * lift + fR[0][i] * 0.9 * g) * gate + vR[0][i] * 1.5 * (t < T_SIL0 || t >= T_SIL1 ? 1 : 0);
+  R[i] = (MUSIC * mR[1][i] * g * lift + fR[1][i] * 0.9 * g) * gate + vR[1][i] * 1.5 * (t < T_SIL0 || t >= T_SIL1 ? 1 : 0);
 }
 let hl = 0, hr = 0, pl = 0, pr = 0;
 for (let i = 0; i < LEN; i++) {
@@ -537,5 +538,5 @@ for (let i = 0; i < LEN; i++) {
   buf.writeInt16LE(Math.round(Math.max(-1, Math.min(1, L[i])) * 32767), 44 + i * 4);
   buf.writeInt16LE(Math.round(Math.max(-1, Math.min(1, R[i])) * 32767), 46 + i * 4);
 }
-fs.writeFileSync(path.join(ROOT, 'public', 'soundtrack.wav'), buf);
+fs.writeFileSync(path.join(ROOT, 'public', process.env.OUT_WAV ?? 'soundtrack.wav'), buf);
 console.log('soundtrack.wav', (LEN / SR).toFixed(2), 's');
