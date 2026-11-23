@@ -198,6 +198,10 @@ for k, t in enumerate((36.2, 37.9, 38.3, 40.4, 41.1)):  # a few distant birds fa
     ph = 2 * np.pi * np.cumsum(f0 + 900 * np.sin(2 * np.pi * 14 * tt)) / SR
     put(np.sin(ph) * np.sin(np.pi * tt / tt[-1]) ** 2 * 0.006, t, pan=0.5 - 0.25 * k)
 
+if os.environ.get('SFX_ONLY'):
+    # effects bed only (no voice, no ducking) for re-voicing / re-cutting
+    sf.write(os.path.join(ROOT, 'public', 'sfx.wav'), np.stack([L, R], 1).astype(np.float32), SR, subtype='FLOAT')
+    print('sfx written'); raise SystemExit
 # ---------------------------------------------------------------- narration + ducking
 voice = np.zeros(N)
 for pid, t0 in EV['VO'].items():
