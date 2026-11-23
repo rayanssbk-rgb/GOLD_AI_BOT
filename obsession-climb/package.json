@@ -1,0 +1,7 @@
+{
+  "name": "obsession-climb",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": { "studio": "remotion studio src/index.ts", "typecheck": "tsc -p ." }
+}

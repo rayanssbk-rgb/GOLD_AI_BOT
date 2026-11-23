@@ -1,0 +1,6 @@
+node_modules
+out/*.mp4
+out/*.mov
+out/*.log
+out/takes/
+out/stills/
