@@ -210,9 +210,13 @@ v = np.sqrt((xx - 0.5) ** 2 + (yy - 0.48) ** 2)
 img *= (1 - np.clip((v - 0.35) / 0.5, 0, 1) ** 1.6 * 0.55)[..., None]
 img = np.clip(img, 0, 1)
 
-out = Image.fromarray((img * 255).astype(np.uint8)).resize((1080, 1080), Image.LANCZOS)
+import sys
+full = Image.fromarray((img * 255).astype(np.uint8))
+if 'tiktok' in sys.argv:  # tighter framing for TikTok's small round avatar
+    full = full.crop((330, 560, 1830, 2060))
+out = full.resize((1080, 1080), Image.LANCZOS)
 a = np.asarray(out, np.float32)
 grain = rng.normal(0, 4.5, (1080, 1080, 1)).astype(np.float32)
 a = np.clip(a + grain * (0.6 + 0.4 * (1 - a.mean(-1, keepdims=True) / 255)), 0, 255)
-Image.fromarray(a.astype(np.uint8)).save('out/photo-profil.png', optimize=True)
+Image.fromarray(a.astype(np.uint8)).save('out/photo-profil-tiktok.png' if 'tiktok' in sys.argv else 'out/photo-profil.png', optimize=True)
 print('ok')
