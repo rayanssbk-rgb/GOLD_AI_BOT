@@ -16,7 +16,7 @@ GRADE = ("split=2[b{i}][h{i}];[h{i}]curves=all='0/0 0.6/0 1/1',gblur=sigma=26[gl
 inputs, fc = [], []
 for i, (a, b) in enumerate(SEGS):
     inputs += ['-i', f'{SEGDIR}/s{i+1}.mp4']
-inputs += ['-i', 'out/subs_en.mov', '-i', 'public/soundtrack.wav']
+inputs += ['-i', os.environ.get('SUBS', 'out/subs_en.mov'), '-i', 'public/soundtrack.wav']
 n = len(SEGS)
 SUB, AUD = n, n + 1
 fc.append(f'[{SUB}:v]split={n}' + ''.join(f'[sub{i}]' for i in range(n)))
