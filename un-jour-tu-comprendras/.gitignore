@@ -7,3 +7,10 @@ out/*.log
 out/parts.txt
 out/test.mp4
 out/un-jour-tu-comprendras.mp4
+out/master_clean.mp4
+out/clean*.mp4
+out/subs_en.mov
+out/sub_*.png
+out/un-jour-tu-comprendras_EN.mp4
+out/parts_clean.txt
+out/bundle*.log

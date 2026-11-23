@@ -14,7 +14,7 @@ const inR = (f: number, r: number[]) => f >= r[0] && f < r[1];
 const Shot: React.FC<{ f: number; r: number[]; fade?: number; children: React.ReactNode }> = ({ f, r, fade = 12, children }) =>
   inR(f, r) ? <AbsoluteFill style={{ opacity: fade ? Math.min(1, (f - r[0]) / fade) : 1 }}>{children}</AbsoluteFill> : null;
 
-export const Main: React.FC = () => {
+export const Main: React.FC<{ subs?: boolean }> = ({ subs = true }) => {
   useFonts();
   const f = useCurrentFrame();
   return (
@@ -38,7 +38,7 @@ export const Main: React.FC = () => {
         <Sunrise f={f} />
       </Shot>
       <Title f={f} />
-      <Subtitles f={f} />
+      {subs ? <Subtitles f={f} /> : null}
       <Finale f={f} />
       <Audio src={staticFile('soundtrack.wav')} />
     </AbsoluteFill>
