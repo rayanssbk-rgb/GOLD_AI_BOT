@@ -1,0 +1,90 @@
+[
+ {
+  "id": "k1",
+  "who": "KNOX",
+  "voice": "am_fenrir",
+  "lang": "en-us",
+  "speed": 1.0,
+  "text": "Still waiting on a miracle, kid?"
+ },
+ {
+  "id": "d0",
+  "who": "DRE",
+  "voice": "am_liam",
+  "lang": "en-us",
+  "speed": 0.95,
+  "text": "I'm just tired, man."
+ },
+ {
+  "id": "d1",
+  "who": "DRE",
+  "voice": "am_liam",
+  "lang": "en-us",
+  "speed": 1.0,
+  "text": "Everybody out there is winning. And I'm still stuck."
+ },
+ {
+  "id": "v1",
+  "who": "VINCE",
+  "voice": "bm_lewis",
+  "lang": "en-gb",
+  "speed": 0.92,
+  "text": "Stuck is a choice."
+ },
+ {
+  "id": "v2",
+  "who": "VINCE",
+  "voice": "bm_lewis",
+  "lang": "en-gb",
+  "speed": 0.95,
+  "text": "I was broke at thirty. Nobody believed in me."
+ },
+ {
+  "id": "k2",
+  "who": "KNOX",
+  "voice": "am_fenrir",
+  "lang": "en-us",
+  "speed": 1.05,
+  "text": "Nobody's coming, Dre. Not luck. Not your family. Nobody."
+ },
+ {
+  "id": "k3",
+  "who": "KNOX",
+  "voice": "am_fenrir",
+  "lang": "en-us",
+  "speed": 0.95,
+  "text": "Only you."
+ },
+ {
+  "id": "v3",
+  "who": "VINCE",
+  "voice": "bm_lewis",
+  "lang": "en-gb",
+  "speed": 0.95,
+  "text": "Every night you quit, somebody else doesn't."
+ },
+ {
+  "id": "d2",
+  "who": "DRE",
+  "voice": "am_liam",
+  "lang": "en-us",
+  "speed": 1.0,
+  "text": "Then I start tonight."
+ },
+ {
+  "id": "k4",
+  "who": "KNOX",
+  "voice": "am_fenrir",
+  "lang": "en-us",
+  "speed": 1.0,
+  "text": "About time."
+ },
+ {
+  "id": "v4",
+  "who": "VINCE",
+  "voice": "bm_lewis",
+  "lang": "en-gb",
+  "speed": 0.9,
+  "text": "So... what's your excuse?"
+ }
+]
