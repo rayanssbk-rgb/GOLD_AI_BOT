@@ -41,7 +41,7 @@ prev = 'a0'
 for i in range(1, n):
     fc.append(f'[{prev}][a{i}]acrossfade=d={XA}:c1=qsin:c2=qsin[y{i}]')
     prev = f'y{i}'
-fc.append(f'[{prev}]afade=t=in:st=0:d=0.15,afade=t=out:st={total-0.6:.3f}:d=0.6[aout]')
+fc.append(f'[{prev}]afade=t=in:st=0:d=0.15,afade=t=out:st={total-0.6:.3f}:d=0.6,loudnorm=I=-14:TP=-1.0:LRA=11,aresample=44100[aout]')
 cmd = ['ffmpeg', '-loglevel', 'error', '-y', *inputs, '-filter_complex', ';'.join(fc), '-map', '[vout]', '-map', '[aout]',
        '-t', f'{total:.3f}', '-c:v', 'libx264', '-preset', 'slow', '-crf', '17', '-profile:v', 'high', '-level', '4.2', '-r', '30',
        '-colorspace', 'bt709', '-color_primaries', 'bt709', '-color_trc', 'bt709', '-color_range', 'tv',
