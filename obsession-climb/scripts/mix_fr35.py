@@ -21,12 +21,13 @@ for i, (a, b) in enumerate(SEG):
 bed = out[: int(round(total * sr))]
 N = len(bed)
 # French narration
-P = json.load(open(os.path.join(ROOT, 'scripts', 'narration_fr.json')))
+NARR = os.environ.get('NARR', 'narration_fr.json'); VDIR = os.environ.get('VDIR', 'voice_fr'); OUTW = os.environ.get('OUTW', 'soundtrack_fr35.wav')
+P = json.load(open(os.path.join(ROOT, 'scripts', NARR)))
 voice = np.zeros(N); prev = 0; placed = []
 for p in P:
-    v, vsr = sf.read(os.path.join(ROOT, 'public', 'voice_fr', f"{p['id']}.wav"), dtype='float64')
+    v, vsr = sf.read(os.path.join(ROOT, 'public', VDIR, f"{p['id']}.wav"), dtype='float64')
     assert vsr == sr
-    t0 = max(p['en'], prev + 0.35)
+    t0 = max(p.get('at', p.get('en', 0)), prev + p.get('gap', 0.35))
     i = int(t0 * sr); voice[i:i + len(v)] += v[: N - i]
     prev = t0 + len(v) / sr; placed.append((p['id'], round(t0, 2), round(prev, 2)))
 voice *= 0.5 / (np.abs(voice).max() + 1e-9) * 1.25
@@ -35,7 +36,7 @@ duck = (1 - 0.45 * np.clip(vact * 3, 0, 1))[:, None]
 mix = bed * duck * 0.55 + voice[:, None]
 mix *= 0.89 / np.abs(mix).max()
 mix *= np.clip((total - np.arange(N) / sr) / 0.8, 0, 1)[:, None]
-sf.write(os.path.join(ROOT, 'public', 'soundtrack_fr35.wav'), mix.astype(np.float32), sr, subtype='PCM_24')
-json.dump(placed, open(os.path.join(ROOT, 'scripts', 'placed_fr.json'), 'w'))
+sf.write(os.path.join(ROOT, 'public', OUTW), mix.astype(np.float32), sr, subtype='PCM_24')
+json.dump(placed, open(os.path.join(ROOT, 'scripts', 'placed_' + VDIR + '.json'), 'w'))
 for r in placed: print(r)
 print('total', total)
