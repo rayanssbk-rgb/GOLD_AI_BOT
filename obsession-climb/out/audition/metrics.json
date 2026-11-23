@@ -1,0 +1,32 @@
+{
+ "lucas_narr": {
+  "dur": 6.08,
+  "f0_med": 110.3,
+  "range_st": 11.6,
+  "sd_st": 3.72
+ },
+ "jt": {
+  "dur": 5.84,
+  "f0_med": 106.7,
+  "range_st": 20.9,
+  "sd_st": 6.55
+ },
+ "max": {
+  "dur": 7.68,
+  "f0_med": 100.6,
+  "range_st": 13.1,
+  "sd_st": 4.49
+ },
+ "raphael": {
+  "dur": 6.24,
+  "f0_med": 105.3,
+  "range_st": 14.8,
+  "sd_st": 4.68
+ },
+ "lucas_deep": {
+  "dur": 7.36,
+  "f0_med": 96.4,
+  "range_st": 15.6,
+  "sd_st": 4.62
+ }
+}

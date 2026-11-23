@@ -1,0 +1,37 @@
+[
+ {
+  "take": 0,
+  "stab": 0.5,
+  "dur": 35.68,
+  "f0": 99.4,
+  "sd_st": 1.78,
+  "diff": [
+   "- progresses",
+   "+ progresse",
+   "- abandonner",
+   "+ amandonner"
+  ]
+ },
+ {
+  "take": 1,
+  "stab": 0.5,
+  "dur": 34.7,
+  "f0": 100.6,
+  "sd_st": 1.79,
+  "diff": [
+   "- progresses",
+   "+ progresse"
+  ]
+ },
+ {
+  "take": 2,
+  "stab": 0.0,
+  "dur": 31.2,
+  "f0": 101.3,
+  "sd_st": 1.7,
+  "diff": [
+   "- progresses",
+   "+ progresse"
+  ]
+ }
+]
