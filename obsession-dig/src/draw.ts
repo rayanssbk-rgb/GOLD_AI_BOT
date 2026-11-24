@@ -609,9 +609,48 @@ export function renderFrame(ctx: CanvasRenderingContext2D, f: number) {
     ctx.fillRect(0, 0, W, H);
     ctx.globalCompositeOperation = 'source-over';
   }
+  drawTitle(ctx, c, t);
   const out = clamp((t - 31.3) / 0.7);
   if (out > 0) {
     ctx.fillStyle = `rgba(0,0,0,${out})`;
     ctx.fillRect(0, 0, W, H);
   }
+}
+
+// ---------------------------------------------------------------- step titles above the figure
+const TITLES: [number, number, string, boolean][] = [
+  [0.6, 6, 'MOTIVATION', false],
+  [6, 14, 'DISCIPLINE', false],
+  [14, 20, 'PERSÉVÉRANCE', false],
+  [20, 26, 'OBSESSION', true],
+  [26, 32, 'RÉSULTAT', false],
+];
+function drawTitle(ctx: CanvasRenderingContext2D, c: Cam, t: number) {
+  const T = TITLES.find(([a, b]) => t >= a && t < b);
+  if (!T) return;
+  const [a, b, text, gold] = T;
+  const k = clamp((t - a) / 0.25) * clamp((b - t) / 0.2);
+  if (k <= 0) return;
+  const F = figure(t);
+  const pel = add(F.root, F.pose.pel);
+  const neck = add(F.root, F.pose.neck);
+  const top = Math.max(pel[1], neck[1]) + 0.32;
+  const [x, y] = toScreen(c, [F.root[0] + (pel[0] + neck[0]) / 2 - F.root[0], top]);
+  const size = clamp(c.z * 0.2, 38, 50);
+  const sy = clamp(y - 26, size + 120, H - 300);
+  ctx.setTransform(1, 0, 0, 1, 0, 0);
+  ctx.globalAlpha = k;
+  ctx.font = `700 ${size}px Inter700, Arial, sans-serif`;
+  (ctx as unknown as { letterSpacing: string }).letterSpacing = `${(size * 0.32).toFixed(1)}px`;
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'alphabetic';
+  const tw = ctx.measureText(text).width;
+  const sx = clamp(x + size * 0.16, tw / 2 + 50, W - tw / 2 - 50);
+  ctx.shadowColor = gold ? 'rgba(255,180,70,0.9)' : 'rgba(0,0,0,0.9)';
+  ctx.shadowBlur = gold ? 22 : 10;
+  ctx.fillStyle = gold ? '#ffc35e' : '#f4efe6';
+  ctx.fillText(text, sx, sy);
+  ctx.shadowBlur = 0;
+  ctx.globalAlpha = 1;
+  (ctx as unknown as { letterSpacing: string }).letterSpacing = '0px';
 }
