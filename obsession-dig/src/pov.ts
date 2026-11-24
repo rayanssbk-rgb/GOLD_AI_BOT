@@ -7,7 +7,7 @@ import { sky, sun, skyline, ocean } from './yacht';
 
 export const POV_FRAMES = 10 * FPS;
 // beats (s)
-const P = { buzz: 3.0, lift0: 3.2, lift1: 3.95, tap: 5.0, app: 5.15, count0: 5.3, count1: 6.8, ex: 7.0, laugh: 7.3, laughEnd: 9.25, out: 9.6 };
+const P = { buzz: 3.0, lift0: 3.2, lift1: 3.95, tap: 5.0, app: 5.15, count0: 5.3, count1: 6.8, ex: 7.0, laugh: 7.0, laughEnd: 8.95, out: 9.6 };
 const LINE = '#f6f2ea';
 const GREEN = '#2fe07a';
 const AMOUNT = 237450;
@@ -297,7 +297,7 @@ function screen(ctx: CanvasRenderingContext2D, t: number) {
   ctx.stroke();
   ctx.fillRect(SW - 80, 38, 30, 14);
   // notification from the ex, sliding down from the top
-  const nk = easeOut(prog(t, P.ex, P.ex + 0.3)) * (1 - smooth(prog(t, P.laughEnd + 0.05, P.laughEnd + 0.35)));
+  const nk = 0; // the ex's message was removed
   if (nk > 0.001) {
     const by = -140 + nk * 216;
     ctx.save();

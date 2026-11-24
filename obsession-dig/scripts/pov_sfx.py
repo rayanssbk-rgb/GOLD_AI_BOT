@@ -46,14 +46,11 @@ put((chime + chime2) * 0.07, 6.8, pan=0.05)
 n = int(0.5 * SR)
 # message notification: haptic + a soft two-note alert, then his quick laugh
 n = int(0.09 * SR); tt = np.arange(n) / SR
-put(np.sin(2 * np.pi * 170 * tt) * np.sin(np.pi * tt / tt[-1]) * 0.35, 7.0)
 n = int(0.6 * SR); tt = np.arange(n) / SR
-put(np.sin(2 * np.pi * 1568 * tt) * np.exp(-tt / 0.12) * 0.08, 7.0)
-put(np.sin(2 * np.pi * 2093 * tt) * np.exp(-tt / 0.14) * 0.08, 7.1)
 lg, lsr = sf.read(os.path.join(ROOT, 'public', 'laugh.wav'))
 assert lsr == SR
 lg = lg / np.abs(lg).max() * 0.42
-put(lg, 7.3)
+put(lg, 7.0)
 # glass fizz on the left
 fz = np.zeros(N); kk = rng.integers(0, N, 700); fz[kk] = rng.uniform(-1, 1, len(kk))
 fz = band(fz, 4000, 12000) * 0.08
