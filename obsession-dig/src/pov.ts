@@ -1,10 +1,13 @@
-// POV (5 s): still on the deck chair, a glass in one hand, the phone in the other: the balance counts up to 237.450 €.
+// POV (10 s): on the deck chair, looking at the island; the phone buzzes, he lifts it: a transfer has arrived,
+// he opens the app and the balance counts up to 237.450 €; then a message from his ex: "Hello !" -> a mocking laugh.
 // Same 2D glowing-line world (hands, legs, rail, the island at sunset behind); the phone screen is crisp and realistic.
 // The banking app is fictional (no real bank name or logo).
 import { W, H, FPS, clamp, lerp, smooth, sstep, prog, easeOut, rnd } from './timeline.js';
 import { sky, sun, skyline, ocean } from './yacht';
 
-export const POV_FRAMES = 5 * FPS;
+export const POV_FRAMES = 10 * FPS;
+// beats (s)
+const P = { buzz: 3.0, lift0: 3.2, lift1: 3.95, tap: 5.0, app: 5.15, count0: 5.3, count1: 6.8, ex: 7.0, laugh: 7.3, laughEnd: 9.25, out: 9.6 };
 const LINE = '#f6f2ea';
 const GREEN = '#2fe07a';
 const AMOUNT = 237450;
@@ -24,14 +27,15 @@ function background(ctx: CanvasRenderingContext2D, t: number) {
   g.fillRect(0, 0, W, H);
   // looking a bit higher than in the wide shot: the island sits behind the phone, out of focus
   g.save();
-  g.translate(0, -60);
+  g.translate(0, -60 * sstep(t, P.lift0, P.lift1));
   sky(g, t);
   sun(g, t);
   skyline(g, t);
   ocean(g, t);
   g.restore();
   ctx.save();
-  ctx.filter = 'blur(7px) brightness(0.62)';
+  const fk = sstep(t, P.lift0, P.lift1);
+  ctx.filter = `blur(${(7 * fk).toFixed(2)}px) brightness(${(1 - 0.38 * fk).toFixed(3)})`;
   ctx.drawImage(BG, 0, 0);
   ctx.restore();
 }
@@ -55,13 +59,86 @@ function rr(ctx: CanvasRenderingContext2D, x: number, y: number, w: number, h: n
 /** the app screen, drawn in phone-screen pixels (0..SW, 0..SH) */
 const SW = 556;
 const SH = 1176;
-function screen(ctx: CanvasRenderingContext2D, t: number) {
-  const on = sstep(t, 0.45, 0.75);
-  ctx.fillStyle = '#0a0a0d';
+function lockScreen(ctx: CanvasRenderingContext2D, t: number) {
+  const g = ctx.createLinearGradient(0, 0, SW, SH);
+  g.addColorStop(0, '#1b1626');
+  g.addColorStop(0.5, '#0d0b12');
+  g.addColorStop(1, '#201509');
+  ctx.fillStyle = g;
   ctx.fillRect(0, 0, SW, SH);
+  ctx.textAlign = 'center';
+  ctx.fillStyle = '#f4f4f6';
+  ctx.font = '500 26px Inter500, Arial';
+  ctx.fillText('mardi 24 novembre', SW / 2, 170);
+  ctx.font = '700 128px Inter700, Arial';
+  ctx.fillText('19:42', SW / 2, 300);
+  // transfer notification
+  const k = easeOut(prog(t, P.buzz + 0.05, P.buzz + 0.4));
+  const press = 1 - 0.03 * Math.sin(Math.PI * prog(t, P.tap - 0.1, P.tap + 0.12));
+  const y = lerp(SH * 0.62, 420, k);
+  ctx.globalAlpha = k;
+  ctx.save();
+  ctx.translate(SW / 2, y + 70);
+  ctx.scale(press, press);
+  ctx.translate(-SW / 2, -(y + 70));
+  rr(ctx, 20, y, SW - 40, 150, 32);
+  ctx.fillStyle = 'rgba(52,52,60,0.92)';
+  ctx.fill();
+  ctx.beginPath();
+  ctx.arc(76, y + 54, 30, 0, Math.PI * 2);
+  ctx.fillStyle = '#1f9d55';
+  ctx.fill();
+  ctx.fillStyle = '#fff';
+  ctx.font = '700 30px Inter700, Arial';
+  ctx.fillText('€', 76, y + 65);
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#c8c8d0';
+  ctx.font = '600 19px Inter700, Arial';
+  ctx.fillText('MA BANQUE', 122, y + 46);
+  ctx.textAlign = 'right';
+  ctx.fillStyle = '#9a9aa4';
+  ctx.font = '500 19px Inter500, Arial';
+  ctx.fillText('maintenant', SW - 44, y + 46);
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#ffffff';
+  ctx.font = '700 26px Inter700, Arial';
+  ctx.fillText('Virement reçu', 122, y + 88);
+  ctx.fillStyle = '#e4e4ea';
+  ctx.font = '500 23px Inter500, Arial';
+  ctx.fillText('+237.450,00 € crédité sur votre compte', 52, y + 126);
+  ctx.restore();
+  ctx.globalAlpha = 1;
+  // the tap
+  const tp = prog(t, P.tap - 0.12, P.tap + 0.25);
+  if (tp > 0 && tp < 1) {
+    ctx.strokeStyle = `rgba(255,255,255,${0.7 * (1 - tp)})`;
+    ctx.lineWidth = 3;
+    ctx.beginPath();
+    ctx.arc(SW / 2 + 60, y + 80, 18 + 50 * tp, 0, Math.PI * 2);
+    ctx.stroke();
+  }
+  // flashlight / camera shortcuts + home bar, like any lock screen
+  for (const x of [80, SW - 80]) {
+    ctx.beginPath();
+    ctx.arc(x, SH - 110, 38, 0, Math.PI * 2);
+    ctx.fillStyle = 'rgba(60,60,66,0.7)';
+    ctx.fill();
+  }
+}
+function screen(ctx: CanvasRenderingContext2D, t: number) {
+  ctx.fillStyle = '#000';
+  ctx.fillRect(0, 0, SW, SH);
+  const wake = sstep(t, P.buzz, P.buzz + 0.15);
+  if (wake <= 0) return;
+  ctx.globalAlpha = wake;
+  lockScreen(ctx, t);
+  ctx.globalAlpha = 1;
+  const on = sstep(t, P.tap, P.app + 0.15);
   if (on <= 0) return;
   ctx.globalAlpha = on;
-  const scroll = 150 * smooth(prog(t, 3.5, 4.3));
+  ctx.fillStyle = '#0a0a0d';
+  ctx.fillRect(0, 0, SW, SH);
+  const scroll = 0;
   ctx.save();
   ctx.translate(0, -scroll);
   // header
@@ -82,12 +159,12 @@ function screen(ctx: CanvasRenderingContext2D, t: number) {
   ctx.font = '600 26px Inter700, Arial';
   ctx.fillText('Compte principal', 114, 154);
   // balance
-  const k = easeOut(prog(t, 1.0, 2.6));
+  const k = easeOut(prog(t, P.count0, P.count1));
   const n = AMOUNT * k;
   ctx.fillStyle = '#8c8c94';
   ctx.font = '500 24px Inter500, Arial';
   ctx.fillText('Solde disponible', 44, 250);
-  const pulse = sstep(t, 2.55, 2.7) * (1 - 0.6 * sstep(t, 2.7, 3.6));
+  const pulse = sstep(t, P.count1 - 0.05, P.count1 + 0.1) * (1 - 0.6 * sstep(t, P.count1 + 0.1, P.count1 + 1.0));
   ctx.save();
   ctx.shadowColor = `rgba(47,224,122,${0.35 + 0.55 * pulse})`;
   ctx.shadowBlur = 18 + 30 * pulse;
@@ -110,7 +187,7 @@ function screen(ctx: CanvasRenderingContext2D, t: number) {
     v += 0.6 + (rnd(i, 7) - 0.35) * 1.6 + (i > 30 ? 1.2 : 0);
     pts.push([60 + (i / N) * (SW - 120), 690 - v * 5.4]);
   }
-  const draw = smooth(prog(t, 1.3, 2.9));
+  const draw = smooth(prog(t, P.count0 + 0.3, P.count1 + 0.3));
   const m = Math.max(2, Math.floor(draw * N) + 1);
   const shown = pts.slice(0, m);
   ctx.beginPath();
@@ -180,12 +257,7 @@ function screen(ctx: CanvasRenderingContext2D, t: number) {
   ctx.fillStyle = '#f2f2f4';
   ctx.font = '600 25px Inter700, Arial';
   ctx.fillText('Activité récente', 44, 930);
-  const rows: [string, string, string, boolean][] = [
-    ['Virement reçu', "Aujourd'hui", '+48.000,00 €', true],
-    ['Paiement client', 'Hier', '+12.750,00 €', true],
-    ['Restaurant du port', 'Hier', '−86,40 €', false],
-    ['Virement reçu', '12 nov.', '+31.200,00 €', true],
-  ];
+  const rows: [string, string, string, boolean][] = [['Virement reçu', "À l'instant", '+237.450,00 €', true]];
   rows.forEach(([a, d, v2, pos], i) => {
     const y = 990 + i * 92;
     ctx.fillStyle = '#1b1b21';
@@ -225,7 +297,7 @@ function screen(ctx: CanvasRenderingContext2D, t: number) {
   ctx.stroke();
   ctx.fillRect(SW - 80, 38, 30, 14);
   // notification from the ex, sliding down from the top
-  const nk = easeOut(prog(t, 3.1, 3.4)) * (1 - smooth(prog(t, 4.55, 4.85)));
+  const nk = easeOut(prog(t, P.ex, P.ex + 0.3)) * (1 - smooth(prog(t, P.laughEnd + 0.05, P.laughEnd + 0.35)));
   if (nk > 0.001) {
     const by = -140 + nk * 216;
     ctx.save();
@@ -297,12 +369,13 @@ export function renderPov(ctx: CanvasRenderingContext2D, f: number) {
   ctx.restore();
 
   // left hand with the glass (lower left), right hand bringing the phone up
-  const lift = easeOut(prog(t, 0, 0.8));
-  const push = 1 + 0.07 * smooth(prog(t, 2.4, 5));
-  const px = 560;
-  const py = 930 + (1 - lift) * 260 + 7 * sstep(t, 3.45, 3.55) * (1 - sstep(t, 4.4, 4.6)) * Math.sin(t * 31);
-  const laugh = sstep(t, 3.45, 3.55) * (1 - sstep(t, 4.4, 4.6));
-  const tilt = -0.05 + 0.02 * Math.sin(t * 1.1) + 0.012 * laugh * Math.sin(t * 38);
+  const lift = easeOut(prog(t, P.lift0, P.lift1));
+  const laugh = sstep(t, P.laugh, P.laugh + 0.1) * (1 - sstep(t, P.laughEnd - 0.2, P.laughEnd));
+  const push = lerp(0.9, 1, lift) * (1 + 0.07 * smooth(prog(t, P.app, 10)));
+  const buzz = t > P.buzz && t < P.buzz + 0.35 ? 4 * Math.sin(t * 160) : 0;
+  const px = lerp(720, 560, lift) + buzz;
+  const py = lerp(1800, 930, lift) + 7 * laugh * Math.sin(t * 31);
+  const tilt = lerp(0.32, -0.05, lift) + 0.02 * Math.sin(t * 1.1) + 0.012 * laugh * Math.sin(t * 38);
   // glass
   const gx = 175 + 6 * Math.sin(t * 1.3);
   const gy = 1250;
@@ -395,8 +468,19 @@ export function renderPov(ctx: CanvasRenderingContext2D, f: number) {
   glowLine(ctx, [[-PW / 2 - 4, 380], [-PW / 2 + 14, 352]], 20);
   ctx.restore();
 
+  // the screen lights up his lap when it wakes (before he lifts it)
+  const wakeGlow = sstep(t, P.buzz, P.buzz + 0.15) * (1 - lift);
+  if (wakeGlow > 0.01) {
+    ctx.globalCompositeOperation = 'lighter';
+    const g = ctx.createRadialGradient(px, py - 200, 0, px, py - 200, 600);
+    g.addColorStop(0, `rgba(190,170,255,${0.16 * wakeGlow})`);
+    g.addColorStop(1, 'rgba(190,170,255,0)');
+    ctx.fillStyle = g;
+    ctx.fillRect(0, 0, W, H);
+    ctx.globalCompositeOperation = 'source-over';
+  }
   // green light from the screen on the hands when the amount lands
-  const pulse = sstep(t, 2.55, 2.7) * (1 - 0.7 * sstep(t, 2.7, 3.8));
+  const pulse = sstep(t, P.count1 - 0.05, P.count1 + 0.1) * (1 - 0.7 * sstep(t, P.count1 + 0.1, P.count1 + 1.2));
   if (pulse > 0.01) {
     ctx.globalCompositeOperation = 'lighter';
     const g = ctx.createRadialGradient(px, py - 300, 0, px, py - 300, 700);
@@ -406,7 +490,7 @@ export function renderPov(ctx: CanvasRenderingContext2D, f: number) {
     ctx.fillRect(0, 0, W, H);
     ctx.globalCompositeOperation = 'source-over';
   }
-  const fade = Math.max(1 - clamp(t / 0.35), clamp((t - 4.6) / 0.4));
+  const fade = Math.max(1 - clamp(t / 0.35), clamp((t - P.out) / 0.4));
   if (fade > 0) {
     ctx.fillStyle = `rgba(0,0,0,${fade})`;
     ctx.fillRect(0, 0, W, H);
