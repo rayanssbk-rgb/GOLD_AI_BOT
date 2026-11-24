@@ -14,7 +14,7 @@ const LINE = '#f6f2ea';
 const HORIZON = 905;
 
 // ---------------------------------------------------------------- far layer (screen space): sky, sun, skyline, island
-function sky(ctx: CanvasRenderingContext2D, t: number) {
+export function sky(ctx: CanvasRenderingContext2D, t: number) {
   const g = ctx.createLinearGradient(0, 0, 0, HORIZON);
   g.addColorStop(0, '#030304');
   g.addColorStop(0.55, '#08070a');
@@ -29,7 +29,7 @@ function sky(ctx: CanvasRenderingContext2D, t: number) {
   }
 }
 const SUN = (t: number): V => [720, HORIZON - 150 + t * 6];
-function sun(ctx: CanvasRenderingContext2D, t: number) {
+export function sun(ctx: CanvasRenderingContext2D, t: number) {
   const [x, y] = SUN(t);
   ctx.globalCompositeOperation = 'lighter';
   for (const [r, a, c] of [
@@ -94,7 +94,7 @@ function towerPath(ctx: CanvasRenderingContext2D, T: Tower) {
   ctx.lineTo(T.x + T.w, base);
   ctx.closePath();
 }
-function skyline(ctx: CanvasRenderingContext2D, t: number) {
+export function skyline(ctx: CanvasRenderingContext2D, t: number) {
   // island hill
   ctx.fillStyle = '#050405';
   ctx.beginPath();
@@ -178,7 +178,7 @@ function palms(ctx: CanvasRenderingContext2D, t: number) {
 }
 
 // ---------------------------------------------------------------- ocean
-function ocean(ctx: CanvasRenderingContext2D, t: number) {
+export function ocean(ctx: CanvasRenderingContext2D, t: number) {
   const g = ctx.createLinearGradient(0, HORIZON, 0, H);
   g.addColorStop(0, '#120c06');
   g.addColorStop(0.25, '#060507');
