@@ -1,0 +1,16 @@
+{
+  "type": "header",
+  "name": "Groupe en-tête",
+  "sections": {
+    "announcement": {
+      "type": "announcement-bar",
+      "blocks": {
+        "msg1": { "type": "message", "settings": { "text": "Expédition sous 48 h · Paiement sécurisé", "link": "" } },
+        "msg2": { "type": "message", "settings": { "text": "14 jours pour changer d'avis", "link": "" } }
+      },
+      "block_order": ["msg1", "msg2"]
+    },
+    "header": { "type": "header", "settings": { "menu": "main-menu", "transparent": true, "logo_width": 140 } }
+  },
+  "order": ["announcement", "header"]
+}

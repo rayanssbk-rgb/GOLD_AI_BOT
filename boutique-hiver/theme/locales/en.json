@@ -1,0 +1,6 @@
+{
+  "general": {
+    "password_page": { "login_form_heading": "Enter store", "login_form_submit": "Enter" },
+    "accessibility": { "skip_to_content": "Skip to content" }
+  }
+}

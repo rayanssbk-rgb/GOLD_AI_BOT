@@ -1,0 +1,19 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "color_bg": "#F4F1EA",
+      "color_text": "#141414",
+      "color_dark": "#0D0D0E",
+      "color_anthracite": "#2C2E33",
+      "color_cream": "#E6DAC4",
+      "color_ice": "#A8C6D6",
+      "type_heading": "cormorant_n5",
+      "type_body": "assistant_n4",
+      "page_width": 1360,
+      "radius": 2,
+      "animations": true,
+      "free_shipping_threshold": 0
+    }
+  }
+}

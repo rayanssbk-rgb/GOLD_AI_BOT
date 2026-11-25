@@ -1,0 +1,34 @@
+{
+  "sections": {
+    "hero": { "type": "hero", "settings": { "kicker": "Collection Hiver", "heading": "Le froid,\nen toute élégance.", "text": "Bonnets, gants et écharpes pensés pour les matins glacés et les longues soirées.", "button_label": "DÉCOUVRIR LA COLLECTION", "overlay": 35, "full_height": true, "snow": true } },
+    "trust": { "type": "trust-bar", "settings": {} },
+    "bestsellers": { "type": "featured-collection", "settings": { "kicker": "Les plus aimés", "heading": "Best-sellers", "collection": "best-sellers", "limit": 8, "dark": false } },
+    "categories": {
+      "type": "category-grid",
+      "settings": { "kicker": "Pour chaque frisson", "heading": "Les catégories" },
+      "blocks": {
+        "c1": { "type": "category", "settings": { "collection": "bonnets", "label": "Bonnets" } },
+        "c2": { "type": "category", "settings": { "collection": "gants", "label": "Gants" } },
+        "c3": { "type": "category", "settings": { "collection": "echarpes", "label": "Écharpes" } },
+        "c4": { "type": "category", "settings": { "collection": "cache-cou", "label": "Cache-cou & tours de cou" } },
+        "c5": { "type": "category", "settings": { "collection": "chaussettes-thermiques", "label": "Chaussettes thermiques" } },
+        "c6": { "type": "category", "settings": { "collection": "accessoires-froid", "label": "Contre le froid" } }
+      },
+      "block_order": ["c1", "c2", "c3", "c4", "c5", "c6"]
+    },
+    "newarrivals": { "type": "featured-collection", "settings": { "kicker": "Tout juste arrivés", "heading": "Nouveautés", "collection": "nouveautes", "limit": 8, "dark": true } },
+    "quality": {
+      "type": "quality",
+      "settings": { "kicker": "Notre exigence", "heading": "Chaleur, douceur, simplicité." },
+      "blocks": {
+        "q1": { "type": "point", "settings": { "icon": "feather", "title": "Doux au toucher", "text": "Des mailles agréables, sélectionnées pour leur confort au quotidien." } },
+        "q2": { "type": "point", "settings": { "icon": "snow", "title": "Pensé pour le froid", "text": "Des coupes qui couvrent bien et gardent la chaleur là où il faut." } },
+        "q3": { "type": "point", "settings": { "icon": "thread", "title": "Finitions soignées", "text": "Coutures nettes et détails discrets, pour un rendu sobre et durable." } }
+      },
+      "block_order": ["q1", "q2", "q3"]
+    },
+    "reviews": { "type": "reviews", "settings": { "kicker": "Ils en parlent", "heading": "Avis clients" } },
+    "promo": { "type": "promo-banner", "settings": { "kicker": "Collection Hiver", "heading": "Prêt pour les grands froids", "text": "Bonnets, gants et écharpes à associer pour un look d'hiver complet.", "button_label": "VOIR LA COLLECTION", "overlay": 40 } }
+  },
+  "order": ["hero", "trust", "bestsellers", "categories", "newarrivals", "quality", "reviews", "promo"]
+}

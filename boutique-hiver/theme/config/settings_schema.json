@@ -1,0 +1,54 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "Frimas",
+    "theme_version": "1.0.0",
+    "theme_author": "Frimas",
+    "theme_documentation_url": "https://help.shopify.com/manual/online-store/themes",
+    "theme_support_url": "https://help.shopify.com"
+  },
+  {
+    "name": "Couleurs",
+    "settings": [
+      { "type": "color", "id": "color_bg", "label": "Fond (blanc cassé)", "default": "#F4F1EA" },
+      { "type": "color", "id": "color_text", "label": "Texte", "default": "#141414" },
+      { "type": "color", "id": "color_dark", "label": "Noir profond", "default": "#0D0D0E" },
+      { "type": "color", "id": "color_anthracite", "label": "Gris anthracite", "default": "#2C2E33" },
+      { "type": "color", "id": "color_cream", "label": "Beige crème", "default": "#E6DAC4" },
+      { "type": "color", "id": "color_ice", "label": "Bleu glacier (accent)", "default": "#A8C6D6" }
+    ]
+  },
+  {
+    "name": "Typographie",
+    "settings": [
+      { "type": "font_picker", "id": "type_heading", "label": "Titres", "default": "cormorant_n5" },
+      { "type": "font_picker", "id": "type_body", "label": "Texte", "default": "assistant_n4" }
+    ]
+  },
+  {
+    "name": "Mise en page",
+    "settings": [
+      { "type": "range", "id": "page_width", "label": "Largeur maximale", "min": 1000, "max": 1600, "step": 20, "unit": "px", "default": 1360 },
+      { "type": "range", "id": "radius", "label": "Arrondi des coins", "min": 0, "max": 16, "step": 1, "unit": "px", "default": 2 },
+      { "type": "checkbox", "id": "animations", "label": "Animations au défilement", "default": true },
+      { "type": "image_picker", "id": "favicon", "label": "Favicon" }
+    ]
+  },
+  {
+    "name": "Panier et livraison",
+    "settings": [
+      { "type": "number", "id": "free_shipping_threshold", "label": "Livraison offerte dès (€)", "info": "Mets 0 pour masquer la barre de progression. Le montant doit correspondre à tes vrais tarifs d'expédition Shopify.", "default": 0 },
+      { "type": "text", "id": "delivery_text", "label": "Délai de livraison affiché", "default": "Expédition sous 48 h, livraison en 3 à 7 jours ouvrés" },
+      { "type": "text", "id": "returns_text", "label": "Texte retours", "default": "14 jours pour changer d'avis" },
+      { "type": "url", "id": "returns_link", "label": "Lien vers la politique de retour" }
+    ]
+  },
+  {
+    "name": "Réseaux sociaux",
+    "settings": [
+      { "type": "text", "id": "social_instagram", "label": "Instagram (URL)" },
+      { "type": "text", "id": "social_tiktok", "label": "TikTok (URL)" },
+      { "type": "text", "id": "social_pinterest", "label": "Pinterest (URL)" }
+    ]
+  }
+]

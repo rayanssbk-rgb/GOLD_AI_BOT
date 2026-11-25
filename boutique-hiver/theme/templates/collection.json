@@ -1,0 +1,1 @@
+{ "sections": { "main": { "type": "main-collection", "settings": { "per_page": 24 } }, "trust": { "type": "trust-bar", "settings": {} } }, "order": ["main", "trust"] }

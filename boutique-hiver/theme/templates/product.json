@@ -1,0 +1,19 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": { "type": "title", "settings": { "show_vendor": false } },
+        "price": { "type": "price", "settings": {} },
+        "buy": { "type": "buy", "settings": { "low_stock": 5, "dynamic_checkout": true } },
+        "trust": { "type": "reassurance", "settings": {} },
+        "desc": { "type": "description", "settings": {} },
+        "acc1": { "type": "accordion", "settings": { "title": "Composition et entretien", "content": "<p>Composition : à compléter avec les informations exactes du fabricant.</p><p>Entretien : à compléter (lavage, séchage).</p>" } },
+        "acc2": { "type": "accordion", "settings": { "title": "Livraison et retours", "content": "<p>Expédition sous 48 h, livraison suivie en 3 à 7 jours ouvrés. Tu disposes de 14 jours après réception pour nous retourner un article.</p>" } }
+      },
+      "block_order": ["title", "price", "buy", "trust", "desc", "acc1", "acc2"]
+    },
+    "related": { "type": "related-products", "settings": { "heading": "Vous aimerez aussi" } }
+  },
+  "order": ["main", "related"]
+}

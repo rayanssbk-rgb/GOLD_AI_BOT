@@ -1,0 +1,47 @@
+<section class="cart-page page">
+  <h1 class="collection__title">Panier</h1>
+  {%- if cart.item_count > 0 -%}
+    <form action="{{ routes.cart_url }}" method="post" class="cart-page__grid" id="CartPageForm">
+      <ul class="cart-lines">
+        {%- for item in cart.items -%}
+          <li class="cart-line">
+            <a class="cart-line__img" href="{{ item.url }}">
+              {%- if item.image -%}{{ item.image | image_url: width: 300 | image_tag: loading: 'lazy', alt: item.product.title }}{%- endif -%}
+            </a>
+            <div class="cart-line__info">
+              <a href="{{ item.url }}" class="cart-line__title">{{ item.product.title | escape }}</a>
+              {%- unless item.product.has_only_default_variant -%}<p class="cart-line__variant">{{ item.variant.title | escape }}</p>{%- endunless -%}
+              <p class="cart-line__price">{{ item.final_price | money }}{% if item.original_price > item.final_price %} <s>{{ item.original_price | money }}</s>{% endif %}</p>
+              <div class="qty qty--sm">
+                <label class="visually-hidden" for="Qty-{{ item.key }}">Quantité</label>
+                <input id="Qty-{{ item.key }}" type="number" name="updates[]" value="{{ item.quantity }}" min="0">
+              </div>
+              <a class="cart-line__remove" href="{{ item.url_to_remove }}">Retirer</a>
+            </div>
+            <p class="cart-line__total">{{ item.final_line_price | money }}</p>
+          </li>
+        {%- endfor -%}
+      </ul>
+      <aside class="cart-summary">
+        <div class="drawer__total"><span>Sous-total</span><strong>{{ cart.total_price | money }}</strong></div>
+        {%- if cart.cart_level_discount_applications.size > 0 -%}
+          <ul class="cart-summary__discounts">{%- for d in cart.cart_level_discount_applications -%}<li>{{ d.title | escape }} (−{{ d.total_allocated_amount | money }})</li>{%- endfor -%}</ul>
+        {%- endif -%}
+        <p class="drawer__note">Taxes incluses. Frais de livraison calculés à l'étape du paiement.</p>
+        <label class="cart-summary__note"><span>Une précision pour ta commande ?</span><textarea name="note">{{ cart.note }}</textarea></label>
+        <button type="submit" name="update" class="btn btn--line btn--full">Mettre à jour</button>
+        <button type="submit" name="checkout" class="btn btn--dark btn--full">{% render 'icon', name: 'lock' %} Paiement sécurisé</button>
+        {%- if additional_checkout_buttons -%}<div class="cart-summary__express">{{ content_for_additional_checkout_buttons }}</div>{%- endif -%}
+        {% render 'payment-icons' %}
+      </aside>
+    </form>
+  {%- else -%}
+    <div class="empty-cart">
+      <p>Ton panier est vide.</p>
+      <a class="btn btn--dark" href="{{ routes.all_products_collection_url }}">Découvrir la collection</a>
+    </div>
+  {%- endif -%}
+</section>
+{% schema %}
+{ "name": "Panier" }
+{% endschema %}

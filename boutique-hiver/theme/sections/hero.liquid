@@ -1,0 +1,45 @@
+<section class="hero{% if section.settings.full_height %} hero--full{% endif %}" style="--overlay: {{ section.settings.overlay | divided_by: 100.0 }}">
+  <div class="hero__media">
+    {%- if section.settings.image != blank -%}
+      {%- if section.settings.image_mobile != blank -%}
+        <picture>
+          <source media="(max-width: 749px)" srcset="{{ section.settings.image_mobile | image_url: width: 750 }} 750w, {{ section.settings.image_mobile | image_url: width: 1100 }} 1100w" sizes="100vw">
+          {{ section.settings.image | image_url: width: 2400 | image_tag: class: 'hero__img', loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '750, 1100, 1500, 1800, 2400', alt: section.settings.image.alt }}
+        </picture>
+      {%- else -%}
+        {{ section.settings.image | image_url: width: 2400 | image_tag: class: 'hero__img', loading: 'eager', fetchpriority: 'high', sizes: '100vw', widths: '750, 1100, 1500, 1800, 2400', alt: section.settings.image.alt }}
+      {%- endif -%}
+    {%- else -%}
+      <div class="hero__fallback" aria-hidden="true">{{ 'lifestyle-1' | placeholder_svg_tag: 'hero__placeholder' }}</div>
+    {%- endif -%}
+    {%- if section.settings.snow -%}<div class="snow" aria-hidden="true"><i></i><i></i><i></i></div>{%- endif -%}
+  </div>
+  <div class="hero__content page">
+    {%- if section.settings.kicker != blank -%}<p class="kicker hero__kicker">{{ section.settings.kicker | escape }}</p>{%- endif -%}
+    <h1 class="hero__title">{{ section.settings.heading | escape | newline_to_br }}</h1>
+    {%- if section.settings.text != blank -%}<p class="hero__text">{{ section.settings.text | escape }}</p>{%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a class="btn btn--light hero__btn" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }} {% render 'icon', name: 'arrow' %}</a>
+    {%- endif -%}
+  </div>
+  <a class="hero__scroll" href="#{{ section.id }}-next" aria-label="Défiler"><span></span></a>
+  <span id="{{ section.id }}-next"></span>
+</section>
+{% schema %}
+{
+  "name": "Bannière principale",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Photo (paysage, 2400 px de large conseillé)" },
+    { "type": "image_picker", "id": "image_mobile", "label": "Photo mobile (portrait, facultatif)" },
+    { "type": "range", "id": "overlay", "label": "Assombrissement de la photo", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 35 },
+    { "type": "checkbox", "id": "full_height", "label": "Plein écran", "default": true },
+    { "type": "checkbox", "id": "snow", "label": "Légère neige animée", "default": true },
+    { "type": "text", "id": "kicker", "label": "Sur-titre", "default": "Collection Hiver" },
+    { "type": "textarea", "id": "heading", "label": "Slogan", "default": "Le froid,\nen toute élégance." },
+    { "type": "text", "id": "text", "label": "Texte", "default": "Bonnets, gants et écharpes pensés pour les matins glacés et les longues soirées." },
+    { "type": "text", "id": "button_label", "label": "Bouton", "default": "DÉCOUVRIR LA COLLECTION" },
+    { "type": "url", "id": "button_link", "label": "Lien du bouton" }
+  ],
+  "presets": [{ "name": "Bannière principale" }]
+}
+{% endschema %}

@@ -1,0 +1,24 @@
+<div class="drawer" id="CartDrawer" role="dialog" aria-modal="true" aria-labelledby="CartDrawerTitle" aria-hidden="true" data-cart-drawer>
+  <div class="drawer__scrim" data-cart-close></div>
+  <div class="drawer__panel">
+    <div class="drawer__head">
+      <h2 id="CartDrawerTitle" class="drawer__title">Panier <span data-cart-count-label>({{ cart.item_count }})</span></h2>
+      <button class="icon-btn" type="button" data-cart-close aria-label="Fermer le panier">{% render 'icon', name: 'close' %}</button>
+    </div>
+    <div class="drawer__shipping" data-cart-shipping hidden></div>
+    <div class="drawer__body" data-cart-items>
+      {%- comment -%} Rendered by theme.js from /cart.js {%- endcomment -%}
+    </div>
+    <div class="drawer__foot">
+      <div class="drawer__total"><span>Sous-total</span><strong data-cart-total>{{ cart.total_price | money }}</strong></div>
+      <p class="drawer__note">Taxes incluses. Frais de livraison calculés à l'étape du paiement.</p>
+      <form action="{{ routes.cart_url }}" method="post" class="drawer__form">
+        <button type="submit" name="checkout" class="btn btn--dark btn--full" data-cart-checkout{% if cart.item_count == 0 %} disabled{% endif %}>
+          {% render 'icon', name: 'lock' %} Paiement sécurisé
+        </button>
+      </form>
+      <a class="drawer__link" href="{{ routes.cart_url }}">Voir le panier</a>
+      {% render 'payment-icons' %}
+    </div>
+  </div>
+</div>

@@ -1,0 +1,56 @@
+{%- comment -%}
+  Customer reviews: add ONLY real reviews (blocks), or install a reviews app (e.g. Judge.me, Shopify Product Reviews).
+  With no review added, the section shows nothing to customers.
+{%- endcomment -%}
+{%- if section.blocks.size > 0 -%}
+<section class="section reviews">
+  <div class="page">
+    <div class="section__head" data-reveal>
+      <div>
+        <p class="kicker">{{ section.settings.kicker | escape }}</p>
+        <h2 class="section__title">{{ section.settings.heading | escape }}</h2>
+      </div>
+    </div>
+    <div class="reviews__row" data-slider>
+      {%- for block in section.blocks -%}
+        <figure class="review" {{ block.shopify_attributes }} data-reveal>
+          <div class="review__stars" aria-label="{{ block.settings.rating }} sur 5">
+            {%- for i in (1..5) -%}<span class="{% if i > block.settings.rating %}is-off{% endif %}">{% render 'icon', name: 'star' %}</span>{%- endfor -%}
+          </div>
+          <blockquote>« {{ block.settings.text | escape }} »</blockquote>
+          <figcaption>
+            <strong>{{ block.settings.author | escape }}</strong>
+            {%- if block.settings.product != blank -%}<span>· {{ block.settings.product.title | escape }}</span>{%- endif -%}
+            {%- if block.settings.verified -%}<span class="review__verified">Achat vérifié</span>{%- endif -%}
+          </figcaption>
+        </figure>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{%- elsif request.design_mode -%}
+<section class="section"><div class="page"><p class="editor-hint">Avis clients : ajoute ici uniquement de vrais avis (bloc « Avis »), ou installe une application d'avis. Cette section reste invisible tant qu'elle est vide.</p></div></section>
+{%- endif -%}
+{% schema %}
+{
+  "name": "Avis clients",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Sur-titre", "default": "Ils en parlent" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Avis clients" }
+  ],
+  "blocks": [
+    {
+      "type": "review",
+      "name": "Avis (réel uniquement)",
+      "settings": [
+        { "type": "range", "id": "rating", "label": "Note", "min": 1, "max": 5, "step": 1, "default": 5 },
+        { "type": "textarea", "id": "text", "label": "Avis du client (copié tel quel)" },
+        { "type": "text", "id": "author", "label": "Prénom et initiale (avec son accord)" },
+        { "type": "product", "id": "product", "label": "Produit acheté" },
+        { "type": "checkbox", "id": "verified", "label": "Achat vérifié (commande réelle)", "default": false }
+      ]
+    }
+  ],
+  "presets": [{ "name": "Avis clients" }]
+}
+{% endschema %}

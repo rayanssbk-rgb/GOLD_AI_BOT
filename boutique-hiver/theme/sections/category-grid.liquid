@@ -1,0 +1,62 @@
+<section class="section">
+  <div class="page">
+    <div class="section__head" data-reveal>
+      <div>
+        {%- if section.settings.kicker != blank -%}<p class="kicker">{{ section.settings.kicker | escape }}</p>{%- endif -%}
+        <h2 class="section__title">{{ section.settings.heading | escape }}</h2>
+      </div>
+    </div>
+    <div class="cats">
+      {%- for block in section.blocks -%}
+        {%- liquid
+          assign c = block.settings.collection
+          assign label = block.settings.label | default: c.title
+          assign img = block.settings.image | default: c.featured_image
+          assign link = c.url | default: routes.all_products_collection_url
+        -%}
+        <a class="cat" href="{{ link }}" {{ block.shopify_attributes }} data-reveal>
+          <span class="cat__media">
+            {%- if img != blank -%}
+              {{ img | image_url: width: 900 | image_tag: loading: 'lazy', class: 'cat__img', sizes: '(min-width: 990px) 20vw, 50vw', widths: '360, 540, 720, 900', alt: label }}
+            {%- else -%}
+              {{ 'collection-apparel-1' | placeholder_svg_tag: 'cat__img placeholder' }}
+            {%- endif -%}
+          </span>
+          <span class="cat__label">{{ label | escape }} {% render 'icon', name: 'arrow' %}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Catégories",
+  "settings": [
+    { "type": "text", "id": "kicker", "label": "Sur-titre", "default": "Pour chaque frisson" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Les catégories" }
+  ],
+  "blocks": [
+    {
+      "type": "category",
+      "name": "Catégorie",
+      "settings": [
+        { "type": "collection", "id": "collection", "label": "Collection" },
+        { "type": "text", "id": "label", "label": "Nom affiché (facultatif)" },
+        { "type": "image_picker", "id": "image", "label": "Image (facultatif)" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Catégories",
+      "blocks": [
+        { "type": "category", "settings": { "label": "Bonnets" } },
+        { "type": "category", "settings": { "label": "Gants" } },
+        { "type": "category", "settings": { "label": "Écharpes" } },
+        { "type": "category", "settings": { "label": "Cache-cou" } },
+        { "type": "category", "settings": { "label": "Chaussettes thermiques" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

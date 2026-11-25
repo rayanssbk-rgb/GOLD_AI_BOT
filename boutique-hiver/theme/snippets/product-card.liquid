@@ -1,0 +1,53 @@
+{%- comment -%} Usage: {% render 'product-card', product: product, eager: false %} {%- endcomment -%}
+{%- liquid
+  assign first = product.featured_media
+  assign second = product.media[1]
+  assign v = product.selected_or_first_available_variant
+  assign color_option = nil
+  for option in product.options_with_values
+    assign oname = option.name | downcase
+    if oname == 'couleur' or oname == 'color' or oname == 'coloris'
+      assign color_option = option
+    endif
+  endfor
+-%}
+<article class="card" data-reveal>
+  <a class="card__media" href="{{ product.url }}" aria-label="{{ product.title | escape }}">
+    {%- if first -%}
+      {{ first.preview_image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'card__img', sizes: '(min-width: 990px) 25vw, 50vw', widths: '360, 540, 720, 900', alt: product.title }}
+      {%- if second -%}
+        {{ second.preview_image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'card__img card__img--hover', sizes: '(min-width: 990px) 25vw, 50vw', widths: '360, 540, 720, 900', alt: '' }}
+      {%- endif -%}
+    {%- else -%}
+      {{ 'product-apparel-1' | placeholder_svg_tag: 'card__img placeholder' }}
+    {%- endif -%}
+    <span class="card__badges">
+      {%- if product.available == false -%}
+        <span class="badge badge--dark">Épuisé</span>
+      {%- elsif v.compare_at_price > v.price -%}
+        <span class="badge badge--ice">Promo</span>
+      {%- elsif product.tags contains 'nouveau' -%}
+        <span class="badge">Nouveau</span>
+      {%- endif -%}
+    </span>
+  </a>
+  <div class="card__info">
+    <h3 class="card__title"><a href="{{ product.url }}">{{ product.title | escape }}</a></h3>
+    {% render 'price', product: product %}
+    {%- if color_option and color_option.values.size > 1 -%}
+      <ul class="card__swatches" aria-label="Couleurs disponibles">
+        {%- for value in color_option.values limit: 5 -%}
+          <li class="swatch-dot" style="--swatch: {% render 'swatch-color', name: value %}" title="{{ value | escape }}"></li>
+        {%- endfor -%}
+        {%- if color_option.values.size > 5 -%}<li class="swatch-more">+{{ color_option.values.size | minus: 5 }}</li>{%- endif -%}
+      </ul>
+    {%- endif -%}
+  </div>
+  {%- if product.available -%}
+    {%- if product.has_only_default_variant -%}
+      <button class="card__quick" type="button" data-quick-add="{{ v.id }}" aria-label="Ajouter {{ product.title | escape }} au panier">{% render 'icon', name: 'plus' %}</button>
+    {%- else -%}
+      <a class="card__quick" href="{{ product.url }}" aria-label="Choisir les options de {{ product.title | escape }}">{% render 'icon', name: 'plus' %}</a>
+    {%- endif -%}
+  {%- endif -%}
+</article>
