@@ -1,6 +1,6 @@
 # Subtle synthesized sound design (no music, no voice): whooshes, pops, clicks, blips and a "ka-ching".
 import numpy as np, wave, sys
-SR = 48000; DUR = 21.0
+SR = 48000; DUR = 18.0
 out = np.zeros((int(SR * DUR), 2))
 rng = np.random.default_rng(7)
 def env(n, a, d): t = np.arange(n) / SR; return np.minimum(1, t / max(a, 1e-4)) * np.exp(-t / d)
@@ -31,23 +31,23 @@ def coins():
     for k in range(7):
         x = tone(3000 + rng.random() * 2500, 0.15, 0.0005, 0.03) * 0.5; i = int((0.02 + k * 0.045 + rng.random() * 0.02) * SR); s[i:i + len(x)] += x
     return s
-# scene 1
-add(0.2, pop(380), 0.5); add(0.25, chime([660, 990], 0.08, 0.6), 0.18)
-# scene 2: phone rises, icons pop, tap, store opens
-add(3.05, whoosh(0.8), 0.35)
-for i in range(16): add(3.72 + i * 0.05, pop(700 + 40 * (i % 4)), 0.08, (i % 4 - 1.5) / 3)
-add(4.85, click(), 0.55); add(5.05, whoosh(0.55), 0.3); add(5.5, chime([880], 0.0, 0.35), 0.12)
-# scene 3: panel + rows + toggles
-add(7.05, whoosh(0.7), 0.3)
-for i in range(4): t0 = 7.7 + i * 0.42; add(t0, whoosh(0.3), 0.15, 0.3); add(t0 + 0.65, click(), 0.35)
-# scene 4: live globe blips
-add(10.85, whoosh(0.7), 0.3)
-for i in range(9): add(11.9 + i * 0.32, tone(1320 + 110 * (i % 3), 0.3, 0.002, 0.06), 0.1, (i % 3 - 1) * 0.4)
-# scene 5: first sale
-add(14.85, whoosh(0.8), 0.3); add(16.25, whoosh(0.35), 0.25)
-add(16.45, chime([1046.5, 1318.5, 1568, 2093], 0.06, 0.45), 0.3); add(16.45, coins(), 0.35)
-# scene 6: end
-add(18.3, whoosh(0.8), 0.3); add(18.55, pop(330), 0.45); add(19.95, click(), 0.4)
+# logo
+add(0.05, whoosh(0.9), 0.3); add(0.9, chime([660, 990], 0.08, 0.6), 0.15)
+# phone
+add(2.35, whoosh(0.8), 0.35)
+for i in range(16): add(3.55 + i * 0.03, pop(700 + 40 * (i % 4)), 0.06, (i % 4 - 1.5) / 3)
+add(4.4, click(), 0.55); add(4.75, whoosh(0.85), 0.4)
+# products
+add(5.3, whoosh(0.7), 0.3)
+for i in range(4): add(6.6 + i * 0.22, click(), 0.3)
+add(7.15, whoosh(0.4), 0.15)
+# live view
+add(8.6, whoosh(0.8), 0.3); add(10.1, tone(1320, 0.4, 0.002, 0.09), 0.18)
+# text
+add(12.0, whoosh(0.9), 0.25); add(13.5, whoosh(0.5), 0.15)
+# order
+add(14.65, whoosh(0.4), 0.25); add(14.95, chime([1046.5, 1318.5, 1568, 2093], 0.06, 0.45), 0.3); add(14.95, coins(), 0.35)
+add(16.1, whoosh(0.5), 0.2); add(16.75, pop(330), 0.45); add(16.95, chime([784, 1175], 0.07, 0.6), 0.12)
 # gentle room reverb
 ir = rng.standard_normal(int(SR * 0.8)) * np.exp(-np.arange(int(SR * 0.8)) / (SR * 0.18)) * 0.02
 for c in range(2): out[:, c] += np.convolve(out[:, c], ir)[: len(out)] * 0.6
