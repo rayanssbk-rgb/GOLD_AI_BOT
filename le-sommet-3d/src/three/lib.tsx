@@ -264,7 +264,7 @@ const Cap: React.FC<{ r: number; l: number; material: THREE.Material; y?: number
 );
 
 /** Faceless, realistically proportioned mannequin (1.78 m), +Z forward. */
-export type Look = { skin?: string; pants?: string; beanie?: string; beard?: string; hair?: string; collar?: boolean; shoulders?: number; shoe?: string; face?: boolean };
+export type Look = { skin?: string; pants?: string; beanie?: string; beard?: string; hair?: string; collar?: boolean; shoulders?: number; shoe?: string; face?: boolean; eye?: boolean };
 export const Mannequin: React.FC<{ body: Body; position?: V3; rotY?: number; hood?: boolean; cloth?: string; umbrella?: boolean; scale?: number; look?: Look; core?: number; coreColor?: string }> = ({
   body,
   position = [0, 0, 0],
@@ -361,6 +361,12 @@ export const Mannequin: React.FC<{ body: Body; position?: V3; rotY?: number; hoo
                   </mesh>
                 ))}
               </group>
+            ) : null}
+            {look.eye ? (
+              <mesh position={[0.036, 0.175, 0.1]} scale={[1, 0.6, 0.45]}>
+                <sphereGeometry args={[0.016, 12, 10]} />
+                <meshBasicMaterial color={new THREE.Color(3, 3, 3)} toneMapped={false} />
+              </mesh>
             ) : null}
             {look.hair ? (
               <mesh position={[0, 0.2, -0.008]} material={mat(look.hair, 0.95)} scale={[0.95, 0.75, 1.03]}>

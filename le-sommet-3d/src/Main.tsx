@@ -14,27 +14,27 @@ export const W = 1080;
 export const H = 1920;
 export const DUR = 36;
 
-const clamp = (x: number, a = 0, b = 1) => Math.min(b, Math.max(a, x));
-const lerp = (a: number, b: number, k: number) => a + (b - a) * k;
-const prog = (t: number, a: number, b: number) => clamp((t - a) / (b - a));
-const sm = (x: number) => { const k = clamp(x); return k * k * (3 - 2 * k); };
-const ease = (x: number) => { const k = clamp(x); return k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2; };
-const lv = (a: V3, b: V3, k: number): V3 => [lerp(a[0], b[0], k), lerp(a[1], b[1], k), lerp(a[2], b[2], k)];
-const add = (a: V3, b: V3): V3 => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
-const rnd = (i: number, j = 0) => { const s = Math.sin(i * 12.9898 + j * 78.233 + 0.5) * 43758.5453; return s - Math.floor(s); };
+export const clamp = (x: number, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+export const lerp = (a: number, b: number, k: number) => a + (b - a) * k;
+export const prog = (t: number, a: number, b: number) => clamp((t - a) / (b - a));
+export const sm = (x: number) => { const k = clamp(x); return k * k * (3 - 2 * k); };
+export const ease = (x: number) => { const k = clamp(x); return k < 0.5 ? 4 * k * k * k : 1 - Math.pow(-2 * k + 2, 3) / 2; };
+export const lv = (a: V3, b: V3, k: number): V3 => [lerp(a[0], b[0], k), lerp(a[1], b[1], k), lerp(a[2], b[2], k)];
+export const add = (a: V3, b: V3): V3 => [a[0] + b[0], a[1] + b[1], a[2] + b[2]];
+export const rnd = (i: number, j = 0) => { const s = Math.sin(i * 12.9898 + j * 78.233 + 0.5) * 43758.5453; return s - Math.floor(s); };
 
 // ---------------------------------------------------------------- poses
-type RB = Required<Body>;
-const STAND: RB = { pelvisY: 0.95, spine: 0.03, head: [0, 0], shL: [0, 0.07], shR: [0, 0.07], elL: 0.14, elR: 0.14, hipL: [0, 0.03], hipR: [0, 0.03], knL: 0.04, knR: 0.04 };
-const P = (b: Body): RB => ({ ...STAND, ...b });
-const LOOKUP = P({ spine: -0.06, head: [-0.62, 0], shL: [0.05, 0.12], shR: [0.05, 0.12], elL: 0.2, elR: 0.2 });
+export type RB = Required<Body>;
+export const STAND: RB = { pelvisY: 0.95, spine: 0.03, head: [0, 0], shL: [0, 0.07], shR: [0, 0.07], elL: 0.14, elR: 0.14, hipL: [0, 0.03], hipR: [0, 0.03], knL: 0.04, knR: 0.04 };
+export const P = (b: Body): RB => ({ ...STAND, ...b });
+export const LOOKUP = P({ spine: -0.06, head: [-0.62, 0], shL: [0.05, 0.12], shR: [0.05, 0.12], elL: 0.2, elR: 0.2 });
 const LOOKDOWN = P({ spine: 0.12, head: [0.62, 0], shL: [0.02, 0.1], shR: [0.02, 0.1] });
 const SITG = P({ pelvisY: 0.17, spine: 0.35, head: [0.55, 0], shL: [-0.7, 0.15], shR: [-0.7, 0.15], elL: 0.9, elR: 0.9, hipL: [-1.35, 0.1], hipR: [-1.3, 0.1], knL: 1.9, knR: 2.0 });
 const SEIZA = P({ pelvisY: 0.3, spine: 0.75, head: [0.8, 0], shL: [-0.9, 0.12], shR: [-0.9, 0.12], elL: 1.6, elR: 1.6, hipL: [-1.45, 0.09], hipR: [-1.45, 0.09], knL: 2.85, knR: 2.85 });
-const FALL = P({ pelvisY: 0.7, spine: 0.95, head: [0.2, 0], shL: [-1.3, 0.2], shR: [-1.1, 0.2], elL: 0.2, elR: 0.3, hipL: [-1.3, 0.05], hipR: [0.2, 0.05], knL: 1.6, knR: 0.9 });
-const KNEEL = P({ pelvisY: 0.5, spine: 0.7, head: [0.75, 0], shL: [-1.05, 0.15], shR: [-0.15, 0.2], elL: 0.25, elR: 0.6, hipL: [-1.55, 0.06], hipR: [0.15, 0.06], knL: 1.65, knR: 2.0 });
-const CROUCH = P({ pelvisY: 0.66, spine: 0.55, head: [-0.1, 0], shL: [0.4, 0.1], shR: [0.3, 0.1], elL: 0.3, elR: 0.3, hipL: [-1.2, 0.05], hipR: [-0.5, 0.05], knL: 1.8, knR: 1.0 });
-function mixB(a: Body, b: Body, k: number): RB {
+export const FALL = P({ pelvisY: 0.7, spine: 0.95, head: [0.2, 0], shL: [-1.3, 0.2], shR: [-1.1, 0.2], elL: 0.2, elR: 0.3, hipL: [-1.3, 0.05], hipR: [0.2, 0.05], knL: 1.6, knR: 0.9 });
+export const KNEEL = P({ pelvisY: 0.5, spine: 0.7, head: [0.75, 0], shL: [-1.05, 0.15], shR: [-0.15, 0.2], elL: 0.25, elR: 0.6, hipL: [-1.55, 0.06], hipR: [0.15, 0.06], knL: 1.65, knR: 2.0 });
+export const CROUCH = P({ pelvisY: 0.66, spine: 0.55, head: [-0.1, 0], shL: [0.4, 0.1], shR: [0.3, 0.1], elL: 0.3, elR: 0.3, hipL: [-1.2, 0.05], hipR: [-0.5, 0.05], knL: 1.8, knR: 1.0 });
+export function mixB(a: Body, b: Body, k: number): RB {
   const A = P(a);
   const Bb = P(b);
   if (k <= 0) return A;
@@ -48,7 +48,7 @@ function mixB(a: Body, b: Body, k: number): RB {
   return o as RB;
 }
 /** stair climbing cycle; ph advances by PI per step */
-function climbBody(ph: number, tired = 0): RB {
+export function climbBody(ph: number, tired = 0): RB {
   const leg = (p: number): [number, number] => {
     const q = ((p % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
     if (q < Math.PI) { const u = q / Math.PI; return [lerp(-0.6, 0.12, u), lerp(0.8, 0.05, u)]; }
@@ -63,7 +63,7 @@ function climbBody(ph: number, tired = 0): RB {
 
 // ---------------------------------------------------------------- materials
 const texCache = new Map<string, THREE.CanvasTexture>();
-function concreteTex(seed: number) {
+export function concreteTex(seed: number) {
   const key = `c${seed}`;
   if (texCache.has(key)) return texCache.get(key)!;
   const c = document.createElement('canvas');
@@ -100,7 +100,7 @@ function concreteTex(seed: number) {
   return tx;
 }
 const matCache = new Map<string, THREE.MeshStandardMaterial>();
-function concrete(color: string, ru: number, rv: number, rough = 0.9, metal = 0.0, seed = 1) {
+export function concrete(color: string, ru: number, rv: number, rough = 0.9, metal = 0.0, seed = 1) {
   const key = `${color}|${ru}|${rv}|${rough}|${metal}|${seed}`;
   if (matCache.has(key)) return matCache.get(key)!;
   const base = concreteTex(seed);
@@ -111,12 +111,12 @@ function concrete(color: string, ru: number, rv: number, rough = 0.9, metal = 0.
   matCache.set(key, m);
   return m;
 }
-const LIGHT = new THREE.MeshBasicMaterial({ color: new THREE.Color(3.2, 2.35, 1.5), toneMapped: false });
-const LIGHT_DIM = new THREE.MeshBasicMaterial({ color: new THREE.Color(1.6, 1.15, 0.7), toneMapped: false });
+export const LIGHT = new THREE.MeshBasicMaterial({ color: new THREE.Color(3.2, 2.35, 1.5), toneMapped: false });
+export const LIGHT_DIM = new THREE.MeshBasicMaterial({ color: new THREE.Color(1.6, 1.15, 0.7), toneMapped: false });
 const GATE = new THREE.MeshBasicMaterial({ color: new THREE.Color(6, 4.6, 3.1), toneMapped: false });
 const DOOR = new THREE.MeshBasicMaterial({ color: new THREE.Color(5, 4.3, 3.4), toneMapped: false });
 
-const Env: React.FC<{ intensity: number }> = ({ intensity }) => {
+export const Env: React.FC<{ intensity: number }> = ({ intensity }) => {
   const { gl, scene } = useThree();
   useLayoutEffect(() => {
     const pm = new THREE.PMREMGenerator(gl);
@@ -129,8 +129,8 @@ const Env: React.FC<{ intensity: number }> = ({ intensity }) => {
 };
 
 // ---------------------------------------------------------------- figures
-const LOOK = { skin: '#ece9e3', pants: '#e2dfd9', shoe: '#cfcbc4', face: true };
-const Fig: React.FC<{ pos: V3; rotY: number; body: Body; pitch?: number }> = ({ pos, rotY, body, pitch = 0 }) => {
+export const LOOK = { skin: '#ece9e3', pants: '#e2dfd9', shoe: '#cfcbc4', face: true };
+export const Fig: React.FC<{ pos: V3; rotY: number; body: Body; pitch?: number }> = ({ pos, rotY, body, pitch = 0 }) => {
   const ref = useRef<THREE.Group>(null);
   useLayoutEffect(() => {
     ref.current?.traverse((o) => { if ((o as THREE.Mesh).isMesh) { o.castShadow = true; o.receiveShadow = true; } });
@@ -370,7 +370,7 @@ const Platforms: React.FC<{ t: number }> = ({ t }) => {
 };
 
 let GLOW: THREE.CanvasTexture | null = null;
-function glowTex() {
+export function glowTex() {
   if (GLOW) return GLOW;
   const c = document.createElement('canvas');
   c.width = c.height = 256;
