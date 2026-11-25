@@ -1,13 +1,11 @@
-// v3 "mix": typed-prompt opening -> 3D UI montage (v2) -> 3D domino chain reaction -> first order.
+// v3 "mix": typed-prompt opening -> 3D UI montage (v2) -> first order.
 import React from 'react';
 import { AbsoluteFill, Easing, interpolate, useCurrentFrame } from 'remotion';
-import { Bag, Caption, FONT, Glow, LIME, SceneLive, SceneLogo, SceneOrder, ScenePhone, SceneProducts } from './Ad';
-import { DOM_START, Dominoes, LAUNCH_END } from './Dominoes';
+import { Bag, FONT, Glow, LIME, SceneLive, SceneLogo, SceneOrder, ScenePhone, SceneProducts, SceneText } from './Ad';
 
 export const FPS = 60;
-export const DUR = 25.5;
+export const DUR = 21.6;
 const OFF = 3.6; // v2 montage starts after the prompt
-const ORDER_AT = LAUNCH_END - 0.05;
 const ease = Easing.bezier(0.22, 1, 0.36, 1);
 const inout = Easing.bezier(0.65, 0, 0.35, 1);
 const p = (t: number, a: number, b: number, e = ease) => interpolate(t, [a, b], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: e });
@@ -61,22 +59,6 @@ function ScenePrompt({ t }: { t: number }) {
   );
 }
 
-function SceneChain({ t }: { t: number }) {
-  if (t < DOM_START || t > ORDER_AT + 0.4) return null;
-  const v = p(t, DOM_START, DOM_START + 0.35, inout);
-  const flash = p(t, LAUNCH_END - 0.25, LAUNCH_END, Easing.in(Easing.quad)) * (1 - p(t, ORDER_AT, ORDER_AT + 0.4));
-  return (
-    <AbsoluteFill>
-      <AbsoluteFill style={{ opacity: v }}>
-        <Dominoes t={t} />
-      </AbsoluteFill>
-      <Caption t={t} t0={16.6} t1={18.85} text="Vends ce que *tu crées*" y={250} size={84} />
-      <Caption t={t} t0={18.9} t1={21.2} text="et vis ta *première vente.*" y={250} size={84} />
-      <AbsoluteFill style={{ background: `radial-gradient(circle at 50% 50%, rgba(235,255,210,${flash}) 0%, rgba(163,240,74,${flash * 0.9}) 45%, rgba(11,12,11,${flash}) 100%)` }} />
-    </AbsoluteFill>
-  );
-}
-
 export const Mix: React.FC = () => {
   const t = useCurrentFrame() / FPS;
   const o = t - OFF;
@@ -84,16 +66,16 @@ export const Mix: React.FC = () => {
     <AbsoluteFill style={{ background: 'radial-gradient(130% 90% at 50% 45%, #171917 0%, #0b0c0b 60%, #060706 100%)', overflow: 'hidden' }}>
       <style>{FONT}</style>
       <ScenePrompt t={t} />
-      {t > OFF - 0.1 && t < 16.2 ? (
+      {t > OFF - 0.1 ? (
         <>
           <SceneLogo t={o} />
           <ScenePhone t={o} />
           <SceneProducts t={o} />
           <SceneLive t={o} />
+          <SceneText t={o} />
+          <SceneOrder t={o} />
         </>
       ) : null}
-      <SceneChain t={t} />
-      <SceneOrder t={t - (ORDER_AT - 14.7)} />
       <AbsoluteFill style={{ background: 'radial-gradient(120% 80% at 50% 50%, transparent 55%, rgba(0,0,0,.55) 100%)' }} />
     </AbsoluteFill>
   );
