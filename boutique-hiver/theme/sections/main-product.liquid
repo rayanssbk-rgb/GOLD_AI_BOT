@@ -9,7 +9,14 @@
         <div class="product__slide{% if media.id == featured.id %} is-current{% endif %}" data-media-id="{{ media.id }}">
           {%- case media.media_type -%}
             {%- when 'image' -%}
-              {{ media | image_url: width: 1600 | image_tag: class: 'product__img', loading: forloop.first | ternary: 'eager', 'lazy', sizes: '(min-width: 990px) 55vw, 100vw', widths: '600, 900, 1200, 1600', alt: media.alt | default: product.title }}
+              {%- liquid
+                assign loading = 'lazy'
+                if forloop.first
+                  assign loading = 'eager'
+                endif
+                assign media_alt = media.alt | default: product.title
+              -%}
+              {{ media | image_url: width: 1600 | image_tag: class: 'product__img', loading: loading, sizes: '(min-width: 990px) 55vw, 100vw', widths: '600, 900, 1200, 1600', alt: media_alt }}
             {%- when 'video' -%}
               {{ media | video_tag: autoplay: true, loop: true, muted: true, controls: false, playsinline: true, class: 'product__img' }}
             {%- else -%}

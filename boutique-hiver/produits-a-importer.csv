@@ -1,0 +1,27 @@
+Handle,Title,Body (HTML),Vendor,Product Category,Type,Tags,Published,Option1 Name,Option1 Value,Option2 Name,Option2 Value,Variant SKU,Variant Inventory Tracker,Variant Inventory Qty,Variant Inventory Policy,Variant Fulfillment Service,Variant Price,Variant Compare At Price,Variant Requires Shipping,Variant Taxable,Status
+bonnet-cotele-aube,Bonnet Côtelé Aube,"<p>Un bonnet côtelé à revers, épais et souple, qui couvre bien les oreilles.</p><p>Composition : à compléter.</p>",FRIMAS,,Bonnets,nouveau,FALSE,Couleur,Crème,,,FRM-BON-01-CRE,shopify,0,deny,manual,29.90,,TRUE,TRUE,draft
+bonnet-cotele-aube,,,,,,,,,Noir,,,FRM-BON-01-NOI,shopify,0,deny,manual,29.90,,TRUE,TRUE,
+bonnet-cotele-aube,,,,,,,,,Anthracite,,,FRM-BON-01-ANT,shopify,0,deny,manual,29.90,,TRUE,TRUE,
+bonnet-cotele-aube,,,,,,,,,Bleu glacier,,,FRM-BON-01-BLG,shopify,0,deny,manual,29.90,,TRUE,TRUE,
+gants-tactiles-nuit,Gants Tactiles Nuit,"<p>Des gants doublés et compatibles écran tactile, pour garder les mains au chaud sans les retirer.</p><p>Composition : à compléter.</p>",FRIMAS,,Gants,,FALSE,Couleur,Noir,Taille,S,FRM-GAN-01-NOI-S,shopify,0,deny,manual,34.90,,TRUE,TRUE,draft
+gants-tactiles-nuit,,,,,,,,,Noir,,M,FRM-GAN-01-NOI-M,shopify,0,deny,manual,34.90,,TRUE,TRUE,
+gants-tactiles-nuit,,,,,,,,,Noir,,L,FRM-GAN-01-NOI-L,shopify,0,deny,manual,34.90,,TRUE,TRUE,
+gants-tactiles-nuit,,,,,,,,,Camel,,S,FRM-GAN-01-CAM-S,shopify,0,deny,manual,34.90,,TRUE,TRUE,
+gants-tactiles-nuit,,,,,,,,,Camel,,M,FRM-GAN-01-CAM-M,shopify,0,deny,manual,34.90,,TRUE,TRUE,
+gants-tactiles-nuit,,,,,,,,,Camel,,L,FRM-GAN-01-CAM-L,shopify,0,deny,manual,34.90,,TRUE,TRUE,
+echarpe-grande-maille-fjord,Écharpe Grande Maille Fjord,"<p>Une grande écharpe enveloppante, à porter nouée ou en étole.</p><p>Composition : à compléter.</p>",FRIMAS,,Écharpes,,FALSE,Couleur,Crème,,,FRM-ECH-01-CRE,shopify,0,deny,manual,44.90,,TRUE,TRUE,draft
+echarpe-grande-maille-fjord,,,,,,,,,Anthracite,,,FRM-ECH-01-ANT,shopify,0,deny,manual,44.90,,TRUE,TRUE,
+echarpe-grande-maille-fjord,,,,,,,,,Camel,,,FRM-ECH-01-CAM,shopify,0,deny,manual,44.90,,TRUE,TRUE,
+cache-cou-polaire-brume,Cache-cou Polaire Brume,"<p>Un tour de cou polaire léger, idéal sous une veste ou pour le sport.</p><p>Composition : à compléter.</p>",FRIMAS,,Cache-cou,,FALSE,Couleur,Noir,,,FRM-CAC-01-NOI,shopify,0,deny,manual,19.90,,TRUE,TRUE,draft
+cache-cou-polaire-brume,,,,,,,,,Anthracite,,,FRM-CAC-01-ANT,shopify,0,deny,manual,19.90,,TRUE,TRUE,
+cache-cou-polaire-brume,,,,,,,,,Bleu glacier,,,FRM-CAC-01-BLG,shopify,0,deny,manual,19.90,,TRUE,TRUE,
+tour-de-cou-cotele-givre,Tour de cou Côtelé Givre,"<p>Un tour de cou côtelé doux, à enfiler en un geste.</p><p>Composition : à compléter.</p>",FRIMAS,,Cache-cou,nouveau,FALSE,Couleur,Crème,,,FRM-TDC-01-CRE,shopify,0,deny,manual,22.90,,TRUE,TRUE,draft
+tour-de-cou-cotele-givre,,,,,,,,,Noir,,,FRM-TDC-01-NOI,shopify,0,deny,manual,22.90,,TRUE,TRUE,
+chaussettes-thermiques-refuge,Chaussettes Thermiques Refuge,"<p>Des chaussettes épaisses à bouclette intérieure, pour les pieds froids.</p><p>Composition : à compléter.</p>",FRIMAS,,Chaussettes thermiques,,FALSE,Couleur,Anthracite,Taille,36-38,FRM-CHA-01-ANT-36,shopify,0,deny,manual,16.90,,TRUE,TRUE,draft
+chaussettes-thermiques-refuge,,,,,,,,,Anthracite,,39-42,FRM-CHA-01-ANT-39,shopify,0,deny,manual,16.90,,TRUE,TRUE,
+chaussettes-thermiques-refuge,,,,,,,,,Anthracite,,43-46,FRM-CHA-01-ANT-43,shopify,0,deny,manual,16.90,,TRUE,TRUE,
+chaussettes-thermiques-refuge,,,,,,,,,Crème,,36-38,FRM-CHA-01-CRE-36,shopify,0,deny,manual,16.90,,TRUE,TRUE,
+chaussettes-thermiques-refuge,,,,,,,,,Crème,,39-42,FRM-CHA-01-CRE-39,shopify,0,deny,manual,16.90,,TRUE,TRUE,
+chaussettes-thermiques-refuge,,,,,,,,,Crème,,43-46,FRM-CHA-01-CRE-43,shopify,0,deny,manual,16.90,,TRUE,TRUE,
+mitaines-laine-ardoise,Mitaines Laine Ardoise,"<p>Des mitaines chaudes qui laissent les doigts libres.</p><p>Composition : à compléter.</p>",FRIMAS,,Gants,,FALSE,Couleur,Anthracite,,,FRM-MIT-01-ANT,shopify,0,deny,manual,24.90,,TRUE,TRUE,draft
+mitaines-laine-ardoise,,,,,,,,,Noir,,,FRM-MIT-01-NOI,shopify,0,deny,manual,24.90,,TRUE,TRUE,
