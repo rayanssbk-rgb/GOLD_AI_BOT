@@ -333,7 +333,7 @@ export const Marches3D: React.FC = () => {
       <Label at={project(camFull, headOf(sh))} text="SHADOW" color="#d4d6de" glow="rgba(200,210,255,.4)" alpha={lab(1.8) * shadowA} size={labSize - 2} />
 
       {/* captions */}
-      {!hook
+      {false && !hook
         ? CAPTIONS.map(([a, b, txt], i) => {
             if (t < a || t > b) return null;
             const out = prog(t, b - 0.3, b);
