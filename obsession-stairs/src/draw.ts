@@ -4,7 +4,8 @@
 export const FPS = 30;
 export const W = 1080;
 export const H = 1920;
-export const DUR = 31;
+export const HOOK = 2.6; // cold open
+export const DUR = 31 + HOOK;
 export const DURATION = DUR * FPS;
 
 type V = [number, number];
@@ -289,7 +290,7 @@ function drawFigure(g: CanvasRenderingContext2D, c: Cam, ox: number, z: number, 
   if (style === 'shadow') {
     g.shadowBlur = 10; g.shadowColor = '#fff';
     g.fillStyle = 'rgba(255,255,255,.95)';
-    g.beginPath(); g.ellipse(hp[0] + 0.05 * c.s, hp[1] - 0.01 * c.s, 0.028 * c.s, 0.016 * c.s, 0, 0, Math.PI * 2); g.fill();
+    g.beginPath(); g.ellipse(hp[0] + 0.05 * c.s, hp[1] - 0.01 * c.s, 0.028 * c.s, Math.max(0.0005, 0.016 * EYE) * c.s, 0, 0, Math.PI * 2); g.fill();
   }
   if (style === 'obs') {
     // wound
@@ -386,6 +387,7 @@ function caption(g: CanvasRenderingContext2D, t: number) {
 }
 
 let GRAIN: HTMLCanvasElement | null = null;
+let EYE = 1; // eyelid opening of the shadow (cold open)
 function finish(g: CanvasRenderingContext2D, t: number) {
   const vg = g.createRadialGradient(W / 2, H * 0.5, H * 0.3, W / 2, H * 0.5, H * 0.78);
   vg.addColorStop(0, 'rgba(0,0,0,0)');
@@ -430,12 +432,57 @@ function endCard(g: CanvasRenderingContext2D, t: number) {
   g.restore();
 }
 
+function hookCam(h: number): { t: number; c: Cam } {
+  // the story moment shown in the cold open: Obsession on her knees, Shadow right behind
+  const t = 14.2 + h * 0.15;
+  const sp = walkPose(sShad(t), 'shadow', t);
+  const up = mul(sub(sp.neck, sp.pel), 1 / len(sub(sp.neck, sp.pel)));
+  const head = add(sp.neck, mul(up, 0.17));
+  const eye: V = [head[0] + BACK.x + 0.05 + OBX * (BACK.z + 0.55), head[1] + OBY * (BACK.z + 0.55)];
+  const wide = camera(t);
+  const k = sm(prog(h, 0.75, 1.7));
+  const s = lerp(2600, wide.s * 0.95, 1 - Math.pow(1 - k, 3));
+  const shake = h > 0.75 && h < 1.4 ? (1.4 - h) * 0.05 : 0;
+  // keep the eye at screen centre while zoomed in, then drift to the wide framing
+  const cx = lerp(eye[0], wide.x, k) + shake * Math.sin(h * 90);
+  const cy = lerp(eye[1] - (H * 0.06) / s, wide.y, k) + shake * Math.cos(h * 77);
+  return { t, c: { x: cx, y: cy, s } };
+}
+function hookText(g: CanvasRenderingContext2D, h: number) {
+  const lines: [string, string, number][] = [['SI TU T\u2019ARRÊTES,', '#ffffff', 0.55], ['IL TE RATTRAPE.', '#ff4b3e', 1.05]];
+  g.save();
+  g.textAlign = 'center';
+  lines.forEach(([txt, col, at], i) => {
+    const k = prog(h, at, at + 0.18);
+    if (k <= 0) return;
+    const sc = lerp(1.9, 1, 1 - Math.pow(1 - k, 3));
+    const out = prog(h, HOOK - 0.25, HOOK);
+    g.save();
+    g.translate(W / 2, 1450 + i * 135);
+    g.scale(sc, sc);
+    g.globalAlpha = Math.min(1, k * 2) * (1 - out);
+    g.font = '700 104px Inter700, Arial';
+    g.lineWidth = 16;
+    g.strokeStyle = 'rgba(0,0,0,.85)';
+    g.strokeText(txt, 0, 0);
+    g.fillStyle = col;
+    g.shadowColor = i ? 'rgba(255,40,30,.9)' : 'rgba(255,255,255,.5)';
+    g.shadowBlur = 30;
+    g.fillText(txt, 0, 0);
+    g.restore();
+  });
+  g.restore();
+}
+
 export function renderFrame(g: CanvasRenderingContext2D, f: number) {
-  const t = f / FPS;
+  const ft = f / FPS;
+  const hook = ft < HOOK ? hookCam(ft) : null;
+  const t = hook ? hook.t : ft - HOOK;
+  EYE = hook ? sm(prog(ft, 0.22, 0.42)) : 1;
   g.setTransform(1, 0, 0, 1, 0, 0);
   g.globalAlpha = 1;
   g.shadowBlur = 0;
-  const c = camera(t);
+  const c = hook ? hook.c : camera(t);
   background(g, t, c);
   // floor
   const fl = proj(c, [0, 0], 0);
@@ -471,14 +518,31 @@ export function renderFrame(g: CanvasRenderingContext2D, f: number) {
   const dHead = drawFigure(g, c, 0, 0.55, walkPose(sd, 'disc', t), 'disc', 1, t);
 
   // labels (appear one by one at the start)
-  const lab = (a: number) => sm(prog(t, a, a + 0.5)) * (1 - sm(prog(t, 27.2, 27.8)));
+  const lab = (a: number) => hook ? 0 : sm(prog(t, a, a + 0.5)) * (1 - sm(prog(t, 27.2, 27.8)));
   label(g, dHead, 'DISCIPLINE', '#ffffff', 'rgba(255,240,215,.7)', lab(0.6), Math.round(c.s * 0.13));
   label(g, obsHead, 'OBSESSION', RED, 'rgba(255,60,40,.7)', lab(1.2), Math.round(c.s * 0.13));
   if (shHead) label(g, shHead, 'SHADOW', '#cfd2da', 'rgba(200,210,255,.5)', lab(1.8) * shadowA, Math.round(c.s * 0.12));
 
-  caption(g, t);
+  if (!hook) caption(g, t);
   finish(g, t);
+  if (hook) {
+    const h = ft;
+    // black until the eye opens, red flash on the zoom-out, white flash into the story
+    const dark = 1 - sm(prog(h, 0.12, 0.35));
+    if (dark > 0) {
+      g.fillStyle = `rgba(0,0,0,${dark})`;
+      g.fillRect(0, 0, W, H);
+    }
+    const red = Math.exp(-Math.max(0, h - 0.75) * 7) * (h > 0.75 ? 1 : 0);
+    if (red > 0.01) { g.fillStyle = `rgba(200,10,10,${0.45 * red})`; g.fillRect(0, 0, W, H); }
+    hookText(g, h);
+    const wf = prog(h, HOOK - 0.12, HOOK);
+    if (wf > 0) { g.fillStyle = `rgba(255,246,232,${wf})`; g.fillRect(0, 0, W, H); }
+    return;
+  }
+  const wf0 = 1 - prog(t, 0, 0.25);
+  if (wf0 > 0) { g.fillStyle = `rgba(255,246,232,${wf0})`; g.fillRect(0, 0, W, H); }
   endCard(g, t);
-  const out = prog(t, DUR - 0.6, DUR);
+  const out = prog(t, DUR - HOOK - 0.6, DUR - HOOK);
   if (out > 0) { g.fillStyle = `rgba(0,0,0,${out})`; g.fillRect(0, 0, W, H); }
 }
