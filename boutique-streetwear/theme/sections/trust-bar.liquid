@@ -1,0 +1,10 @@
+<section class="trust">
+  <div class="page trust__grid">
+    <div class="trust__item" data-reveal>{% render 'icon', name: 'lock' %}<div><strong>Paiement sécurisé</strong><span>Données chiffrées, gérées par Shopify</span></div></div>
+    <div class="trust__item" data-reveal>{% render 'icon', name: 'truck' %}<div><strong>Livraison suivie</strong><span>{{ settings.delivery_text | escape }}</span></div></div>
+    <div class="trust__item" data-reveal>{% render 'icon', name: 'return' %}<div><strong>Retours</strong><span>{% if settings.returns_link != blank %}<a href="{{ settings.returns_link }}">{{ settings.returns_text | escape }}</a>{% else %}{{ settings.returns_text | escape }}{% endif %}</span></div></div>
+  </div>
+</section>
+{% schema %}
+{ "name": "Réassurance", "settings": [], "presets": [{ "name": "Réassurance" }] }
+{% endschema %}

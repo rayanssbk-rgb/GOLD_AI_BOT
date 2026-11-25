@@ -1,0 +1,20 @@
+{
+  "current": "Default",
+  "presets": {
+    "Default": {
+      "color_bg": "#EEEBE5",
+      "color_text": "#0E0E0F",
+      "color_dark": "#0B0B0C",
+      "color_anthracite": "#1F2023",
+      "color_cream": "#D8D3CA",
+      "color_ice": "#B9A58A",
+      "type_heading": "assistant_n4",
+      "type_body": "assistant_n4",
+      "page_width": 1360,
+      "radius": 2,
+      "animations": true,
+      "free_shipping_threshold": 0,
+      "heading_upper": true
+    }
+  }
+}

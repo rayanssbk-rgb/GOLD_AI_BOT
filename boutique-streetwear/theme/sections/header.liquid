@@ -1,0 +1,60 @@
+<header class="header{% if section.settings.transparent and template.name == 'index' %} header--overlay{% endif %}" data-header>
+  <div class="header__inner page">
+    <button class="icon-btn header__menu-btn" type="button" aria-controls="MobileNav" aria-expanded="false" data-nav-open aria-label="Ouvrir le menu">{% render 'icon', name: 'menu' %}</button>
+
+    <a class="header__logo" href="{{ routes.root_url }}" aria-label="{{ shop.name }}">
+      {%- if section.settings.logo != blank -%}
+        {{ section.settings.logo | image_url: width: 400 | image_tag: class: 'header__logo-img', style: 'max-width: {{ section.settings.logo_width }}px', alt: shop.name, widths: '200, 300, 400' }}
+      {%- else -%}
+        <span class="header__wordmark">{{ shop.name }}</span>
+      {%- endif -%}
+    </a>
+
+    <nav class="header__nav" aria-label="Navigation principale">
+      <ul>
+        {%- for link in section.settings.menu.links -%}
+          <li><a href="{{ link.url }}"{% if link.active %} aria-current="page"{% endif %}>{{ link.title | escape }}</a></li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <div class="header__actions">
+      <button class="icon-btn" type="button" data-search-open aria-label="Rechercher">{% render 'icon', name: 'search' %}</button>
+      <a class="icon-btn header__cart" href="{{ routes.cart_url }}" data-cart-open aria-label="Panier">
+        {% render 'icon', name: 'cart' %}
+        <span class="header__count{% if cart.item_count == 0 %} is-empty{% endif %}" data-cart-count>{{ cart.item_count }}</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="mobile-nav" id="MobileNav" aria-hidden="true" data-nav>
+    <div class="mobile-nav__scrim" data-nav-close></div>
+    <nav class="mobile-nav__panel" aria-label="Menu">
+      <div class="mobile-nav__head">
+        <span class="header__wordmark">{{ shop.name }}</span>
+        <button class="icon-btn" type="button" data-nav-close aria-label="Fermer le menu">{% render 'icon', name: 'close' %}</button>
+      </div>
+      <ul class="mobile-nav__links">
+        {%- for link in section.settings.menu.links -%}
+          <li><a href="{{ link.url }}">{{ link.title | escape }} {% render 'icon', name: 'arrow' %}</a></li>
+        {%- endfor -%}
+      </ul>
+      <div class="mobile-nav__foot">
+        <p>{{ settings.delivery_text | escape }}</p>
+        <p>{{ settings.returns_text | escape }}</p>
+      </div>
+    </nav>
+  </div>
+</header>
+{% schema %}
+{
+  "name": "En-tête",
+  "class": "section-header",
+  "settings": [
+    { "type": "image_picker", "id": "logo", "label": "Logo (sinon : nom de la boutique)" },
+    { "type": "range", "id": "logo_width", "label": "Largeur du logo", "min": 60, "max": 260, "step": 10, "unit": "px", "default": 140 },
+    { "type": "link_list", "id": "menu", "label": "Menu", "default": "main-menu" },
+    { "type": "checkbox", "id": "transparent", "label": "Transparent au-dessus de la bannière (page d'accueil)", "default": true }
+  ]
+}
+{% endschema %}

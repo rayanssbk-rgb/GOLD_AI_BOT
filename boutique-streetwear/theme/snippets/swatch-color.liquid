@@ -1,0 +1,42 @@
+{%- comment -%} Maps a French/English colour name to a CSS colour (falls back to cream). Output only, no whitespace. {%- endcomment -%}
+{%- liquid
+  assign n = name | downcase | strip
+  case n
+    when 'noir', 'black'
+      echo '#141414'
+    when 'blanc', 'white', 'blanc cassé', 'ivoire', 'ecru', 'écru'
+      echo '#F2EEE6'
+    when 'gris', 'grey', 'gray', 'gris chiné'
+      echo '#9A9A9C'
+    when 'anthracite', 'charcoal', 'gris anthracite'
+      echo '#2C2E33'
+    when 'beige', 'crème', 'creme', 'cream', 'sable', 'sand'
+      echo '#D9CBB2'
+    when 'os', 'bone', 'off-white', 'blanc os'
+      echo '#ECE6DA'
+    when 'kaki', 'khaki', 'olive', 'vert olive'
+      echo '#5E5D43'
+    when 'gris béton', 'béton', 'concrete', 'gris clair'
+      echo '#B8B4AC'
+    when 'délavé', 'washed black', 'noir délavé'
+      echo '#3A3A3C'
+    when 'camel', 'caramel', 'cognac'
+      echo '#B8865B'
+    when 'marron', 'brown', 'chocolat'
+      echo '#5B4033'
+    when 'bleu', 'blue', 'bleu glacier', 'glacier'
+      echo '#A8C6D6'
+    when 'marine', 'navy', 'bleu marine'
+      echo '#1F2A44'
+    when 'vert', 'green', 'sapin', 'vert sapin'
+      echo '#2F4A3A'
+    when 'bordeaux', 'burgundy'
+      echo '#5E1F2A'
+    when 'rouge', 'red'
+      echo '#A12B2B'
+    when 'rose', 'pink'
+      echo '#E4B9BE'
+    else
+      echo '#E6DAC4'
+  endcase
+-%}

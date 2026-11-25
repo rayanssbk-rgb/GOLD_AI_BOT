@@ -1,0 +1,77 @@
+<footer class="footer">
+  <div class="page footer__grid">
+    <div class="footer__brand" data-reveal>
+      <p class="footer__wordmark">{{ shop.name }}</p>
+      {%- if section.settings.about != blank -%}<div class="footer__about">{{ section.settings.about }}</div>{%- endif -%}
+      <ul class="footer__social">
+        {%- if settings.social_instagram != blank -%}<li><a href="{{ settings.social_instagram }}" target="_blank" rel="noopener" aria-label="Instagram">{% render 'icon', name: 'instagram' %}</a></li>{%- endif -%}
+        {%- if settings.social_tiktok != blank -%}<li><a href="{{ settings.social_tiktok }}" target="_blank" rel="noopener" aria-label="TikTok">{% render 'icon', name: 'tiktok' %}</a></li>{%- endif -%}
+        {%- if settings.social_pinterest != blank -%}<li><a href="{{ settings.social_pinterest }}" target="_blank" rel="noopener" aria-label="Pinterest">{% render 'icon', name: 'pinterest' %}</a></li>{%- endif -%}
+      </ul>
+    </div>
+
+    {%- for block in section.blocks -%}
+      <div class="footer__col" {{ block.shopify_attributes }} data-reveal>
+        {%- case block.type -%}
+          {%- when 'menu' -%}
+            <h2 class="footer__title">{{ block.settings.title | escape }}</h2>
+            <ul class="footer__links">
+              {%- for link in block.settings.menu.links -%}<li><a href="{{ link.url }}">{{ link.title | escape }}</a></li>{%- endfor -%}
+            </ul>
+          {%- when 'newsletter' -%}
+            <h2 class="footer__title">{{ block.settings.title | escape }}</h2>
+            {%- if block.settings.text != blank -%}<p class="footer__text">{{ block.settings.text | escape }}</p>{%- endif -%}
+            {%- form 'customer', class: 'newsletter' -%}
+              <input type="hidden" name="contact[tags]" value="newsletter">
+              {%- if form.posted_successfully? -%}
+                <p class="newsletter__ok" role="status">Merci, ton inscription est confirmée.</p>
+              {%- else -%}
+                <label class="visually-hidden" for="NewsletterEmail-{{ block.id }}">E-mail</label>
+                <input id="NewsletterEmail-{{ block.id }}" type="email" name="contact[email]" required autocomplete="email" placeholder="Ton adresse e-mail">
+                <button type="submit" class="newsletter__btn" aria-label="S'inscrire">{% render 'icon', name: 'arrow' %}</button>
+                {%- if form.errors -%}<p class="newsletter__err" role="alert">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</p>{%- endif -%}
+              {%- endif -%}
+            {%- endform -%}
+            <p class="footer__fine">En t'inscrivant, tu acceptes de recevoir nos e-mails. Désinscription en un clic.</p>
+        {%- endcase -%}
+      </div>
+    {%- endfor -%}
+  </div>
+
+  <div class="page footer__bottom">
+    {% render 'payment-icons' %}
+    <ul class="footer__policies">
+      {%- for policy in shop.policies -%}
+        {%- if policy != blank -%}<li><a href="{{ policy.url }}">{{ policy.title | escape }}</a></li>{%- endif -%}
+      {%- endfor -%}
+    </ul>
+    <p class="footer__copy">© {{ 'now' | date: '%Y' }} {{ shop.name }}</p>
+  </div>
+</footer>
+{% schema %}
+{
+  "name": "Pied de page",
+  "settings": [
+    { "type": "richtext", "id": "about", "label": "Présentation", "default": "<p>Streetwear premium pour homme : des basiques épais, des coupes amples et des finitions nettes.</p>" }
+  ],
+  "blocks": [
+    {
+      "type": "menu",
+      "name": "Menu",
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Boutique" },
+        { "type": "link_list", "id": "menu", "label": "Menu", "default": "footer" }
+      ]
+    },
+    {
+      "type": "newsletter",
+      "name": "Newsletter",
+      "limit": 1,
+      "settings": [
+        { "type": "text", "id": "title", "label": "Titre", "default": "Accès anticipé" },
+        { "type": "text", "id": "text", "label": "Texte", "default": "Sois prévenu avant chaque drop." }
+      ]
+    }
+  ]
+}
+{% endschema %}

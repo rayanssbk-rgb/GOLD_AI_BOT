@@ -1,0 +1,8 @@
+<article class="page page--narrow simple-page">
+  <p class="kicker">{{ article.published_at | date: '%d/%m/%Y' }}</p>
+  <h1 class="collection__title">{{ article.title | escape }}</h1>
+  <div class="rte">{{ article.content }}</div>
+</article>
+{% schema %}
+{ "name": "Article" }
+{% endschema %}

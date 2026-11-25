@@ -1,0 +1,164 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "kicker": "Nouvelle collection",
+        "heading": "Pensé pour\nla rue.",
+        "text": "Coupes amples, matières épaisses, finitions nettes. Le streetwear, version premium.",
+        "button_label": "DÉCOUVRIR LA COLLECTION",
+        "overlay": 40,
+        "full_height": true,
+        "snow": false
+      }
+    },
+    "trust": {
+      "type": "trust-bar",
+      "settings": {}
+    },
+    "bestsellers": {
+      "type": "featured-collection",
+      "settings": {
+        "kicker": "Les plus aimés",
+        "heading": "Best-sellers",
+        "collection": "best-sellers",
+        "limit": 8,
+        "dark": false
+      }
+    },
+    "categories": {
+      "type": "category-grid",
+      "settings": {
+        "kicker": "Le vestiaire",
+        "heading": "Les catégories"
+      },
+      "blocks": {
+        "c1": {
+          "type": "category",
+          "settings": {
+            "collection": "hoodies",
+            "label": "Hoodies"
+          }
+        },
+        "c2": {
+          "type": "category",
+          "settings": {
+            "collection": "t-shirts",
+            "label": "T-shirts"
+          }
+        },
+        "c3": {
+          "type": "category",
+          "settings": {
+            "collection": "sweats",
+            "label": "Sweats"
+          }
+        },
+        "c4": {
+          "type": "category",
+          "settings": {
+            "collection": "joggings",
+            "label": "Joggings"
+          }
+        },
+        "c5": {
+          "type": "category",
+          "settings": {
+            "collection": "cargos",
+            "label": "Cargos"
+          }
+        },
+        "c6": {
+          "type": "category",
+          "settings": {
+            "collection": "vestes",
+            "label": "Vestes"
+          }
+        }
+      },
+      "block_order": [
+        "c1",
+        "c2",
+        "c3",
+        "c4",
+        "c5",
+        "c6"
+      ]
+    },
+    "newarrivals": {
+      "type": "featured-collection",
+      "settings": {
+        "kicker": "Tout juste arrivés",
+        "heading": "Nouveautés",
+        "collection": "nouveautes",
+        "limit": 8,
+        "dark": true
+      }
+    },
+    "quality": {
+      "type": "quality",
+      "settings": {
+        "kicker": "Notre exigence",
+        "heading": "Le détail fait la différence."
+      },
+      "blocks": {
+        "q1": {
+          "type": "point",
+          "settings": {
+            "icon": "thread",
+            "title": "Matières épaisses",
+            "text": "Des cotons et molletons qui tiennent leur forme, lavage après lavage."
+          }
+        },
+        "q2": {
+          "type": "point",
+          "settings": {
+            "icon": "feather",
+            "title": "Coupes étudiées",
+            "text": "Épaules tombantes, volumes amples, longueurs justes."
+          }
+        },
+        "q3": {
+          "type": "point",
+          "settings": {
+            "icon": "heart",
+            "title": "Finitions nettes",
+            "text": "Coutures propres, côtes solides, logos discrets."
+          }
+        }
+      },
+      "block_order": [
+        "q1",
+        "q2",
+        "q3"
+      ]
+    },
+    "reviews": {
+      "type": "reviews",
+      "settings": {
+        "kicker": "Ils en parlent",
+        "heading": "Avis clients"
+      }
+    },
+    "promo": {
+      "type": "promo-banner",
+      "settings": {
+        "kicker": "Drop",
+        "heading": "Le nouveau drop est en ligne",
+        "text": "Hoodies, cargos et t-shirts à associer pour un look complet. Quantités limitées par taille.",
+        "button_label": "VOIR LA COLLECTION",
+        "overlay": 40
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "trust",
+    "bestsellers",
+    "categories",
+    "newarrivals",
+    "quality",
+    "reviews",
+    "promo"
+  ]
+}

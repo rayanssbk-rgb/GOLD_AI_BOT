@@ -1,0 +1,14 @@
+<section class="page page--narrow simple-page">
+  <h1 class="collection__title">{{ blog.title | escape }}</h1>
+  {%- paginate blog.articles by 12 -%}
+    <ul class="articles">
+      {%- for article in blog.articles -%}
+        <li><a href="{{ article.url }}"><strong>{{ article.title | escape }}</strong><span>{{ article.published_at | date: '%d/%m/%Y' }}</span></a></li>
+      {%- endfor -%}
+    </ul>
+    {%- if paginate.pages > 1 -%}{% render 'pagination', paginate: paginate %}{%- endif -%}
+  {%- endpaginate -%}
+</section>
+{% schema %}
+{ "name": "Blog" }
+{% endschema %}

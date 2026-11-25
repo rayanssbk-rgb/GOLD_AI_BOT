@@ -1,0 +1,75 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "title": {
+          "type": "title",
+          "settings": {
+            "show_vendor": false
+          }
+        },
+        "price": {
+          "type": "price",
+          "settings": {}
+        },
+        "buy": {
+          "type": "buy",
+          "settings": {
+            "low_stock": 5,
+            "dynamic_checkout": true
+          }
+        },
+        "trust": {
+          "type": "reassurance",
+          "settings": {}
+        },
+        "desc": {
+          "type": "description",
+          "settings": {}
+        },
+        "acc1": {
+          "type": "accordion",
+          "settings": {
+            "title": "Composition et entretien",
+            "content": "<p>Composition : à compléter avec les informations exactes du fabricant.</p><p>Entretien : lavage à 30 °C sur l'envers, pas de sèche-linge (à adapter selon le fabricant).</p>"
+          }
+        },
+        "acc2": {
+          "type": "accordion",
+          "settings": {
+            "title": "Livraison et retours",
+            "content": "<p>Expédition sous 48 h, livraison suivie en 3 à 7 jours ouvrés. Tu disposes de 14 jours après réception pour nous retourner un article.</p>"
+          }
+        },
+        "acc0": {
+          "type": "accordion",
+          "settings": {
+            "title": "Guide des tailles",
+            "content": "<p><strong>Coupe ample.</strong> Prends ta taille habituelle pour un tombé oversize, une taille en dessous pour un rendu plus ajusté.</p><table><tr><th>Taille</th><th>Tour de poitrine</th><th>Longueur</th></tr><tr><td>S</td><td>à compléter</td><td>à compléter</td></tr><tr><td>M</td><td>à compléter</td><td>à compléter</td></tr><tr><td>L</td><td>à compléter</td><td>à compléter</td></tr><tr><td>XL</td><td>à compléter</td><td>à compléter</td></tr><tr><td>XXL</td><td>à compléter</td><td>à compléter</td></tr></table>"
+          }
+        }
+      },
+      "block_order": [
+        "title",
+        "price",
+        "buy",
+        "trust",
+        "desc",
+        "acc0",
+        "acc1",
+        "acc2"
+      ]
+    },
+    "related": {
+      "type": "related-products",
+      "settings": {
+        "heading": "Complète le look"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related"
+  ]
+}

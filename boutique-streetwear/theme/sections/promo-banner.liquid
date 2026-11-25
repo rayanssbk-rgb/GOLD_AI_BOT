@@ -1,0 +1,32 @@
+<section class="promo" style="--overlay: {{ section.settings.overlay | divided_by: 100.0 }}">
+  <div class="promo__media">
+    {%- if section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 2000 | image_tag: loading: 'lazy', class: 'promo__img', sizes: '100vw', widths: '750, 1100, 1500, 2000', alt: section.settings.image.alt }}
+    {%- else -%}
+      {{ 'lifestyle-2' | placeholder_svg_tag: 'promo__img placeholder' }}
+    {%- endif -%}
+  </div>
+  <div class="promo__content page" data-reveal>
+    <p class="kicker">{{ section.settings.kicker | escape }}</p>
+    <h2 class="promo__title">{{ section.settings.heading | escape }}</h2>
+    {%- if section.settings.text != blank -%}<p class="promo__text">{{ section.settings.text | escape }}</p>{%- endif -%}
+    {%- if section.settings.button_label != blank -%}
+      <a class="btn btn--light" href="{{ section.settings.button_link | default: routes.all_products_collection_url }}">{{ section.settings.button_label | escape }} {% render 'icon', name: 'arrow' %}</a>
+    {%- endif -%}
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Bannière promotionnelle",
+  "settings": [
+    { "type": "image_picker", "id": "image", "label": "Image" },
+    { "type": "range", "id": "overlay", "label": "Assombrissement", "min": 0, "max": 80, "step": 5, "unit": "%", "default": 40 },
+    { "type": "text", "id": "kicker", "label": "Sur-titre", "default": "Drop" },
+    { "type": "text", "id": "heading", "label": "Titre", "default": "Le nouveau drop est en ligne" },
+    { "type": "text", "id": "text", "label": "Texte (n'annonce qu'une promotion réellement active)", "default": "Hoodies, cargos et t-shirts à associer pour un look complet. Quantités limitées par taille." },
+    { "type": "text", "id": "button_label", "label": "Bouton", "default": "VOIR LA COLLECTION" },
+    { "type": "url", "id": "button_link", "label": "Lien" }
+  ],
+  "presets": [{ "name": "Bannière promotionnelle" }]
+}
+{% endschema %}

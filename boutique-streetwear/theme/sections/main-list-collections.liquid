@@ -1,0 +1,18 @@
+<section class="section">
+  <div class="page">
+    <h1 class="collection__title">Collections</h1>
+    <div class="cats">
+      {%- for c in collections -%}
+        <a class="cat" href="{{ c.url }}" data-reveal>
+          <span class="cat__media">
+            {%- if c.featured_image -%}{{ c.featured_image | image_url: width: 900 | image_tag: loading: 'lazy', class: 'cat__img', alt: c.title }}{%- else -%}{{ 'collection-apparel-1' | placeholder_svg_tag: 'cat__img placeholder' }}{%- endif -%}
+          </span>
+          <span class="cat__label">{{ c.title | escape }} {% render 'icon', name: 'arrow' %}</span>
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+{% schema %}
+{ "name": "Liste des collections" }
+{% endschema %}
