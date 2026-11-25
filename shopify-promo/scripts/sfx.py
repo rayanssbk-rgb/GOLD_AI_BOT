@@ -1,6 +1,6 @@
 # Subtle synthesized sound design (no music, no voice): whooshes, pops, clicks, blips and a "ka-ching".
 import numpy as np, wave, sys
-SR = 48000; DUR = 25.2
+SR = 48000; DUR = 26.55
 out = np.zeros((int(SR * DUR), 2))
 rng = np.random.default_rng(7)
 def env(n, a, d): t = np.arange(n) / SR; return np.minimum(1, t / max(a, 1e-4)) * np.exp(-t / d)
@@ -41,24 +41,36 @@ def rumble(dur):
 for k in range(30): add(0.55 + k * 0.05 + rng.random() * 0.012, click(), 0.12, 0.3)
 add(2.1, pop(900), 0.12); add(2.65, click(), 0.6); add(2.8, whoosh(0.5), 0.25); add(3.15, chime([1318.5], 0, 0.4), 0.12)
 O = 3.6
-add(O + 0.05, whoosh(0.9), 0.3); add(O + 0.9, chime([660, 990], 0.08, 0.6), 0.15)
-add(O + 2.35, whoosh(0.8), 0.35)
-for i in range(16): add(O + 3.55 + i * 0.03, pop(700 + 40 * (i % 4)), 0.06, (i % 4 - 1.5) / 3)
-add(O + 4.4, click(), 0.55); add(O + 4.75, whoosh(0.85), 0.4)
-add(O + 5.3, whoosh(0.7), 0.3)
-for i in range(4): add(O + 6.6 + i * 0.22, click(), 0.3)
-add(O + 8.6, whoosh(0.8), 0.3); add(O + 10.1, tone(1320, 0.4, 0.002, 0.09), 0.18)
-add(O + 12.0, whoosh(0.9), 0.25); add(O + 13.5, whoosh(0.5), 0.15)
+SEGS = [(0, 2.25), (2.8, 5.1), (5.75, 8.5), (9.05, 11.9), (12.45, 14.5), (15.0, 19.4), (19.75, 21.6)]
+TR = 0.75
+AT = []; m = O
+for (a_, b_) in SEGS: AT.append(m); m += b_ - a_ + TR
+def M(o):
+    for k, (a_, b_) in enumerate(SEGS):
+        if a_ - 1e-6 <= o <= b_ + 1e-6: return AT[k] + o - a_
+    return None
+def at(o, sig, g=1.0, pan=0.0):
+    x = M(o)
+    if x is not None: add(x, sig, g, pan)
 def buzz():
     n = int(SR * 0.26); tt = np.arange(n) / SR
     return np.sin(2 * np.pi * 165 * tt) * (0.5 + 0.5 * np.sign(np.sin(2 * np.pi * 28 * tt))) * env(n, 0.005, 0.12)
-add(O + 14.75, whoosh(0.9), 0.3)
+add(O + 0.05, whoosh(0.9), 0.3); at(0.9, chime([660, 990], 0.08, 0.6), 0.15)
+for i in range(16): at(3.55 + i * 0.03, pop(700 + 40 * (i % 4)), 0.06, (i % 4 - 1.5) / 3)
+at(4.4, click(), 0.55); at(4.75, whoosh(0.85), 0.3)
+for i in range(4): at(6.6 + i * 0.22, click(), 0.3)
+at(10.1, tone(1320, 0.4, 0.002, 0.09), 0.18); at(13.5, whoosh(0.5), 0.15)
 NOTIF = [15.35, 16.45, 17.25, 17.85, 18.3, 18.65, 18.95, 19.2]
 for k, x in enumerate(NOTIF):
-    add(O + x, chime([1568, 2093] if k % 2 == 0 else [1760, 2349], 0.07, 0.3), 0.22 - 0.012 * k, (k % 3 - 1) * 0.3)
-    add(O + x, buzz(), 0.35)
-    if k == 0: add(O + x + 0.05, coins(), 0.3)
-add(O + 19.45, whoosh(0.6), 0.25); add(O + 19.8, pop(330), 0.45); add(O + 20.0, chime([784, 1175], 0.07, 0.6), 0.14)
+    at(x, chime([1568, 2093] if k % 2 == 0 else [1760, 2349], 0.07, 0.3), 0.22 - 0.012 * k, (k % 3 - 1) * 0.3)
+    at(x, buzz(), 0.35)
+    if k == 0: at(x + 0.05, coins(), 0.3)
+at(19.8, pop(330), 0.45); at(20.0, chime([784, 1175], 0.07, 0.6), 0.14)
+# window switches: shrink swoosh, mouse click on the tab, slide whoosh, settle
+for k in range(len(SEGS) - 1):
+    t0 = AT[k] + SEGS[k][1] - SEGS[k][0]
+    add(t0, whoosh(0.3), 0.12); add(t0 + 0.32 * TR, click(), 0.5)
+    add(t0 + 0.3 * TR, whoosh(0.45), 0.32, 0.4); add(t0 + 0.68 * TR, whoosh(0.3), 0.12, -0.3)
 # gentle room reverb
 ir = rng.standard_normal(int(SR * 0.8)) * np.exp(-np.arange(int(SR * 0.8)) / (SR * 0.18)) * 0.02
 for c in range(2): out[:, c] += np.convolve(out[:, c], ir)[: len(out)] * 0.6

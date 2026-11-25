@@ -4,7 +4,7 @@ import { AbsoluteFill, Easing, interpolate, useCurrentFrame } from 'remotion';
 import { Bag, Caption, FONT, Glow, LIME, SceneLive, SceneLogo, ScenePhone, SceneProducts, SceneText } from './Ad';
 
 export const FPS = 60;
-export const DUR = 25.2;
+export const DUR = 26.55;
 const OFF = 3.6; // v2 montage starts after the prompt
 const ease = Easing.bezier(0.22, 1, 0.36, 1);
 const inout = Easing.bezier(0.65, 0, 0.35, 1);
@@ -175,24 +175,142 @@ function SceneEnd({ t }: { t: number }) {
   );
 }
 
+// ------------------------------------------------------------------ "inside a computer" page transitions
+type Seg = { s: number; e: number; tab: string; url: string; render: (o: number) => React.ReactNode };
+const SEGS: Seg[] = [
+  { s: 0, e: 2.25, tab: 'Shopify', url: 'shopify.com', render: (o) => <SceneLogo t={o} /> },
+  { s: 2.8, e: 5.1, tab: 'Mon téléphone', url: 'eclaire.fr', render: (o) => <ScenePhone t={o} /> },
+  { s: 5.75, e: 8.5, tab: 'Produits', url: 'admin.shopify.com/produits', render: (o) => <SceneProducts t={o} /> },
+  { s: 9.05, e: 11.9, tab: 'Live View', url: 'admin.shopify.com/live-view', render: (o) => <SceneLive t={o} /> },
+  { s: 12.45, e: 14.5, tab: 'ECLAIRE', url: 'eclaire.fr', render: (o) => <SceneText t={o} /> },
+  { s: 15.0, e: 19.4, tab: 'Commandes', url: 'admin.shopify.com/commandes', render: (o) => <SceneSales t={o} /> },
+  { s: 19.75, e: 21.6, tab: 'Shopify', url: 'shopify.com', render: (o) => <SceneEnd t={o} /> },
+];
+export const TR = 0.75;
+export const SEG_AT = (() => {
+  const a: number[] = [];
+  let m = OFF;
+  for (const g of SEGS) { a.push(m); m += g.e - g.s + TR; }
+  return a;
+})();
+export const TOTAL = SEG_AT[SEGS.length - 1] + SEGS[SEGS.length - 1].e - SEGS[SEGS.length - 1].s;
+const PAGE_BG = 'radial-gradient(130% 90% at 50% 45%, #171917 0%, #0b0c0b 60%, #060706 100%)';
+const CH = 150; // browser chrome height (page px)
+
+const Chrome: React.FC<{ seg: number; hoverNext: number }> = ({ seg, hoverNext }) => {
+  const tabs = [seg, seg + 1].filter((i) => i < SEGS.length);
+  return (
+    <div style={{ position: 'absolute', left: 0, right: 0, top: -CH, height: CH, background: '#1d1e1d', borderBottom: '1px solid rgba(255,255,255,.08)', fontFamily: 'I5', color: '#fff' }}>
+      <div style={{ position: 'absolute', left: 34, top: 30, display: 'flex', gap: 14 }}>
+        {['#ff5f57', '#febc2e', '#28c840'].map((c) => <div key={c} style={{ width: 22, height: 22, borderRadius: '50%', background: c }} />)}
+      </div>
+      <div style={{ position: 'absolute', left: 150, top: 14, right: 20, height: 56, display: 'flex', gap: 8 }}>
+        {tabs.map((i) => {
+          const active = i === seg;
+          return (
+            <div key={i} style={{ width: 330, height: 56, borderRadius: '16px 16px 0 0', display: 'flex', alignItems: 'center', gap: 12, padding: '0 20px', boxSizing: 'border-box', fontSize: 24, whiteSpace: 'nowrap',
+              background: active ? '#2c2e2c' : `rgba(255,255,255,${0.04 + 0.1 * hoverNext})`, color: active ? '#fff' : `rgba(255,255,255,${0.55 + 0.45 * hoverNext})` }}>
+              <Bag size={30} /> {SEGS[i].tab}
+            </div>
+          );
+        })}
+        <div style={{ width: 56, height: 56, display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: 34, color: 'rgba(255,255,255,.5)' }}>+</div>
+      </div>
+      <div style={{ position: 'absolute', left: 0, right: 0, top: 70, height: 80, background: '#2c2e2c', display: 'flex', alignItems: 'center', padding: '0 26px', gap: 22, boxSizing: 'border-box' }}>
+        <span style={{ fontSize: 30, color: 'rgba(255,255,255,.45)' }}>‹ ›</span>
+        <div style={{ flex: 1, height: 52, borderRadius: 26, background: '#191a19', display: 'flex', alignItems: 'center', padding: '0 24px', fontSize: 24, color: 'rgba(255,255,255,.8)', whiteSpace: 'nowrap' }}>
+          <span style={{ color: LIME, marginRight: 12 }}>●</span>{SEGS[seg].url}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+/** one page = a browser window; full-screen while playing, shrinks into a window to switch tabs */
+const Win: React.FC<{ seg: number; scale: number; x: number; rotY: number; blur: number; hoverNext: number; o: number }> = ({ seg, scale, x, rotY, blur, hoverNext, o }) => (
+  <div style={{ position: 'absolute', inset: 0, perspective: 2200 }}>
+    <div style={{ position: 'absolute', left: 0, top: 0, width: 1080, height: 1920, transformOrigin: '50% 52%',
+      transform: `translateX(${x}px) translateY(${(1 - scale) * 90}px) rotateY(${rotY}deg) scale(${scale})`, filter: blur > 0.2 ? `blur(${blur}px)` : 'none' }}>
+      <Chrome seg={seg} hoverNext={hoverNext} />
+      <div style={{ position: 'absolute', inset: 0, overflow: 'hidden', background: PAGE_BG, borderRadius: scale < 0.999 ? '0 0 36px 36px' : 0,
+        boxShadow: scale < 0.999 ? `0 80px 160px rgba(0,0,0,${0.8 * (1 - scale) / 0.38})` : 'none' }}>
+        {SEGS[seg].render(o)}
+      </div>
+    </div>
+  </div>
+);
+
+/** macOS-like desktop that shows up behind the windows during a switch */
+const Desktop: React.FC<{ k: number; seg: number }> = ({ k, seg }) => (
+  <AbsoluteFill style={{ opacity: k }}>
+    <Glow x={540} y={1000} r={900} o={0.35} />
+    <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: 64, background: 'rgba(20,21,20,.75)', display: 'flex', alignItems: 'center', gap: 34, padding: '0 34px', fontFamily: 'I7', fontSize: 25, color: 'rgba(255,255,255,.85)', transform: `translateY(${(1 - k) * -64}px)` }}>
+      <Bag size={34} /> <span>Navigateur</span><span style={{ fontFamily: 'I5' }}>Fichier</span><span style={{ fontFamily: 'I5' }}>Édition</span><span style={{ fontFamily: 'I5' }}>Fenêtre</span>
+      <span style={{ marginLeft: 'auto', fontFamily: 'I5' }}>mar. 25 nov. 9:41</span>
+    </div>
+    <div style={{ position: 'absolute', bottom: 40, left: '50%', transform: `translateX(-50%) translateY(${(1 - k) * 200}px)`, padding: 18, borderRadius: 40, background: 'rgba(60,62,60,.45)', border: '1px solid rgba(255,255,255,.1)', display: 'flex', gap: 18 }}>
+      {['#3b3f3a', '#2f4a2a', 'SHOP', '#434843', '#355a3c', '#2b302a'].map((c, i) => (
+        <div key={i} style={{ width: 96, height: 96, borderRadius: 24, background: c === 'SHOP' ? '#fff' : c, display: 'flex', alignItems: 'center', justifyContent: 'center', position: 'relative' }}>
+          {c === 'SHOP' ? <Bag size={78} /> : <div style={{ width: 36, height: 36, borderRadius: 10, background: 'rgba(255,255,255,.13)' }} />}
+          {c === 'SHOP' ? <div style={{ position: 'absolute', bottom: -12, width: 8, height: 8, borderRadius: 4, background: '#fff' }} /> : null}
+        </div>
+      ))}
+    </div>
+    <div style={{ position: 'absolute', top: 96, width: '100%', textAlign: 'center', fontFamily: 'I5', fontSize: 24, color: 'rgba(255,255,255,.4)', letterSpacing: 2 }}>{seg + 1} / {SEGS.length}</div>
+  </AbsoluteFill>
+);
+
+const Cursor: React.FC<{ x: number; y: number; press: number; o: number }> = ({ x, y, press, o }) => (
+  <svg width="64" height="64" viewBox="0 0 24 24" style={{ position: 'absolute', left: x, top: y, opacity: o, transform: `scale(${1 - 0.18 * press})`, transformOrigin: '0 0', filter: 'drop-shadow(0 4px 8px rgba(0,0,0,.6))' }}>
+    <path d="M3 2 L3 19 L7.5 14.8 L10.4 21.2 L13.2 20 L10.4 13.8 L16.5 13.8 Z" fill="#fff" stroke="#000" strokeWidth="1.2" strokeLinejoin="round" />
+  </svg>
+);
+
+function Desk({ t }: { t: number }) {
+  if (t < OFF - 0.001) return null;
+  // which segment / transition are we in?
+  let k = SEGS.length - 1;
+  for (let i = 0; i < SEGS.length; i++) if (t < SEG_AT[i] + (SEGS[i].e - SEGS[i].s) + (i < SEGS.length - 1 ? TR : 99)) { k = i; break; }
+  const g = SEGS[k];
+  const local = t - SEG_AT[k];
+  const playLen = g.e - g.s;
+  if (local <= playLen || k === SEGS.length - 1) {
+    return <Win seg={k} scale={1} x={0} rotY={0} blur={0} hoverNext={0} o={g.s + Math.min(local, playLen + 5)} />;
+  }
+  // transition from k to k+1
+  const u = (local - playLen) / TR;
+  const shrink = p(u, 0, 0.32, inout);
+  const slide = p(u, 0.3, 0.72, inout);
+  const grow = p(u, 0.68, 1, inout);
+  const S = 0.6;
+  const outScale = 1 - (1 - S) * shrink;
+  const inScale = S + (1 - S) * grow;
+  const speed = Math.sin(Math.PI * slide);
+  const n = SEGS[k + 1];
+  // cursor: travels to the next tab, clicks at u≈0.3
+  const tabX = 540 + (150 + 338 + 165 - 540) * S;
+  const tabY = 960 + 90 * (1 - S) + (-CH + 42 - 960 * 1.04) * S;
+  const cx = interpolate(u, [0, 0.28], [780, tabX], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: inout });
+  const cy = interpolate(u, [0, 0.28], [1500, tabY], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: inout });
+  const press = Math.sin(Math.PI * p(u, 0.26, 0.38, Easing.linear));
+  const cursorO = p(u, 0, 0.08) * (1 - p(u, 0.45, 0.6));
+  return (
+    <AbsoluteFill>
+      <Desktop k={Math.min(shrink, 1 - grow)} seg={k + (slide > 0.5 ? 1 : 0)} />
+      {slide < 1 ? <Win seg={k} scale={outScale} x={-1150 * slide} rotY={22 * slide} blur={speed * 7} hoverNext={p(u, 0.15, 0.3)} o={g.e} /> : null}
+      {slide > 0 ? <Win seg={k + 1} scale={inScale} x={1150 * (1 - slide)} rotY={-22 * (1 - slide)} blur={speed * 7} hoverNext={0} o={n.s} /> : null}
+      <Cursor x={cx} y={cy} press={press} o={cursorO} />
+    </AbsoluteFill>
+  );
+}
+
 export const Mix: React.FC = () => {
   const t = useCurrentFrame() / FPS;
-  const o = t - OFF;
   return (
     <AbsoluteFill style={{ background: 'radial-gradient(130% 90% at 50% 45%, #171917 0%, #0b0c0b 60%, #060706 100%)', overflow: 'hidden' }}>
       <style>{FONT}</style>
       <ScenePrompt t={t} />
-      {t > OFF - 0.1 ? (
-        <>
-          <SceneLogo t={o} />
-          <ScenePhone t={o} />
-          <SceneProducts t={o} />
-          <SceneLive t={o} />
-          <SceneText t={o} />
-          <SceneSales t={o} />
-          <SceneEnd t={o} />
-        </>
-      ) : null}
+      <Desk t={t} />
       <AbsoluteFill style={{ background: 'radial-gradient(120% 80% at 50% 50%, transparent 55%, rgba(0,0,0,.55) 100%)' }} />
     </AbsoluteFill>
   );
