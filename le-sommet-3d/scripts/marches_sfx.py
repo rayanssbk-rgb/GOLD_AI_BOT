@@ -1,7 +1,7 @@
 # Sound design for "Les marches": footsteps per character, heartbeat, drips, drone, final swell. No music.
 import sys, wave
 import numpy as np
-SR = 48000; HOOK = 2.6; DUR = 31.0 + HOOK; OFF = HOOK
+SR = 48000; HOOK = 2.6; DUR = 32.4 + HOOK; OFF = HOOK
 N = int(SR * DUR)
 L = np.zeros(N); R = np.zeros(N)
 rng = np.random.default_rng(11)

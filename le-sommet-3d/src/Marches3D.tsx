@@ -12,7 +12,7 @@ export const FPS = 30;
 export const W = 1080;
 export const H = 1920;
 export const HOOK = 2.6;
-export const DUR = 31 + HOOK;
+export const DUR = 32.4 + HOOK; // 35 s
 
 // ---------------------------------------------------------------- story (same beats as the 2D version)
 function track(keys: [number, number][], t: number) {
