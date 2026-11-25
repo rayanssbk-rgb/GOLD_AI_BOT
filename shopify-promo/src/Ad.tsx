@@ -4,18 +4,18 @@ import { AbsoluteFill, Easing, interpolate, staticFile, useCurrentFrame } from '
 
 export const FPS = 60;
 export const DUR = 18;
-const LIME = '#A3F04A';
+export const LIME = '#A3F04A';
 const ease = Easing.bezier(0.22, 1, 0.36, 1);
 const inout = Easing.bezier(0.65, 0, 0.35, 1);
 const p = (t: number, a: number, b: number, e = ease) => interpolate(t, [a, b], [0, 1], { extrapolateLeft: 'clamp', extrapolateRight: 'clamp', easing: e });
 const win = (t: number, a: number, b: number, fi = 0.35, fo = 0.35) => Math.min(p(t, a, a + fi, inout), 1 - p(t, b - fo, b, inout));
 
-const FONT = `
+export const FONT = `
 @font-face{font-family:I7;src:url(${staticFile('Inter-700.woff2')})}
 @font-face{font-family:I5;src:url(${staticFile('Inter-500.woff2')})}`;
 
 /** Shopify bag logo */
-const Bag: React.FC<{ size: number; style?: React.CSSProperties }> = ({ size, style }) => (
+export const Bag: React.FC<{ size: number; style?: React.CSSProperties }> = ({ size, style }) => (
   <svg width={size} height={size} viewBox="-50 -55 100 110" style={style}>
     <path d="M-14 -24 C-14 -52 10 -52 12 -24" stroke="#95BF47" strokeWidth="7" fill="none" strokeLinecap="round" />
     <path d="M-40 -26 L22 -30 L30 52 L-46 44 Z" fill="#95BF47" />
@@ -24,12 +24,12 @@ const Bag: React.FC<{ size: number; style?: React.CSSProperties }> = ({ size, st
   </svg>
 );
 
-const Glow: React.FC<{ x: number; y: number; r: number; o: number; c?: string }> = ({ x, y, r, o, c = '130,235,50' }) => (
+export const Glow: React.FC<{ x: number; y: number; r: number; o: number; c?: string }> = ({ x, y, r, o, c = '130,235,50' }) => (
   <div style={{ position: 'absolute', left: x - r, top: y - r, width: r * 2, height: r * 2, borderRadius: '50%', opacity: o, background: `radial-gradient(circle, rgba(${c},.85) 0%, rgba(${c},.35) 35%, rgba(${c},0) 70%)`, filter: 'blur(30px)' }} />
 );
 
 /** caption: words rise out of blur; words wrapped in * are lime and glow; a thin line sweeps under it */
-const Caption: React.FC<{ t: number; t0: number; t1: number; text: string; y: number; size?: number }> = ({ t, t0, t1, text, y, size = 76 }) => {
+export const Caption: React.FC<{ t: number; t0: number; t1: number; text: string; y: number; size?: number }> = ({ t, t0, t1, text, y, size = 76 }) => {
   if (t < t0 - 0.01 || t > t1 + 0.01) return null;
   const out = p(t, t1 - 0.35, t1, inout);
   const words = text.split(' ');
@@ -79,7 +79,7 @@ const Garment: React.FC<{ kind: 'tee' | 'hoodie' | 'cargo' | 'cap'; color: strin
 };
 
 // =============================================================== scenes
-function SceneLogo({ t }: { t: number }) {
+export function SceneLogo({ t }: { t: number }) {
   const v = win(t, 0, 2.7, 0.01, 0.4);
   if (v <= 0) return null;
   const k = p(t, 0.1, 1.3);
@@ -100,7 +100,7 @@ function SceneLogo({ t }: { t: number }) {
 }
 
 const APPS = ['#2b2e2b', '#3a3f39', '#2a332a', '#434843', '#2f3a2c', '#373a37', '#2c312b', '#3d443b', '#2a2d2a', 'SHOP', '#353b34', '#2e322d', '#3b3f3a', '#2b302a', '#40463e', '#30352f'];
-function ScenePhone({ t }: { t: number }) {
+export function ScenePhone({ t }: { t: number }) {
   const v = win(t, 2.5, 5.6, 0.3, 0.3);
   if (v <= 0) return null;
   const rise = p(t, 2.5, 3.5);
@@ -156,7 +156,7 @@ const PRODUCTS: [string, string, string, 'tee' | 'hoodie' | 'cargo' | 'cap', str
   ['Cargo Technique', '89,00 € · 8 en stock', '#3b3a33', 'cargo', '#d9d2c2'],
   ['Casquette Paris', '29,00 € · 30 en stock', '#141416', 'cap', '#d0d0cc'],
 ];
-function SceneProducts({ t }: { t: number }) {
+export function SceneProducts({ t }: { t: number }) {
   const v = win(t, 5.4, 8.9, 0.35, 0.35);
   if (v <= 0) return null;
   const enter = p(t, 5.4, 6.4);
@@ -212,7 +212,7 @@ const MAP = (() => {
   }
   return pts;
 })();
-function SceneLive({ t }: { t: number }) {
+export function SceneLive({ t }: { t: number }) {
   const v = win(t, 8.7, 12.3, 0.35, 0.35);
   if (v <= 0) return null;
   const enter = p(t, 8.7, 9.7);
@@ -261,7 +261,7 @@ function SceneLive({ t }: { t: number }) {
   );
 }
 
-function SceneText({ t }: { t: number }) {
+export function SceneText({ t }: { t: number }) {
   const v = win(t, 12.1, 14.9, 0.4, 0.01);
   if (v <= 0) return null;
   return (
@@ -273,7 +273,7 @@ function SceneText({ t }: { t: number }) {
   );
 }
 
-function SceneOrder({ t }: { t: number }) {
+export function SceneOrder({ t }: { t: number }) {
   if (t < 14.7) return null;
   const k = p(t, 14.7, 15.25, Easing.bezier(0.34, 1.45, 0.64, 1));
   const rings = p(t, 15.0, 16.0);
