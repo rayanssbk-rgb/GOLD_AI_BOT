@@ -15,6 +15,7 @@ export const H = 1920;
 export const HOOK = 0; // cold open removed
 export const DUR = 35;
 const STORY = 32.4; // story seconds, slowed to fill 35 s
+const T0 = 2.0; // story time at frame 0 (characters start walking ~0.6 s in)
 
 // ---------------------------------------------------------------- story (same beats as the 2D version)
 function track(keys: [number, number][], t: number) {
@@ -176,6 +177,22 @@ const Blood: React.FC<{ t: number }> = ({ t }) => {
   );
 };
 
+const Dust: React.FC<{ t: number }> = ({ t }) => (
+  <group>
+    {Array.from({ length: 140 }, (_, i) => {
+      const x = (rnd(i, 11) - 0.5) * 8 + 0.4 * Math.sin(t * 0.17 + i);
+      const y = ((rnd(i, 12) * 11 + t * (0.05 + 0.06 * rnd(i, 14))) % 11) + 0.2;
+      const z = 0.5 - rnd(i, 13) * 17 + 0.3 * Math.cos(t * 0.13 + i * 2);
+      const tw = 0.5 + 0.5 * Math.sin(t * (1 + rnd(i, 15) * 2) + i);
+      return (
+        <sprite key={i} position={[x, y, z]} scale={[0.035, 0.035, 1]}>
+          <spriteMaterial map={glowTex()} color="#ffe2bd" transparent opacity={0.25 + 0.45 * tw} blending={THREE.AdditiveBlending} depthWrite={false} />
+        </sprite>
+      );
+    })}
+  </group>
+);
+
 // ---------------------------------------------------------------- camera
 type Cam = { pos: V3; target: V3; fov: number; focus: V3 };
 function mainCam(t: number): Cam {
@@ -193,7 +210,19 @@ function mainCam(t: number): Cam {
   const pos = lv(base, closePos, close);
   const target = lv(add(mid, [0, -0.2, -0.6]), add(obsFocus, [-0.4, 0, -0.4]), close);
   const focus = lv(mid, obsFocus, close);
-  return { pos, target, fov: 34, focus };
+  const wideCam: Cam = { pos, target, fov: 34, focus };
+  // shot 1: crane from the first step (shoes, LED, numbers) up to the wide
+  const dd = discState(t).pos;
+  const crane: Cam = { pos: add(dd, [0.75, 0.2, 2.1]), target: add(dd, [-0.1, 0.3, -0.3]), fov: 32, focus: add(dd, [0, 0.2, 0]) };
+  // shot 2: in front of Discipline, face and shoulders, steps rising behind
+  const face: Cam = { pos: add(dd, [1.0, 2.05, -2.0]), target: add(dd, [-0.2, 1.4, -0.1]), fov: 30, focus: add(dd, [0, 1.6, 0]) };
+  // shot 3: low angle from below the top steps, Discipline against the light
+  const low: Cam = { pos: add(stairPos(XD, 23.2), [1.25, 0.55, 0.9]), target: add(dd, [0, 1.5, 0]), fov: 32, focus: add(dd, [0, 1.2, 0]) };
+  const mixC = (a: Cam, b: Cam, k: number): Cam => ({ pos: lv(a.pos, b.pos, k), target: lv(a.target, b.target, k), fov: lerp(a.fov, b.fov, k), focus: lv(a.focus, b.focus, k) });
+  let c = mixC(crane, wideCam, sm(prog(t, 2.6, 6.2)));
+  c = mixC(c, face, sm(prog(t, 19.2, 20.2)) * (1 - sm(prog(t, 22.8, 23.8))));
+  c = mixC(c, low, sm(prog(t, 25.2, 26.0)) * (1 - sm(prog(t, 27.0, 28.2))));
+  return c;
 }
 function hookCam(h: number): { t: number; cam: Cam } {
   const t = 14.2 + h * 0.15;
@@ -243,7 +272,7 @@ export const Marches3D: React.FC = () => {
   const f = useCurrentFrame();
   const ft = f / FPS;
   const hook = ft < HOOK ? hookCam(ft) : null;
-  const t = hook ? hook.t : (ft * STORY) / DUR;
+  const t = hook ? hook.t : T0 + (ft * (STORY - T0)) / DUR;
   const cam = hook ? hook.cam : mainCam(t);
   const focus = useMemo(() => new THREE.Vector3(), []);
   focus.set(...cam.focus);
@@ -256,7 +285,7 @@ export const Marches3D: React.FC = () => {
   const lightTop = 0.4 + 0.6 * sm(prog(t, 18, 27));
   const headOf = (s: { pos: V3; body: Body }): V3 => add(s.pos, [0, P(s.body).pelvisY + 1.0, 0]);
   const camFull = { ...cam, pos: add(cam.pos, drift) };
-  const lab = (a: number) => (hook ? 0 : sm(prog(t, a, a + 0.5)) * (1 - sm(prog(t, 27.2, 27.8))));
+  const lab = (a: number) => (hook ? 0 : (1 - sm(prog(t, 19.2, 19.7)) * (1 - sm(prog(t, 23.3, 23.8)))) * sm(prog(t, a + 4.0, a + 4.6)) * (1 - sm(prog(t, 27.2, 27.8))));
   const labSize = Math.round(lerp(30, 40, sm(prog(t, 0, 4))));
   const eyeOpen = hook ? sm(prog(ft, 0.22, 0.42)) : 1;
 
@@ -288,6 +317,8 @@ export const Marches3D: React.FC = () => {
         <sprite position={[0, TOP * RISE + 3, 0.26 - TOP * RUN - 4]} scale={[18, 18, 1]}>
           <spriteMaterial map={glowTex()} color="#ffd6a2" transparent opacity={0.55 * lightTop} blending={THREE.AdditiveBlending} depthWrite={false} toneMapped={false} fog={false} />
         </sprite>
+        <spotLight position={[2, TOP * RISE + 7, 0.26 - TOP * RUN - 8]} target-position={[0, 3, -6]} angle={0.7} penumbra={1} intensity={160 * (0.5 + 0.5 * lightTop)} decay={1.5} distance={0} color="#ffd2a0" />
+        <Dust t={ft} />
         {/* warm light spilling from the steps they are on */}
         <pointLight position={add(d.pos, [0.4, 0.5, 0.6])} intensity={2.2} distance={3} decay={1.8} color="#ffc98c" />
         <pointLight position={add(o.pos, [0.4, 0.5, 0.6])} intensity={2.2} distance={3} decay={1.8} color="#ffc98c" />
@@ -355,7 +386,7 @@ export const Marches3D: React.FC = () => {
           <AbsoluteFill style={{ background: '#fff6e8', opacity: prog(ft, HOOK - 0.12, HOOK) }} />
         </AbsoluteFill>
       ) : (
-        <AbsoluteFill style={{ background: '#000', opacity: 1 - sm(prog(t, 0, 0.8)) }} />
+        <AbsoluteFill style={{ background: '#000', opacity: 1 - sm(prog(ft, 0, 0.7)) }} />
       )}
 
       {/* end card */}

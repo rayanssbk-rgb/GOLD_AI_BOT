@@ -1,12 +1,12 @@
 # Sound design for "Les marches": footsteps per character, heartbeat, drips, drone, final swell. No music.
 import sys, wave
 import numpy as np
-SR = 48000; HOOK = 0.0; DUR = 35.0; OFF = 0.0; K = 35.0 / 32.4  # no cold open; story slowed to fill 35 s
+SR = 48000; HOOK = 0.0; DUR = 35.0; OFF = 0.0; T0 = 2.0; K = 35.0 / (32.4 - T0)  # story time T0 at 0 s, slowed to fill 35 s
 N = int(SR * DUR)
 L = np.zeros(N); R = np.zeros(N)
 rng = np.random.default_rng(11)
 def add(t, s, g=1.0, pan=0.0):
-    i = int((t * K + OFF) * SR)
+    i = int(((t - T0) * K + OFF) * SR)
     if i >= N or i < 0: return
     s = s[: N - i] * g
     L[i:i + len(s)] += s * np.sqrt((1 - pan) / 2) * 1.414
