@@ -1,11 +1,12 @@
 // "Les marches" in minimalist cinematic 3D: two staircases of stone pillars, DISCIPLINE climbing steadily,
 // OBSESSION bleeding with SHADOW right behind her. Same story as the 2D version, with the cold-open hook.
-import React, { useLayoutEffect, useMemo, useRef } from 'react';
+import React, { useMemo } from 'react';
 import { AbsoluteFill, staticFile, useCurrentFrame } from 'remotion';
 import { ThreeCanvas } from '@remotion/three';
 import { EffectComposer, Bloom, DepthOfField, Noise, Vignette } from '@react-three/postprocessing';
 import * as THREE from 'three';
-import { Body, CamRig, Mannequin, V3, camTransform, walkBody } from './three/lib';
+import { Body, CamRig, V3, camTransform, walkBody } from './three/lib';
+import { Human } from './three/Human';
 import { CROUCH, Env, FALL, KNEEL, LOOK, LOOKUP, P, STAND, add, climbBody, concrete, ease, glowTex, lerp, lv, mixB, prog, rnd, sm } from './Main';
 
 export const FPS = 30;
@@ -73,37 +74,23 @@ function shadowState(t: number) {
 const discState = (t: number) => gait(XD, track(DISC, t));
 
 // ---------------------------------------------------------------- pieces
-const SHADOW_LOOK = { skin: '#0a0a0b', pants: '#0a0a0b', shoe: '#050505', eye: true };
-const Fig: React.FC<{ pos: V3; body: Body; dark?: boolean; opacity?: number; blood?: number }> = ({ pos, body, dark = false, opacity = 1, blood = 0 }) => {
-  const ref = useRef<THREE.Group>(null);
-  useLayoutEffect(() => {
-    ref.current?.traverse((o) => {
-      const m = o as THREE.Mesh;
-      if (!m.isMesh) return;
-      m.castShadow = true;
-      m.receiveShadow = true;
-      if (opacity < 1) {
-        if (!m.userData.own) { m.material = (m.material as THREE.Material).clone(); m.userData.own = true; }
-        const mm = m.material as THREE.Material;
-        mm.transparent = true;
-        mm.opacity = opacity;
-        mm.depthWrite = opacity > 0.6;
-      }
-    });
-  });
-  return (
-    <group ref={ref} position={pos} rotation={[0, Math.PI, 0]}>
-      <Mannequin body={body} cloth={dark ? '#0b0b0c' : '#ebe8e2'} look={dark ? SHADOW_LOOK : LOOK} />
-      {blood > 0 ? (
-        // wound on her side
-        <mesh position={[-0.2, 1.22 * (P(body).pelvisY / 0.95), 0.02]} scale={[0.5, 1, 0.9]}>
-          <sphereGeometry args={[0.09, 16, 12]} />
-          <meshStandardMaterial color="#8a0f0c" emissive="#5a0503" emissiveIntensity={0.6 * blood} roughness={0.4} />
-        </mesh>
-      ) : null}
-    </group>
-  );
+const OUTFIT: Record<string, Record<string, string> | undefined> = {
+  disc: { Outfit_Top: '#d9d5cd', Outfit_Bottom: '#2b2b2e' },
+  obs: { Outfit_Top: '#5a0d0b', Outfit_Bottom: '#151517' },
+  shad: undefined,
 };
+const Fig: React.FC<{ pos: V3; body: Body; who: 'disc' | 'obs' | 'shad'; opacity?: number; blood?: number }> = ({ pos, body, who, opacity = 1, blood = 0 }) => (
+  <group position={pos} rotation={[0, Math.PI, 0]}>
+    <Human file="human.glb" outfit={OUTFIT[who]} body={body} skin={who === 'shad' ? 'shadow' : 'real'} eyes={who === 'shad'} opacity={opacity} />
+    {blood > 0 ? (
+      // wound on her side
+      <mesh position={[-0.15, 1.08 + (P(body).pelvisY - 0.96), 0.03]} scale={[0.6, 1, 0.8]}>
+        <sphereGeometry args={[0.07, 16, 12]} />
+        <meshStandardMaterial color="#7a0b09" emissive="#4a0402" emissiveIntensity={0.5 * blood} roughness={0.3} />
+      </mesh>
+    ) : null}
+  </group>
+);
 
 const numCache = new Map<number, THREE.CanvasTexture>();
 function numTex(n: number) {
@@ -266,7 +253,7 @@ export const Marches3D: React.FC = () => {
   const sh = shadowState(t);
   const shadowA = 1 - sm(prog(t, B.shadowFade, B.shadowFade + 2.4));
   const lightTop = 0.4 + 0.6 * sm(prog(t, 18, 27));
-  const headOf = (s: { pos: V3; body: Body }): V3 => add(s.pos, [0, P(s.body).pelvisY + 0.95, 0]);
+  const headOf = (s: { pos: V3; body: Body }): V3 => add(s.pos, [0, P(s.body).pelvisY + 1.0, 0]);
   const camFull = { ...cam, pos: add(cam.pos, drift) };
   const lab = (a: number) => (hook ? 0 : sm(prog(t, a, a + 0.5)) * (1 - sm(prog(t, 27.2, 27.8))));
   const labSize = Math.round(lerp(30, 40, sm(prog(t, 0, 4))));
@@ -303,7 +290,7 @@ export const Marches3D: React.FC = () => {
         {/* warm light spilling from the steps they are on */}
         <pointLight position={add(d.pos, [0.4, 0.5, 0.6])} intensity={2.2} distance={3} decay={1.8} color="#ffc98c" />
         <pointLight position={add(o.pos, [0.4, 0.5, 0.6])} intensity={2.2} distance={3} decay={1.8} color="#ffc98c" />
-        {shadowA > 0.01 ? <Fig pos={sh.pos} body={sh.body} dark opacity={shadowA} /> : null}
+        {shadowA > 0.01 ? <Fig pos={sh.pos} body={sh.body} who="shad" opacity={shadowA} /> : null}
         {/* smoke as the shadow dissolves */}
         {t > B.shadowFade && t < B.shadowFade + 4
           ? Array.from({ length: 26 }, (_, i) => {
@@ -317,8 +304,8 @@ export const Marches3D: React.FC = () => {
               );
             })
           : null}
-        <Fig pos={o.pos} body={o.body} blood={1} />
-        <Fig pos={d.pos} body={d.body} />
+        <Fig pos={o.pos} body={o.body} who="obs" blood={1} />
+        <Fig pos={d.pos} body={d.body} who="disc" />
         <EffectComposer multisampling={4}>
           <DepthOfField target={focus} focalLength={0.028} bokehScale={2.6} height={960} />
           <Bloom intensity={0.8} luminanceThreshold={0.82} luminanceSmoothing={0.2} mipmapBlur radius={0.65} />
