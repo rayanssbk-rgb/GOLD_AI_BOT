@@ -12,8 +12,9 @@ import { CROUCH, Env, FALL, KNEEL, LOOK, LOOKUP, P, STAND, add, climbBody, concr
 export const FPS = 30;
 export const W = 1080;
 export const H = 1920;
-export const HOOK = 2.6;
-export const DUR = 32.4 + HOOK; // 35 s
+export const HOOK = 0; // cold open removed
+export const DUR = 35;
+const STORY = 32.4; // story seconds, slowed to fill 35 s
 
 // ---------------------------------------------------------------- story (same beats as the 2D version)
 function track(keys: [number, number][], t: number) {
@@ -242,7 +243,7 @@ export const Marches3D: React.FC = () => {
   const f = useCurrentFrame();
   const ft = f / FPS;
   const hook = ft < HOOK ? hookCam(ft) : null;
-  const t = hook ? hook.t : ft - HOOK;
+  const t = hook ? hook.t : (ft * STORY) / DUR;
   const cam = hook ? hook.cam : mainCam(t);
   const focus = useMemo(() => new THREE.Vector3(), []);
   focus.set(...cam.focus);
@@ -354,7 +355,7 @@ export const Marches3D: React.FC = () => {
           <AbsoluteFill style={{ background: '#fff6e8', opacity: prog(ft, HOOK - 0.12, HOOK) }} />
         </AbsoluteFill>
       ) : (
-        <AbsoluteFill style={{ background: '#fff6e8', opacity: 1 - prog(t, 0, 0.25) }} />
+        <AbsoluteFill style={{ background: '#000', opacity: 1 - sm(prog(t, 0, 0.8)) }} />
       )}
 
       {/* end card */}
@@ -364,7 +365,7 @@ export const Marches3D: React.FC = () => {
           <div style={{ position: 'absolute', top: 1080, width: '100%', textAlign: 'center', fontFamily: 'I7', fontSize: 40, color: 'rgba(255,255,255,.75)', opacity: sm(prog(t, 28.4, 29.2)) }}>Même en saignant.</div>
         </AbsoluteFill>
       ) : null}
-      <AbsoluteFill style={{ background: '#000', opacity: hook ? 0 : prog(t, DUR - HOOK - 0.6, DUR - HOOK) }} />
+      <AbsoluteFill style={{ background: '#000', opacity: hook ? 0 : prog(t, STORY - 0.6, STORY) }} />
     </AbsoluteFill>
   );
 };

@@ -1,12 +1,12 @@
 # Sound design for "Les marches": footsteps per character, heartbeat, drips, drone, final swell. No music.
 import sys, wave
 import numpy as np
-SR = 48000; HOOK = 2.6; DUR = 32.4 + HOOK; OFF = HOOK
+SR = 48000; HOOK = 0.0; DUR = 35.0; OFF = 0.0; K = 35.0 / 32.4  # no cold open; story slowed to fill 35 s
 N = int(SR * DUR)
 L = np.zeros(N); R = np.zeros(N)
 rng = np.random.default_rng(11)
 def add(t, s, g=1.0, pan=0.0):
-    i = int((t + OFF) * SR)
+    i = int((t * K + OFF) * SR)
     if i >= N or i < 0: return
     s = s[: N - i] * g
     L[i:i + len(s)] += s * np.sqrt((1 - pan) / 2) * 1.414
@@ -65,24 +65,9 @@ add(17.0, lp(rng.standard_normal(n), 0.03) * np.sin(np.pi * tt / 2.4) * 3, 0.5, 
 # drone bed + final swell into the light
 tt = np.arange(N) / SR
 drone = (np.sin(2 * np.pi * 55 * tt) + 0.5 * np.sin(2 * np.pi * 82.5 * tt + 0.3) + 0.25 * np.sin(2 * np.pi * 110.3 * tt)) * 0.06
-swell = np.clip((tt - 20 - HOOK) / 7, 0, 1) ** 2 * (np.sin(2 * np.pi * 220 * tt) + np.sin(2 * np.pi * 330.4 * tt) + 0.6 * np.sin(2 * np.pi * 440.7 * tt)) * 0.05 * np.clip((30.5 + HOOK - tt) / 2, 0, 1)
+swell = np.clip((tt - 21.5) / 7.5, 0, 1) ** 2 * (np.sin(2 * np.pi * 220 * tt) + np.sin(2 * np.pi * 330.4 * tt) + 0.6 * np.sin(2 * np.pi * 440.7 * tt)) * 0.05 * np.clip((34.6 - tt) / 2, 0, 1)
 L += drone + swell; R += drone + swell
 n = int(SR * 3); add(27.4, np.sin(2 * np.pi * 41 * np.arange(n) / SR) * env(n, 0.01, 0.9), 0.7)
-# ---- cold open (absolute time)
-OFF = 0.0
-n = int(SR * 1.6); tt2 = np.arange(n) / SR
-add(0.2, np.tanh(2.5 * np.sin(2 * np.pi * np.cumsum(32 + 60 * np.exp(-tt2 / 0.15)) / SR) * env(n, 0.002, 0.6)), 1.0)  # eye opens: sub boom
-n = int(SR * 0.3); add(0.22, lp(rng.standard_normal(n), 0.5) * env(n, 0.001, 0.05), 0.4)
-for k, x in enumerate([0.3, 0.62, 0.92, 1.2, 1.45, 1.68, 1.9, 2.1, 2.3]): add(x, heart(), 0.5 + 0.04 * k)
-def hit():
-    n = int(SR * 1.0); t3 = np.arange(n) / SR
-    return np.tanh(3 * (np.sin(2 * np.pi * np.cumsum(45 + 120 * np.exp(-t3 / 0.03)) / SR) * env(n, 0.001, 0.25) + lp(rng.standard_normal(n), 0.3) * env(n, 0.001, 0.08)))
-add(0.55, hit(), 0.75); add(1.05, hit(), 0.9)
-n = int(SR * 0.9); t4 = np.arange(n) / SR
-add(0.75, lp(rng.standard_normal(n), 0.06) * np.sin(np.pi * t4 / 0.9) * 2.2, 0.6)  # zoom-out whoosh
-n = int(SR * 1.2); t5 = np.arange(n) / SR
-add(1.4, rng.standard_normal(n) * (t5 / 1.2) ** 3 * 0.25, 1.0)  # riser into the flash
-add(2.58, hit(), 0.7)
 mix = np.stack([L, R], 1)
 mix /= np.abs(mix).max() + 1e-9
 fade = int(SR * 0.8); mix[-fade:] *= np.linspace(1, 0, fade)[:, None]
