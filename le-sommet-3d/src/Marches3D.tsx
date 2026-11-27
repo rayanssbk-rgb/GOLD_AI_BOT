@@ -44,14 +44,68 @@ function stairPos(x: number, p: number): V3 {
   if (p <= TOP) return [x, p * RISE, 0.26 - p * RUN];
   return [x, TOP * RISE, 0.26 - TOP * RUN - (p - TOP) * 0.62];
 }
-function gait(x: number, p: number, tired = 0): { pos: V3; body: Body } {
+// determined stair climb: one step per half cycle. The lead leg lifts high, lands on the next step and drives
+// the body up while the trailing leg pushes off; torso leans in, arms pump, eyes on the summit.
+type Drive = { drive?: number; tired?: number; wound?: boolean; look?: number };
+function stairClimb(ph: number, o: Drive): Body {
+  const { drive = 1, tired = 0, wound = false, look = 1 } = o;
+  const leg = (p: number): [number, number] => {
+    const q = ((p % (2 * Math.PI)) + 2 * Math.PI) % (2 * Math.PI);
+    if (q < Math.PI) {
+      // stance: foot planted one step up, push until the leg is straight
+      const u = sm(q / Math.PI);
+      return [lerp(-0.78, 0.12, u), lerp(1.05, 0.06, Math.pow(u, 0.8))];
+    }
+    // swing: knee drives high, then the foot reaches for the next step
+    const u = (q - Math.PI) / Math.PI;
+    const lift = Math.sin(Math.PI * Math.min(1, u * 1.15));
+    return [lerp(0.12, -0.78, sm(u)) - (0.45 + 0.15 * drive) * lift, lerp(0.06, 1.05, u) + (0.95 + 0.2 * drive) * lift];
+  };
+  const [hl, kl] = leg(ph);
+  const [hr, kr] = leg(ph + Math.PI);
+  const s = Math.sin(ph);
+  const push = Math.abs(Math.sin(ph));
+  const pump = (0.42 + 0.25 * drive) * (1 - 0.5 * tired);
+  const lean = 0.26 + 0.08 * drive + 0.16 * tired + 0.05 * push;
+  const b: Body = {
+    pelvisY: 0.9 + 0.045 * push - 0.03 * tired,
+    spine: lean,
+    // gaze up the stairs to the light (the lean is compensated), dipping when it hurts
+    head: [-(0.32 + 0.18 * drive) * look + 0.35 * tired * (0.5 + 0.5 * Math.sin(ph * 0.5)), 0.06 * Math.sin(ph * 0.5)],
+    hipL: [hl, 0.04],
+    hipR: [hr, 0.04],
+    knL: kl,
+    knR: kr,
+    shL: [pump * s - 0.1, 0.09],
+    shR: [-pump * s - 0.1, 0.09],
+    elL: 0.95 + 0.25 * drive,
+    elR: 0.95 + 0.25 * drive,
+  };
+  if (wound) {
+    // her left hand pressed on the wound on her side
+    b.shL = [-0.28, 0.32];
+    b.elL = 1.95;
+  }
+  return b;
+}
+function gait(x: number, p: number, o: Drive = {}): { pos: V3; body: Body } {
   const pos = stairPos(x, p);
-  if (p <= 0 || p > TOP + 0.5) return { pos, body: walkBody(p * Math.PI, 0, 0.05 + 0.25 * tired) };
-  return { pos, body: climbBody(p * Math.PI, tired) };
+  const bob: V3 = [0, 0.03 * Math.abs(Math.sin(p * Math.PI)), 0];
+  if (p <= 0) return { pos, body: walkBody(p * Math.PI, 0, -0.1 * (o.look ?? 1)) };
+  if (p > TOP + 0.3) {
+    // on the summit: chest opens, head up into the light
+    const k = sm(prog(p, TOP + 0.3, TOP + 1.6));
+    const w = walkBody(p * Math.PI, 0, 0);
+    return { pos, body: mixB(w, { ...w, spine: -0.06, head: [-0.5, 0], shL: [w.shL![0], 0.22], shR: [w.shR![0], 0.22] }, k) };
+  }
+  const k = sm(prog(p, 0, 0.8));
+  const c = stairClimb(p * Math.PI, o);
+  return { pos: add(pos, bob), body: k < 1 ? mixB(walkBody(p * Math.PI), c, k) : c };
 }
 function obsState(t: number) {
   const s = track(OBS, t);
-  const walk = gait(XO, s, 0.6);
+  const after = sm(prog(t, B.go, B.go + 2));
+  const walk = gait(XO, s, { drive: 0.55 + 0.45 * after, tired: 0.65 - 0.3 * after, wound: true, look: 0.6 + 0.4 * after });
   if (t < B.fall || t > B.go + 0.6) return walk;
   const base = stairPos(XO, 11);
   if (t < B.kneel) { const k = ease(prog(t, B.fall, B.kneel)); return { pos: lv(walk.pos, base, k), body: mixB(walk.body, FALL, k) }; }
@@ -67,13 +121,13 @@ function obsState(t: number) {
 }
 function shadowState(t: number) {
   const s = track(SHAD, t);
-  const g = gait(XO, s);
+  const g = gait(XO, s, { drive: 0.2, tired: 0.1, look: 0 });
   // reaches toward her while she is down
   const reach = sm(prog(t, 12.2, 13.4)) * (1 - sm(prog(t, 15.4, 16.4)));
   const b = P(g.body);
   return { pos: g.pos, body: { ...b, shR: [lerp(b.shR[0], -1.25, reach), 0.1] as [number, number], elR: lerp(b.elR, 0.15, reach), spine: b.spine + 0.15 * reach } };
 }
-const discState = (t: number) => gait(XD, track(DISC, t));
+const discState = (t: number) => gait(XD, track(DISC, t), { drive: 1, tired: 0, look: 1 });
 
 // ---------------------------------------------------------------- pieces
 const OUTFIT: Record<string, Record<string, string> | undefined> = {
@@ -202,13 +256,13 @@ function mainCam(t: number): Cam {
   const wide = 1 - sm(prog(t, 0, 4.5));
   const close = sm(prog(t, 10.3, 11.6)) * (1 - sm(prog(t, 15.6, 17.4)));
   const end = sm(prog(t, 26.4, 30.5));
-  const mid2 = sm(prog(t, 16.5, 18.5)) * (1 - end);
-  const z = lerp(1.0, 1.55, wide) * lerp(1, 1.25, end) * lerp(1, 1.45, mid2);
+  const mid2 = sm(prog(t, 15.4, 17.0)) * (1 - end);
+  const z = lerp(1.0, 1.55, wide) * lerp(1, 1.25, end) * lerp(1, 1.85, mid2);
   const base: V3 = add(mid, [6.2 * z, 5.0 * z, 6.6 * z]);
   const obsFocus: V3 = add(o, [0, 0.8, 0]);
   const closePos: V3 = add(obsFocus, [3.4, 2.4, 3.6]);
   const pos = lv(base, closePos, close);
-  const target = lv(add(mid, [0, -0.2, -0.6]), add(obsFocus, [-0.4, 0, -0.4]), close);
+  const target = lv(add(mid, [-0.45, -0.2, -0.6]), add(obsFocus, [-0.4, 0, -0.4]), close);
   const focus = lv(mid, obsFocus, close);
   const wideCam: Cam = { pos, target, fov: 34, focus };
   // shot 1: crane from the first step (shoes, LED, numbers) up to the wide
