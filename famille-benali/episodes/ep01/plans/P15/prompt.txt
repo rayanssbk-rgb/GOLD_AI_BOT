@@ -12,7 +12,7 @@ CHARACTERS:
 
 ACTION: Whole family in frame: Nadia in the kitchen doorway with her spoon shaking her head, Mohamed sits back down satisfied, Yanis drops onto the sofa defeated, Adam still laughing on the rug, Ines laughing as she taps 'post' on her phone. Hold on the laugh.
 CAMERA: wide shot of the whole living room. Vertical 9:16 framing, cinematic, fluid natural body motion, characters react to each other.
-DURATION: 2.7s (generate 5s, trimmed in edit)
+DURATION: 2.6s (generate 5s, trimmed in edit)
 LIP-SYNC: Inès speaks, use voix_ines.wav
 
 NEGATIVE: children cartoon, flat 2D, anime, plastic skin, deformed hands, extra fingers, text, watermark, logo, brand marks

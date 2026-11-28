@@ -8,7 +8,7 @@ CHARACTERS:
 
 ACTION: Yanis walks into the living room scrolling on his phone, relaxed, shrugging innocently as he talks.
 CAMERA: medium shot from the sofa, hallway door in the background. Vertical 9:16 framing, cinematic, fluid natural body motion, characters react to each other.
-DURATION: 1.8s (generate 5s, trimmed in edit)
+DURATION: 2.1s (generate 5s, trimmed in edit)
 LIP-SYNC: Yanis speaks, use voix_yanis.wav
 
 NEGATIVE: children cartoon, flat 2D, anime, plastic skin, deformed hands, extra fingers, text, watermark, logo, brand marks

@@ -8,7 +8,7 @@ CHARACTERS:
 
 ACTION: Yanis defensive, gesturing with his phone, arguing that it is limited edition and an investment.
 CAMERA: medium close-up, handheld. Vertical 9:16 framing, cinematic, fluid natural body motion, characters react to each other.
-DURATION: 3.3s (generate 5s, trimmed in edit)
+DURATION: 3.4s (generate 5s, trimmed in edit)
 LIP-SYNC: Yanis speaks, use voix_yanis.wav
 
 NEGATIVE: children cartoon, flat 2D, anime, plastic skin, deformed hands, extra fingers, text, watermark, logo, brand marks

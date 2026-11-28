@@ -8,7 +8,7 @@ CHARACTERS:
 
 ACTION: Adam bursts out laughing so hard he slides off the sofa onto the rug, holding his stomach.
 CAMERA: medium shot. Vertical 9:16 framing, cinematic, fluid natural body motion, characters react to each other.
-DURATION: 1.5s (generate 5s, trimmed in edit)
+DURATION: 1.8s (generate 5s, trimmed in edit)
 LIP-SYNC: Adam speaks, use voix_adam.wav
 
 NEGATIVE: children cartoon, flat 2D, anime, plastic skin, deformed hands, extra fingers, text, watermark, logo, brand marks

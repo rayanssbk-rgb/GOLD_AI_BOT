@@ -8,7 +8,7 @@ CHARACTERS:
 
 ACTION: Mohamed is slumped relaxed on the grey sofa, TV football in the background, checking his banking app on his phone with reading glasses. His face freezes, eyebrows shoot up, he leans toward the screen in disbelief, then turns his head toward the hallway and shouts.
 CAMERA: medium close-up, slow push-in to close-up. Vertical 9:16 framing, cinematic, fluid natural body motion, characters react to each other.
-DURATION: 4.2s (generate 5s, trimmed in edit)
+DURATION: 5.3s (generate 5s, trimmed in edit)
 LIP-SYNC: Mohamed speaks, use voix_mohamed.wav
 
 NEGATIVE: children cartoon, flat 2D, anime, plastic skin, deformed hands, extra fingers, text, watermark, logo, brand marks

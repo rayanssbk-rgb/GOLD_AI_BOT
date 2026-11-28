@@ -8,5 +8,45 @@
       "stability": 0.5,
       "similarity": 0.8
     }
+  },
+  "nadia": {
+    "voice_id": "MwyLOX8cIF3Wee2kIUhj",
+    "nom": "Nadia Benali",
+    "essai_retenu": "essai3.mp3",
+    "modele_tts": "eleven_v3",
+    "reglages": {
+      "stability": 0.5,
+      "similarity": 0.8
+    }
+  },
+  "yanis": {
+    "voice_id": "lq0m97eEd2Ds9VlgISKi",
+    "nom": "Yanis Benali",
+    "essai_retenu": "essai3.mp3",
+    "modele_tts": "eleven_v3",
+    "reglages": {
+      "stability": 0.5,
+      "similarity": 0.8
+    }
+  },
+  "adam": {
+    "voice_id": "ifjo1D7QbBYKtVDwExOm",
+    "nom": "Adam Benali",
+    "essai_retenu": "essai1.mp3",
+    "modele_tts": "eleven_v3",
+    "reglages": {
+      "stability": 0.5,
+      "similarity": 0.8
+    }
+  },
+  "ines": {
+    "voice_id": "RtduslNrJKdbY8v0kThj",
+    "nom": "Inès Benali",
+    "essai_retenu": "essai1.mp3",
+    "modele_tts": "eleven_v3",
+    "reglages": {
+      "stability": 0.5,
+      "similarity": 0.8
+    }
   }
 }

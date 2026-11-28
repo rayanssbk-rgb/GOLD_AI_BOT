@@ -8,7 +8,7 @@ CHARACTERS:
 
 ACTION: Mohamed slowly stands up from the sofa, takes off his reading glasses, stern and calm, staring at Yanis.
 CAMERA: low angle, medium shot. Vertical 9:16 framing, cinematic, fluid natural body motion, characters react to each other.
-DURATION: 2.2s (generate 5s, trimmed in edit)
+DURATION: 3.1s (generate 5s, trimmed in edit)
 LIP-SYNC: Mohamed speaks, use voix_mohamed.wav
 
 NEGATIVE: children cartoon, flat 2D, anime, plastic skin, deformed hands, extra fingers, text, watermark, logo, brand marks
