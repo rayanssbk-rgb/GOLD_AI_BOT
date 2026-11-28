@@ -9,7 +9,7 @@ CHARACTERS:
 
 ACTION: Mohamed, totally calm and deadpan, delivers the punishment slowly; Yanis's confident face collapses.
 CAMERA: close-up on Mohamed, deadpan, then cut to Yanis's face falling. Vertical 9:16 framing, cinematic, fluid natural body motion, characters react to each other.
-DURATION: 4.4s (generate 5s, trimmed in edit)
+DURATION: 4.2s (generate 5s, trimmed in edit)
 LIP-SYNC: Mohamed speaks, use voix_mohamed.wav
 
 NEGATIVE: children cartoon, flat 2D, anime, plastic skin, deformed hands, extra fingers, text, watermark, logo, brand marks

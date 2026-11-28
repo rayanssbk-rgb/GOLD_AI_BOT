@@ -1,7 +1,8 @@
 """Resserre le rythme : tout silence de plus de 0,30 s dans le dialogue est ramené à 0,20 s (fondu court).
 Met à jour dialogue.wav, les pistes par personnage et TOUS les minutages (segments + caractères),
 donc sous-titres et lip-sync restent synchronisés. À lancer juste après generate_dialogue.py.
-Usage : python scripts/tighten.py ep01 [--max 0.30] [--garde 0.20]
+Usage : python scripts/tighten.py ep01 [--max 0.30] [--garde 0.20] [--tempo 1.04]
+(--tempo : accélération légère sans changer la hauteur, si l'épisode dépasse 45 s)
 """
 import os, sys
 import numpy as np, soundfile as sf
@@ -48,7 +49,29 @@ def main(ep, mx, keep):
     print(f'{len(cuts)} silences resserrés : {old:.1f}s -> {tm["duree"]:.1f}s')
 
 
+def tempo(ep, f):
+    """accélère légèrement (sans changer la hauteur de voix) et recale tous les minutages"""
+    d = os.path.join(ROOT, 'episodes', ep, 'audio')
+    for p in [os.path.join(d, 'dialogue.wav')] + [os.path.join(d, 'par_perso', x) for x in os.listdir(os.path.join(d, 'par_perso'))]:
+        import subprocess
+        subprocess.run(['ffmpeg', '-v', 'error', '-y', '-i', p, '-af', f'atempo={f}', p + '.tmp.wav'], check=True)
+        os.replace(p + '.tmp.wav', p)
+    tm = jload(os.path.join(d, 'timing.json'))
+    for s in tm['segments']:
+        s['debut'] /= f; s['fin'] /= f
+    for k in ('alignment', 'normalized_alignment'):
+        a = tm.get(k)
+        if a:
+            for kk in ('character_start_times_seconds', 'character_end_times_seconds'):
+                a[kk] = [t / f for t in a[kk]]
+    tm['duree'] /= f; tm['tempo'] = f
+    jsave(os.path.join(d, 'timing.json'), tm)
+    print(f'tempo x{f} -> {tm["duree"]:.1f}s')
+
+
 if __name__ == '__main__':
     a = sys.argv
     opt = lambda k, v: float(a[a.index(k) + 1]) if k in a else v
     main(a[1], opt('--max', 0.30), opt('--garde', 0.20))
+    if '--tempo' in a:
+        tempo(a[1], opt('--tempo', 1.0))

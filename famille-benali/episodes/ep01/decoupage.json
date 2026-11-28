@@ -5,7 +5,7 @@
     {
       "id": "P01",
       "debut": 0.0,
-      "fin": 5.349,
+      "fin": 4.903,
       "decor": "salon",
       "persos": [
         "mohamed"
@@ -17,8 +17,8 @@
     },
     {
       "id": "P02",
-      "debut": 5.349,
-      "fin": 7.45,
+      "debut": 4.903,
+      "fin": 6.981,
       "decor": "salon",
       "persos": [
         "yanis"
@@ -30,8 +30,8 @@
     },
     {
       "id": "P03",
-      "debut": 7.45,
-      "fin": 10.091,
+      "debut": 6.981,
+      "fin": 9.462,
       "decor": "salon",
       "persos": [
         "mohamed"
@@ -43,8 +43,8 @@
     },
     {
       "id": "P04",
-      "debut": 10.091,
-      "fin": 12.591,
+      "debut": 9.462,
+      "fin": 12.355,
       "decor": "salon",
       "persos": [
         "yanis"
@@ -56,8 +56,8 @@
     },
     {
       "id": "P05",
-      "debut": 12.591,
-      "fin": 14.512,
+      "debut": 12.355,
+      "fin": 14.356,
       "decor": "salon",
       "persos": [
         "adam"
@@ -69,8 +69,8 @@
     },
     {
       "id": "P06",
-      "debut": 14.512,
-      "fin": 16.672,
+      "debut": 14.356,
+      "fin": 16.625,
       "decor": "salon",
       "persos": [
         "yanis",
@@ -83,8 +83,8 @@
     },
     {
       "id": "P07",
-      "debut": 16.672,
-      "fin": 20.292,
+      "debut": 16.625,
+      "fin": 19.923,
       "decor": "cuisine",
       "persos": [
         "nadia"
@@ -96,8 +96,8 @@
     },
     {
       "id": "P08",
-      "debut": 20.292,
-      "fin": 23.202,
+      "debut": 19.923,
+      "fin": 23.221,
       "decor": "salon",
       "persos": [
         "ines"
@@ -109,8 +109,8 @@
     },
     {
       "id": "P09",
-      "debut": 23.202,
-      "fin": 26.282,
+      "debut": 23.221,
+      "fin": 25.779,
       "decor": "salon",
       "persos": [
         "mohamed"
@@ -122,8 +122,8 @@
     },
     {
       "id": "P10",
-      "debut": 26.282,
-      "fin": 28.601,
+      "debut": 25.779,
+      "fin": 28.067,
       "decor": "salon",
       "persos": [
         "yanis"
@@ -135,8 +135,8 @@
     },
     {
       "id": "P11",
-      "debut": 28.601,
-      "fin": 32.742,
+      "debut": 28.067,
+      "fin": 32.289,
       "decor": "salon",
       "persos": [
         "mohamed",
@@ -149,8 +149,8 @@
     },
     {
       "id": "P12",
-      "debut": 32.742,
-      "fin": 34.542,
+      "debut": 32.289,
+      "fin": 34.019,
       "decor": "salon",
       "persos": [
         "adam"
@@ -162,8 +162,8 @@
     },
     {
       "id": "P13",
-      "debut": 34.542,
-      "fin": 37.903,
+      "debut": 34.019,
+      "fin": 37.962,
       "decor": "salon",
       "persos": [
         "yanis"
@@ -175,8 +175,8 @@
     },
     {
       "id": "P14",
-      "debut": 37.903,
-      "fin": 42.323,
+      "debut": 37.962,
+      "fin": 42.202,
       "decor": "salon",
       "persos": [
         "mohamed",
@@ -189,8 +189,8 @@
     },
     {
       "id": "P15",
-      "debut": 42.323,
-      "fin": 44.91,
+      "debut": 42.202,
+      "fin": 44.992,
       "decor": "salon",
       "persos": [
         "mohamed",

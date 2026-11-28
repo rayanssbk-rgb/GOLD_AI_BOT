@@ -9,7 +9,7 @@ CHARACTERS:
 
 ACTION: Yanis turns sharply toward Adam, pointing at him, annoyed; Adam keeps smirking.
 CAMERA: over-the-shoulder from behind Adam. Vertical 9:16 framing, cinematic, fluid natural body motion, characters react to each other.
-DURATION: 2.2s (generate 5s, trimmed in edit)
+DURATION: 2.3s (generate 5s, trimmed in edit)
 LIP-SYNC: Yanis speaks, use voix_yanis.wav
 
 NEGATIVE: children cartoon, flat 2D, anime, plastic skin, deformed hands, extra fingers, text, watermark, logo, brand marks

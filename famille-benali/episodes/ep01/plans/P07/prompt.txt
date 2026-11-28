@@ -8,7 +8,7 @@ CHARACTERS:
 
 ACTION: Nadia in her apron at the stove, wooden spoon in hand, turns toward the living room and shouts, exasperated, steam rising from the pots.
 CAMERA: wide shot through the kitchen doorway, then quick push-in. Vertical 9:16 framing, cinematic, fluid natural body motion, characters react to each other.
-DURATION: 3.6s (generate 5s, trimmed in edit)
+DURATION: 3.3s (generate 5s, trimmed in edit)
 LIP-SYNC: Nadia speaks, use voix_nadia.wav
 
 NEGATIVE: children cartoon, flat 2D, anime, plastic skin, deformed hands, extra fingers, text, watermark, logo, brand marks

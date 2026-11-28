@@ -1,0 +1,166 @@
+{
+  "mohamed": [
+    {
+      "nom": "Yassin",
+      "voice_id": "HDOMjJHzRAmQp1WILXWb",
+      "intelligibilite": 0.7,
+      "proba_fr": 0.537,
+      "duree": 8.4
+    },
+    {
+      "nom": "Tariq",
+      "voice_id": "hiDWCdbsrOy64l833ab2",
+      "intelligibilite": 0.76,
+      "proba_fr": 0.631,
+      "duree": 8.9
+    },
+    {
+      "nom": "Jawad",
+      "voice_id": "PmGnwGtnBs40iau7JfoF",
+      "intelligibilite": 0.69,
+      "proba_fr": 0.586,
+      "duree": 11.0
+    },
+    {
+      "nom": "Badr",
+      "voice_id": "pNCAEmZFNur1TpjR9TC0",
+      "intelligibilite": 0.71,
+      "proba_fr": 0.423,
+      "duree": 9.1
+    },
+    {
+      "nom": "Rachid",
+      "voice_id": "0Up3glsGKvZx3M5JI0XB",
+      "intelligibilite": 0.68,
+      "proba_fr": 0.364,
+      "duree": 9.7
+    },
+    {
+      "nom": "Adil",
+      "voice_id": "j3nEsGUwbVLzxIkOwfXY",
+      "intelligibilite": 0.64,
+      "proba_fr": 0.802,
+      "duree": 9.8
+    }
+  ],
+  "nadia": [
+    {
+      "nom": "Ghizlane",
+      "voice_id": "OfGMGmhShO8iL9jCkXy8",
+      "intelligibilite": 0.83,
+      "proba_fr": 0.982,
+      "duree": 8.0
+    },
+    {
+      "nom": "Ghalia",
+      "voice_id": "ugVysa6SU3kBjf7zmeSV",
+      "intelligibilite": 0.96,
+      "proba_fr": 0.993,
+      "duree": 8.6
+    },
+    {
+      "nom": "Loubna",
+      "voice_id": "C5sH6vPhsC46AKaQmXXJ",
+      "intelligibilite": 0.9,
+      "proba_fr": 0.981,
+      "duree": 9.0
+    }
+  ],
+  "yanis": [
+    {
+      "nom": "KarimBen",
+      "voice_id": "y7xXnNGaYeVHZS9szDxN",
+      "intelligibilite": 0.85,
+      "proba_fr": 0.965,
+      "duree": 6.6
+    },
+    {
+      "nom": "Mehdi",
+      "voice_id": "Vsm8jlUqY4LxvQNtr7R6",
+      "intelligibilite": 0.88,
+      "proba_fr": 0.997,
+      "duree": 7.0
+    },
+    {
+      "nom": "Houssam",
+      "voice_id": "NMWQDQipWXm8HlCLKapi",
+      "intelligibilite": 0.83,
+      "proba_fr": 0.971,
+      "duree": 8.7
+    },
+    {
+      "nom": "Khalil",
+      "voice_id": "NrhVFquWMOHTRNOAY8AO",
+      "intelligibilite": 0.87,
+      "proba_fr": 0.994,
+      "duree": 7.0
+    },
+    {
+      "nom": "Ali",
+      "voice_id": "5lXEHh42xcasVuJofypc",
+      "intelligibilite": 0.72,
+      "proba_fr": 0.994,
+      "duree": 6.3
+    }
+  ],
+  "adam": [
+    {
+      "nom": "Anas",
+      "voice_id": "JyOZ8fOJkYGmajIlFsJ4",
+      "intelligibilite": 0.89,
+      "proba_fr": 0.999,
+      "duree": 7.7
+    },
+    {
+      "nom": "Soljatech",
+      "voice_id": "9wgywDFq3hOfIPOhPVMc",
+      "intelligibilite": 0.86,
+      "proba_fr": 0.998,
+      "duree": 7.4
+    },
+    {
+      "nom": "Abderrahmane",
+      "voice_id": "pchObSjcWci9U7IOuAsg",
+      "intelligibilite": 0.86,
+      "proba_fr": 0.992,
+      "duree": 7.8
+    },
+    {
+      "nom": "Hamid",
+      "voice_id": "A9ATTqUUQ6GHu0coCz8t",
+      "intelligibilite": 0.79,
+      "proba_fr": 0.996,
+      "duree": 7.4
+    },
+    {
+      "nom": "Ezzine",
+      "voice_id": "hIvt4L9VXpeewKZtybZ7",
+      "intelligibilite": 0.86,
+      "proba_fr": 0.997,
+      "duree": 9.2
+    }
+  ],
+  "ines": [
+    {
+      "nom": "Loubna",
+      "voice_id": "C5sH6vPhsC46AKaQmXXJ",
+      "intelligibilite": 0.71,
+      "proba_fr": 0.994,
+      "duree": 7.2
+    },
+    {
+      "nom": "Ghalia",
+      "voice_id": "ugVysa6SU3kBjf7zmeSV",
+      "intelligibilite": 0.82,
+      "proba_fr": 0.984,
+      "duree": 7.1
+    },
+    {
+      "nom": "Ghizlane",
+      "voice_id": "OfGMGmhShO8iL9jCkXy8",
+      "intelligibilite": 0.9,
+      "proba_fr": 0.974,
+      "duree": 6.2
+    }
+  ]
+}

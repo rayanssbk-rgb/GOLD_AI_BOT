@@ -8,7 +8,7 @@ CHARACTERS:
 
 ACTION: Adam sprawled on the other end of the sofa, headphones around his neck, phone in hand, laughing and pointing at his brother, teasing.
 CAMERA: medium shot on the sofa. Vertical 9:16 framing, cinematic, fluid natural body motion, characters react to each other.
-DURATION: 1.9s (generate 5s, trimmed in edit)
+DURATION: 2.0s (generate 5s, trimmed in edit)
 LIP-SYNC: Adam speaks, use voix_adam.wav
 
 NEGATIVE: children cartoon, flat 2D, anime, plastic skin, deformed hands, extra fingers, text, watermark, logo, brand marks

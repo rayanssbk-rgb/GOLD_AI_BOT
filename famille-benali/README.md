@@ -7,7 +7,7 @@
 | Fiches des 5 personnages (apparence, personnalité, voix) | ✅ `personnages/personnages.json` |
 | Décors : salon, cuisine, cité HLM | ✅ `decors/decors.json` |
 | **5 voix permanentes ElevenLabs** (Voice IDs) | ✅ créées, `config/voices.json` |
-| Épisode 1 « Le père découvre les 200 € » : dialogue joué (44,1 s, une seule prise multi-voix, silences resserrés) | ✅ `episodes/ep01/audio/` |
+| Épisode 1 « Le père découvre les 200 € » : dialogue joué (44,2 s, une seule prise multi-voix, silences resserrés) | ✅ `episodes/ep01/audio/` |
 | Sous-titres synchronisés mot à mot (SRT + style TikTok ASS) | ✅ `episodes/ep01/sous-titres/` |
 | Données de synchro labiale (ouverture + visèmes, 30 i/s) | ✅ `episodes/ep01/lipsync/` |
 | Découpage en 15 plans + prompts + audio par plan | ✅ `episodes/ep01/plans/` |
@@ -30,7 +30,7 @@ scripts/       pipeline
 ## Pipeline d'un épisode
 
 ```bash
-python scripts/create_voices.py          # une seule fois : ne remplace jamais une voix existante
+python scripts/casting.py                # casting de voix réelles (bibliothèque) ; ou create_voices.py (voix générées)
 python scripts/generate_dialogue.py ep01 # dialogue joué + timings (crédits ElevenLabs)
 python scripts/tighten.py ep01           # resserre les blancs (rythme TikTok)
 python scripts/sync_decoupage.py ep01    # recale les plans sur le minutage
@@ -45,11 +45,25 @@ python scripts/assemble.py ep01 [--ambiance salon.wav]
 Nouvel épisode : copier `episodes/ep01/script.json` et `decoupage.json`, changer les répliques et les plans ;
 les voix et les fiches ne bougent pas.
 
-## Voix : accent marocain
+## Voix : accent marocain, voix réelles
 
-Parents nés au Maroc (accent marqué), enfants nés en France (accent plus léger). Français majoritaire
-avec quelques mots de darija ; lexique dans `episodes/ep01/script.json` (`lexique_darija`).
-Anciennes voix (v1, accent léger) gardées pour mémoire dans `config/voices_historique.json`.
+Les 5 voix viennent de la **bibliothèque ElevenLabs** : voix clonées de vraies personnes marocaines (darija),
+qu'on fait parler en français ; c'est ce qui donne l'accent fort et le grain humain (moins « synthétique » que
+des voix générées). Choix fait par casting (`scripts/casting.py`, écoute dans `voix/casting/<perso>_ecoute.mp3`,
+mesures dans `voix/casting/casting.json`) : intelligibilité en français + force de l'accent + hauteur adaptée à l'âge.
+
+| Personnage | Voix (bibliothèque) |
+|---|---|
+| Mohamed | Yassin : puissante, rauque |
+| Nadia | Ghizlane : chaleureuse, expressive |
+| Yanis | Houssam : grave, détendu |
+| Adam | Anas : jeune, énergique |
+| Inès | Ghalia : naturelle, jeune |
+
+Français majoritaire avec quelques mots de darija ; lexique dans `episodes/ep01/script.json` (`lexique_darija`).
+Voix précédentes (générées) gardées pour mémoire dans `config/voices_historique.json`.
+⚠️ Une voix de bibliothèque appartient à son auteur, qui peut la retirer (ElevenLabs prévient alors à l'avance) :
+garder les extraits de casting comme référence.
 
 ## Continuité
 

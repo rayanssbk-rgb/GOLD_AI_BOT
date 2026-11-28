@@ -1,8 +1,9 @@
 {
   "mohamed": {
-    "voice_id": "hK5YyFDRcGm3QxUdUxo7",
+    "voice_id": "HDOMjJHzRAmQp1WILXWb",
     "nom": "Mohamed Benali",
-    "essai_retenu": "essai3.mp3",
+    "source": "bibliothèque ElevenLabs : « Yassin » (voix réelle marocaine)",
+    "casting": "voix/casting/mohamed/Yassin.mp3",
     "modele_tts": "eleven_v3",
     "reglages": {
       "stability": 0.5,
@@ -10,9 +11,10 @@
     }
   },
   "nadia": {
-    "voice_id": "MwyLOX8cIF3Wee2kIUhj",
+    "voice_id": "OfGMGmhShO8iL9jCkXy8",
     "nom": "Nadia Benali",
-    "essai_retenu": "essai3.mp3",
+    "source": "bibliothèque ElevenLabs : « Ghizlane » (voix réelle marocaine)",
+    "casting": "voix/casting/nadia/Ghizlane.mp3",
     "modele_tts": "eleven_v3",
     "reglages": {
       "stability": 0.5,
@@ -20,9 +22,10 @@
     }
   },
   "yanis": {
-    "voice_id": "lq0m97eEd2Ds9VlgISKi",
+    "voice_id": "NMWQDQipWXm8HlCLKapi",
     "nom": "Yanis Benali",
-    "essai_retenu": "essai3.mp3",
+    "source": "bibliothèque ElevenLabs : « Houssam » (voix réelle marocaine)",
+    "casting": "voix/casting/yanis/Houssam.mp3",
     "modele_tts": "eleven_v3",
     "reglages": {
       "stability": 0.5,
@@ -30,9 +33,10 @@
     }
   },
   "adam": {
-    "voice_id": "ifjo1D7QbBYKtVDwExOm",
+    "voice_id": "JyOZ8fOJkYGmajIlFsJ4",
     "nom": "Adam Benali",
-    "essai_retenu": "essai1.mp3",
+    "source": "bibliothèque ElevenLabs : « Anas » (voix réelle marocaine)",
+    "casting": "voix/casting/adam/Anas.mp3",
     "modele_tts": "eleven_v3",
     "reglages": {
       "stability": 0.5,
@@ -40,9 +44,10 @@
     }
   },
   "ines": {
-    "voice_id": "RtduslNrJKdbY8v0kThj",
+    "voice_id": "ugVysa6SU3kBjf7zmeSV",
     "nom": "Inès Benali",
-    "essai_retenu": "essai1.mp3",
+    "source": "bibliothèque ElevenLabs : « Ghalia » (voix réelle marocaine)",
+    "casting": "voix/casting/ines/Ghalia.mp3",
     "modele_tts": "eleven_v3",
     "reglages": {
       "stability": 0.5,

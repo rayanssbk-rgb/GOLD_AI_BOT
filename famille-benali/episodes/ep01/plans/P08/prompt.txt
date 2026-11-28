@@ -8,7 +8,7 @@ CHARACTERS:
 
 ACTION: Ines, long dark hair, earbuds in, discreetly holds her phone up filming the argument, whispering with a mischievous grin, the red recording dot glowing on her screen.
 CAMERA: close-up, she is half-hidden behind the display cabinet. Vertical 9:16 framing, cinematic, fluid natural body motion, characters react to each other.
-DURATION: 2.9s (generate 5s, trimmed in edit)
+DURATION: 3.3s (generate 5s, trimmed in edit)
 LIP-SYNC: Inès speaks, use voix_ines.wav
 
 NEGATIVE: children cartoon, flat 2D, anime, plastic skin, deformed hands, extra fingers, text, watermark, logo, brand marks
