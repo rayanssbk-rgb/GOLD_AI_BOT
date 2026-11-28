@@ -1,0 +1,14 @@
+Stylized cinematic 3D animation, high-end video-game cutscene quality. Human proportions with a light cartoon stylization, expressive detailed faces, soft natural subsurface skin, groomed 3D hair, cloth with real folds and fabric texture, expressive eyes, warm directional key light, soft realistic shadows, subtle specular highlights, shallow depth of field, clean detailed professional render. NOT a children's cartoon. No logos, no visible brand marks.
+
+SETTING: Living room of a 4-room council flat on the 7th floor of a French HLM tower, evening. Large grey fabric sofa with cushions, big flat-screen TV showing a football match, low coffee table with two remotes, plastic water bottles and a tea glass, large patterned rug, glass display cabinet with decorative plates and a tea set, thick burgundy curtains half open, balcony door showing lit windows of the neighbouring concrete towers at dusk. Lived-in details: phone charger, folded blanket, slippers.
+LIGHTING: Warm, homely evening light: warm ceiling lamp and floor lamp, cool blue TV glow on faces, blue dusk through the balcony window.
+
+CHARACTERS:
+- Yanis: North African man, 22, about 1m80, black hair with a sharp fade, thin shaped beard, black technical fleece tracksuit (no logo), chunky running sneakers, black crossbody bag, smartphone in hand. (match the reference sheet exactly)
+
+ACTION: Yanis walks into the living room scrolling on his phone, relaxed, shrugging innocently as he talks.
+CAMERA: medium shot from the sofa, hallway door in the background. Vertical 9:16 framing, cinematic, fluid natural body motion, characters react to each other.
+DURATION: 1.8s (generate 5s, trimmed in edit)
+LIP-SYNC: Yanis speaks, use voix_yanis.wav
+
+NEGATIVE: children cartoon, flat 2D, anime, plastic skin, deformed hands, extra fingers, text, watermark, logo, brand marks

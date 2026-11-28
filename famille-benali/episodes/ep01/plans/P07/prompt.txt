@@ -1,0 +1,14 @@
+Stylized cinematic 3D animation, high-end video-game cutscene quality. Human proportions with a light cartoon stylization, expressive detailed faces, soft natural subsurface skin, groomed 3D hair, cloth with real folds and fabric texture, expressive eyes, warm directional key light, soft realistic shadows, subtle specular highlights, shallow depth of field, clean detailed professional render. NOT a children's cartoon. No logos, no visible brand marks.
+
+SETTING: Kitchen of the same flat: big family table with oilcloth, fridge covered with magnets and school papers, open cupboards full of food, pots simmering on the stove, spice jars, worktop with chopped vegetables, dishes drying, a wooden spoon.
+LIGHTING: Warm tungsten kitchen light with steam catching the light.
+
+CHARACTERS:
+- Nadia: North African woman, 44, dark hair tied in a bun, very expressive face, colourful patterned home dress or comfy set, apron when cooking, phone always nearby. (match the reference sheet exactly)
+
+ACTION: Nadia in her apron at the stove, wooden spoon in hand, turns toward the living room and shouts, exasperated, steam rising from the pots.
+CAMERA: wide shot through the kitchen doorway, then quick push-in. Vertical 9:16 framing, cinematic, fluid natural body motion, characters react to each other.
+DURATION: 2.0s (generate 5s, trimmed in edit)
+LIP-SYNC: Nadia speaks, use voix_nadia.wav
+
+NEGATIVE: children cartoon, flat 2D, anime, plastic skin, deformed hands, extra fingers, text, watermark, logo, brand marks

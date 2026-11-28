@@ -1,0 +1,70 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Sub,Inter Display Black,78,&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,-1,0,0,0,100,100,0,0,1,6,2,2,90,90,560,1
+Style: Nom,Inter Display Black,44,&H00FFFFFF,&H00FFFFFF,&H00000000,&H64000000,-1,0,0,0,100,100,2,0,1,4,1,2,90,90,660,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.07,0:00:01.33,Sub,mohamed,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}PRÉLÈVEMENT… 200 EUROS ?!
+Dialogue: 0,0:00:01.33,0:00:03.33,Sub,mohamed,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}YANIS ! VIENS ICI
+Dialogue: 0,0:00:03.33,0:00:04.25,Sub,mohamed,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}DEUX MINUTES !
+Dialogue: 0,0:00:04.62,0:00:05.24,Sub,yanis,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}QUOI PAPA ?
+Dialogue: 0,0:00:05.24,0:00:05.83,Sub,yanis,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}J'AI RIEN FAIT,
+Dialogue: 0,0:00:05.83,0:00:06.25,Sub,yanis,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}MOI.
+Dialogue: 0,0:00:06.30,0:00:06.83,Sub,mohamed,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}C'EST QUOI LES
+Dialogue: 0,0:00:06.83,0:00:07.64,Sub,mohamed,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}200 EUROS SUR
+Dialogue: 0,0:00:07.64,0:00:08.49,Sub,mohamed,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}MON COMPTE ?
+Dialogue: 0,0:00:08.71,0:00:09.18,Sub,yanis,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}MAIS ATTENDS,
+Dialogue: 0,0:00:09.18,0:00:10.41,Sub,yanis,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}ATTENDS, LAISSE-MOI T'EXPLIQUER
+Dialogue: 0,0:00:10.84,0:00:11.68,Sub,adam,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}WALLAH FRÉROT…
+Dialogue: 0,0:00:11.68,0:00:12.57,Sub,adam,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}T'ES FINI.
+Dialogue: 0,0:00:12.63,0:00:13.56,Sub,yanis,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}MAIS FERME-LA TOI,
+Dialogue: 0,0:00:13.56,0:00:14.49,Sub,yanis,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}PERSONNE T'A PARLÉ !
+Dialogue: 0,0:00:14.56,0:00:15.16,Sub,nadia,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}VOUS ALLEZ ENCORE
+Dialogue: 0,0:00:15.16,0:00:15.80,Sub,nadia,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}CRIER COMME ÇA
+Dialogue: 0,0:00:15.80,0:00:16.65,Sub,nadia,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}TOUTE LA SOIRÉE ?
+Dialogue: 0,0:00:16.88,0:00:18.16,Sub,ines,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}CHUT… JE FILME.
+Dialogue: 0,0:00:18.16,0:00:18.62,Sub,ines,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}ÇA PART EN
+Dialogue: 0,0:00:18.62,0:00:19.61,Sub,ines,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}STORY DIRECT.
+Dialogue: 0,0:00:19.88,0:00:20.92,Sub,mohamed,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}YANIS. QU'EST-CE QUE
+Dialogue: 0,0:00:20.92,0:00:21.69,Sub,mohamed,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}T'AS ACHETÉ ?
+Dialogue: 0,0:00:22.25,0:00:23.22,Sub,yanis,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}PAPA… J'AI INVESTI
+Dialogue: 0,0:00:23.22,0:00:24.17,Sub,yanis,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}DANS MON AVENIR.
+Dialogue: 0,0:00:24.23,0:00:25.13,Sub,mohamed,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}TON AVENIR ?!
+Dialogue: 0,0:00:25.42,0:00:26.36,Sub,mohamed,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}T'AS ACHETÉ DES
+Dialogue: 0,0:00:26.36,0:00:26.94,Sub,mohamed,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}BASKETS À 200
+Dialogue: 0,0:00:26.94,0:00:27.45,Sub,mohamed,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}EUROS !
+Dialogue: 0,0:00:27.88,0:00:28.89,Sub,adam,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}NAN… J'SUIS MORT !
+Dialogue: 0,0:00:29.02,0:00:29.36,Sub,yanis,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}MAIS C'EST UNE
+Dialogue: 0,0:00:29.36,0:00:30.22,Sub,yanis,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}ÉDITION LIMITÉE,
+Dialogue: 0,0:00:30.22,0:00:30.59,Sub,yanis,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}ÇA PREND DE
+Dialogue: 0,0:00:30.59,0:00:31.20,Sub,yanis,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}LA VALEUR !
+Dialogue: 0,0:00:31.20,0:00:32.25,Sub,yanis,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}C'EST DU BUSINESS !
+Dialogue: 0,0:00:32.38,0:00:33.15,Sub,mohamed,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}LE BUSINESS…
+Dialogue: 0,0:00:33.15,0:00:33.55,Sub,mohamed,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}TU VAS LE
+Dialogue: 0,0:00:33.55,0:00:34.13,Sub,mohamed,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}FAIRE AU LAVAGE
+Dialogue: 0,0:00:34.13,0:00:35.26,Sub,mohamed,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}AUTO. DEMAIN.
+Dialogue: 0,0:00:35.26,0:00:36.09,Sub,mohamed,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}SIX HEURES.
+Dialogue: 0,0:00:36.20,0:00:37.03,Sub,ines,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}CELLE-LÀ, JE LA
+Dialogue: 0,0:00:37.03,0:00:37.77,Sub,ines,0,0,0,,{\fscx92\fscy92\t(0,90,\fscx100\fscy100)}POSTE.
+Dialogue: 1,0:00:00.00,0:00:04.16,Nom,mohamed,0,0,0,,{\c&H0066B3FF}MOHAMED
+Dialogue: 1,0:00:04.16,0:00:06.00,Nom,yanis,0,0,0,,{\c&H00FFC84A}YANIS
+Dialogue: 1,0:00:06.00,0:00:08.32,Nom,mohamed,0,0,0,,{\c&H0066B3FF}MOHAMED
+Dialogue: 1,0:00:08.32,0:00:10.40,Nom,yanis,0,0,0,,{\c&H00FFC84A}YANIS
+Dialogue: 1,0:00:10.40,0:00:12.32,Nom,adam,0,0,0,,{\c&H0060E0A0}ADAM
+Dialogue: 1,0:00:12.32,0:00:14.48,Nom,yanis,0,0,0,,{\c&H00FFC84A}YANIS
+Dialogue: 1,0:00:14.48,0:00:16.48,Nom,nadia,0,0,0,,{\c&H00A070FF}NADIA
+Dialogue: 1,0:00:16.48,0:00:19.36,Nom,ines,0,0,0,,{\c&H00E89BFF}INÈS
+Dialogue: 1,0:00:19.36,0:00:21.60,Nom,mohamed,0,0,0,,{\c&H0066B3FF}MOHAMED
+Dialogue: 1,0:00:21.60,0:00:23.92,Nom,yanis,0,0,0,,{\c&H00FFC84A}YANIS
+Dialogue: 1,0:00:23.92,0:00:27.28,Nom,mohamed,0,0,0,,{\c&H0066B3FF}MOHAMED
+Dialogue: 1,0:00:27.28,0:00:28.80,Nom,adam,0,0,0,,{\c&H0060E0A0}ADAM
+Dialogue: 1,0:00:28.80,0:00:32.08,Nom,yanis,0,0,0,,{\c&H00FFC84A}YANIS
+Dialogue: 1,0:00:32.08,0:00:35.84,Nom,mohamed,0,0,0,,{\c&H0066B3FF}MOHAMED
+Dialogue: 1,0:00:35.84,0:00:37.52,Nom,ines,0,0,0,,{\c&H00E89BFF}INÈS

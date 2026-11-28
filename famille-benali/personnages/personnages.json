@@ -1,0 +1,90 @@
+{
+  "style_global": "Stylized cinematic 3D animation, high-end video-game cutscene quality. Human proportions with a light cartoon stylization, expressive detailed faces, soft natural subsurface skin, groomed 3D hair, cloth with real folds and fabric texture, expressive eyes, warm directional key light, soft realistic shadows, subtle specular highlights, shallow depth of field, clean detailed professional render. NOT a children's cartoon. No logos, no visible brand marks.",
+  "personnages": {
+    "mohamed": {
+      "nom": "Mohamed Benali",
+      "role": "le père",
+      "age": 48,
+      "apparence": "North African man, 48, slightly heavy-set build, short black hair with grey strands, salt-and-pepper short beard, thick eyebrows, very expressive face, reading glasses, black track jacket with three side stripes (no logo), plain navy polo, home slides.",
+      "personnalite": [
+        "autoritaire mais attachant",
+        "regarde le foot et les infos",
+        "déteste gaspiller l'argent",
+        "ne comprend pas les expressions des jeunes",
+        "veut toujours le dernier mot"
+      ],
+      "voix": {
+        "description": "A 48-year-old French man from the Paris suburbs with a deep, slightly raspy, warm voice. Native French speaker with light North African intonations, never exaggerated. Calm and weary when relaxed, booming and authoritative when angry, natural sighs and breaths. Close, dry indoor recording, no reverb.",
+        "texte_essai": "Non mais attends… c'est quoi ça ? Deux cents euros ? Je travaille toute la semaine, moi, et toi tu dépenses comme ça ? Je te préviens, ce soir on va parler sérieusement. Assieds-toi."
+      }
+    },
+    "nadia": {
+      "nom": "Nadia Benali",
+      "role": "la mère",
+      "age": 44,
+      "apparence": "North African woman, 44, dark hair tied in a bun, very expressive face, colourful patterned home dress or comfy set, apron when cooking, phone always nearby.",
+      "personnalite": [
+        "parle fort",
+        "connaît tous les potins",
+        "s'occupe de la maison",
+        "passe du calme à la colère en une seconde",
+        "a toujours une remarque"
+      ],
+      "voix": {
+        "description": "A 44-year-old French woman from the Paris suburbs, warm, loud and energetic mid-range voice. Native French speaker with light North African intonations, never exaggerated. Speaks fast when annoyed, spontaneous laughs and exclamations, motherly. Close, dry indoor recording, no reverb.",
+        "texte_essai": "Mais c'est pas possible, cette maison ! Je fais à manger, je range, je nettoie, et vous, vous criez toute la soirée ! Ah non, non, non, ça va pas se passer comme ça, hein. Allez, à table !"
+      }
+    },
+    "yanis": {
+      "nom": "Yanis Benali",
+      "role": "le grand frère",
+      "age": 22,
+      "apparence": "North African man, 22, about 1m80, black hair with a sharp fade, thin shaped beard, black technical fleece tracksuit (no logo), chunky running sneakers, black crossbody bag, smartphone in hand.",
+      "personnalite": [
+        "se prend pour un entrepreneur",
+        "parle business, trading, argent",
+        "va devenir riche (selon lui)",
+        "vit sur le canapé",
+        "a toujours une excuse"
+      ],
+      "voix": {
+        "description": "A 22-year-old French man from the Paris suburbs, slightly deep, relaxed and confident young voice, casual street French. Native French speaker, very natural, a little cocky; gets nervous and fast when caught out. Close, dry indoor recording, no reverb.",
+        "texte_essai": "Wesh, écoute-moi bien. Le business, c'est une question de vision, tu vois. Moi, dans six mois, je suis à mon compte, c'est carré. Les gens rigolent, mais tranquille, on verra qui rigole à la fin."
+      }
+    },
+    "adam": {
+      "nom": "Adam Benali",
+      "role": "le petit frère",
+      "age": 16,
+      "apparence": "North African teenage boy, 16, curly hair with a taper fade, oversized grey hoodie, black cargo pants, bulky sneakers, bluetooth headphones around the neck, phone in hand.",
+      "personnalite": [
+        "insolent mais drôle",
+        "toujours sur les réseaux",
+        "répond à son père avec un calme insolent",
+        "se croit plus malin que son grand frère",
+        "adore provoquer"
+      ],
+      "voix": {
+        "description": "A young adult French male voice from the Paris suburbs, light and youthful timbre, higher than average, lively and fast delivery, ironic and amused tone, natural giggles. Native French speaker, very natural. Close, dry indoor recording, no reverb.",
+        "texte_essai": "Non mais frérot, regarde-toi, t'es matrixé. Tu parles de trading toute la journée et t'as même pas de quoi payer un kebab. J'suis mort, wallah. Attends, je mets ça sur TikTok."
+      }
+    },
+    "ines": {
+      "nom": "Inès Benali",
+      "role": "la sœur",
+      "age": 19,
+      "apparence": "North African young woman, 19, long dark hair, light make-up, long nails, baggy jeans and a trendy jacket or a tracksuit set, handbag, wireless earbuds, always on her phone.",
+      "personnalite": [
+        "toujours au téléphone",
+        "connaît tous les secrets de la famille",
+        "filme discrètement les disputes",
+        "aime provoquer ses frères",
+        "sarcastique et drôle"
+      ],
+      "voix": {
+        "description": "A 19-year-old French young woman from the Paris suburbs, clear natural voice, sarcastic and playful, modern spontaneous delivery, can whisper, laugh and mock. Native French speaker, very natural. Close, dry indoor recording, no reverb.",
+        "texte_essai": "Attends, attends, chut… je filme. Non mais regarde sa tête, j'en peux plus. Franchement, cette famille, c'est mieux que Netflix. Celle-là, je la garde pour le mariage de ma cousine."
+      }
+    }
+  }
+}
