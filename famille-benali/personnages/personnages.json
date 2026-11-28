@@ -14,8 +14,8 @@
         "veut toujours le dernier mot"
       ],
       "voix": {
-        "description": "A 48-year-old French man from the Paris suburbs with a deep, slightly raspy, warm voice. Native French speaker with light North African intonations, never exaggerated. Calm and weary when relaxed, booming and authoritative when angry, natural sighs and breaths. Close, dry indoor recording, no reverb.",
-        "texte_essai": "Non mais attends… c'est quoi ça ? Deux cents euros ? Je travaille toute la semaine, moi, et toi tu dépenses comme ça ? Je te préviens, ce soir on va parler sérieusement. Assieds-toi."
+        "description": "A 48-year-old Moroccan man born in Casablanca who has lived in a Paris suburb for 25 years. He speaks French with a strong, warm Moroccan accent: rolled r, Moroccan Darija melody and rhythm. Deep, slightly raspy, fatherly voice. Calm and weary when relaxed, booming when angry, natural sighs. Mostly French, with a few Moroccan Darija words mixed in naturally. Authentic, not a caricature. Close, dry indoor recording, no reverb.",
+        "texte_essai": "Wach nta hmeq ? Deux cents euros ! Moi je travaille toute la semaine, hein, et toi tu dépenses comme ça ? Safi, assieds-toi, wlidi. Daba, on va parler sérieusement. Hchouma, wallah, hchouma."
       }
     },
     "nadia": {
@@ -31,8 +31,8 @@
         "a toujours une remarque"
       ],
       "voix": {
-        "description": "A 44-year-old French woman from the Paris suburbs, warm, loud and energetic mid-range voice. Native French speaker with light North African intonations, never exaggerated. Speaks fast when annoyed, spontaneous laughs and exclamations, motherly. Close, dry indoor recording, no reverb.",
-        "texte_essai": "Mais c'est pas possible, cette maison ! Je fais à manger, je range, je nettoie, et vous, vous criez toute la soirée ! Ah non, non, non, ça va pas se passer comme ça, hein. Allez, à table !"
+        "description": "A 44-year-old Moroccan woman born in Fès, living in a Paris suburb. She speaks French with a clear Moroccan accent: rolled r, Moroccan Darija melody, quick Darija exclamations. Warm, loud, energetic motherly voice, speaks fast when annoyed, spontaneous laughs. Mostly French, with a few Moroccan Darija words mixed in naturally. Authentic, not a caricature. Close, dry indoor recording, no reverb.",
+        "texte_essai": "Mais c'est pas possible, cette maison ! Wallah je fais à manger, je range, je nettoie, et vous, vous criez bezzaf ! Baraka, safi, ça va pas se passer comme ça, hein. Yallah, à table, ça refroidit !"
       }
     },
     "yanis": {
@@ -48,8 +48,8 @@
         "a toujours une excuse"
       ],
       "voix": {
-        "description": "A 22-year-old French man from the Paris suburbs, slightly deep, relaxed and confident young voice, casual street French. Native French speaker, very natural, a little cocky; gets nervous and fast when caught out. Close, dry indoor recording, no reverb.",
-        "texte_essai": "Wesh, écoute-moi bien. Le business, c'est une question de vision, tu vois. Moi, dans six mois, je suis à mon compte, c'est carré. Les gens rigolent, mais tranquille, on verra qui rigole à la fin."
+        "description": "A 22-year-old French man of Moroccan descent from a Paris suburb housing estate. Street French with a Moroccan flavour in the melody and the r, Darija slang words. Slightly deep, relaxed, confident young voice, a bit cocky; nervous and fast when caught out. Mostly French, with a few Moroccan Darija words mixed in naturally. Authentic, not a caricature. Close, dry indoor recording, no reverb.",
+        "texte_essai": "Wesh, écoute-moi bien, khoya. Le business, c'est une question de vision, tu vois. Moi, dans six mois, je suis à mon compte, wallah c'est carré. Les gens rigolent, mais wakha, on verra qui rigole à la fin, inchallah."
       }
     },
     "adam": {
@@ -65,8 +65,8 @@
         "adore provoquer"
       ],
       "voix": {
-        "description": "A young adult French male voice from the Paris suburbs, light and youthful timbre, higher than average, lively and fast delivery, ironic and amused tone, natural giggles. Native French speaker, very natural. Close, dry indoor recording, no reverb.",
-        "texte_essai": "Non mais frérot, regarde-toi, t'es matrixé. Tu parles de trading toute la journée et t'as même pas de quoi payer un kebab. J'suis mort, wallah. Attends, je mets ça sur TikTok."
+        "description": "A young adult French male voice of Moroccan descent from a Paris suburb housing estate, light youthful timbre, higher than average. Street French with a Moroccan flavour in the melody and Darija slang. Lively fast delivery, ironic and amused, natural giggles. Mostly French, with a few Moroccan Darija words mixed in naturally. Authentic, not a caricature. Close, dry indoor recording, no reverb.",
+        "texte_essai": "Non mais khoya, chouf-toi, t'es matrixé. Tu parles de trading toute la journée et t'as même pas de quoi payer un kebab. Wallah j'suis mort. Attends, attends, je mets ça sur TikTok direct, zwin bezzaf."
       }
     },
     "ines": {
@@ -82,8 +82,8 @@
         "sarcastique et drôle"
       ],
       "voix": {
-        "description": "A 19-year-old French young woman from the Paris suburbs, clear natural voice, sarcastic and playful, modern spontaneous delivery, can whisper, laugh and mock. Native French speaker, very natural. Close, dry indoor recording, no reverb.",
-        "texte_essai": "Attends, attends, chut… je filme. Non mais regarde sa tête, j'en peux plus. Franchement, cette famille, c'est mieux que Netflix. Celle-là, je la garde pour le mariage de ma cousine."
+        "description": "A 19-year-old French young woman of Moroccan descent from a Paris suburb, clear natural voice, modern French with a Moroccan flavour in the melody and Darija slang words. Sarcastic, playful, spontaneous; can whisper, laugh and mock. Mostly French, with a few Moroccan Darija words mixed in naturally. Authentic, not a caricature. Close, dry indoor recording, no reverb.",
+        "texte_essai": "Attends, attends, chut… je filme. Non mais chouf sa tête, wallah j'en peux plus. Franchement, cette famille, c'est mieux que Netflix, hein. Celle-là, je la garde pour le mariage de ma cousine, inchallah."
       }
     }
   }

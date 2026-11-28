@@ -39,7 +39,7 @@ def main(only):
         v = c['voix']
         res = post('/v1/text-to-voice/design', {
             'voice_description': v['description'], 'model_id': 'eleven_ttv_v3', 'text': v['texte_essai'],
-            'seed': SEED.get(pid), 'guidance_scale': 4, 'loudness': 0.5,
+            'seed': SEED.get(pid), 'guidance_scale': 5, 'loudness': 0.5,
         }, params={'output_format': 'mp3_44100_192'})
         out = os.path.join(ROOT, 'voix', 'previews', pid)
         os.makedirs(out, exist_ok=True)

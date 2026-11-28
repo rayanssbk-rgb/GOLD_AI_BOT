@@ -1,48 +1,8 @@
 {
   "mohamed": {
-    "voice_id": "NiIu9TVU6R4iUmxfxmbt",
+    "voice_id": "hK5YyFDRcGm3QxUdUxo7",
     "nom": "Mohamed Benali",
     "essai_retenu": "essai3.mp3",
-    "modele_tts": "eleven_v3",
-    "reglages": {
-      "stability": 0.5,
-      "similarity": 0.8
-    }
-  },
-  "nadia": {
-    "voice_id": "V0kRtdAzYUDjo6o3g0gE",
-    "nom": "Nadia Benali",
-    "essai_retenu": "essai2.mp3",
-    "modele_tts": "eleven_v3",
-    "reglages": {
-      "stability": 0.5,
-      "similarity": 0.8
-    }
-  },
-  "yanis": {
-    "voice_id": "8eHZHzKs2Gpg1k9m02ZI",
-    "nom": "Yanis Benali",
-    "essai_retenu": "essai3.mp3",
-    "modele_tts": "eleven_v3",
-    "reglages": {
-      "stability": 0.5,
-      "similarity": 0.8
-    }
-  },
-  "adam": {
-    "voice_id": "fq121izCHNTbAWnBraMw",
-    "nom": "Adam Benali",
-    "essai_retenu": "essai3.mp3",
-    "modele_tts": "eleven_v3",
-    "reglages": {
-      "stability": 0.5,
-      "similarity": 0.8
-    }
-  },
-  "ines": {
-    "voice_id": "bZwliVF4BdJAP9MJdrEc",
-    "nom": "Inès Benali",
-    "essai_retenu": "essai2.mp3",
     "modele_tts": "eleven_v3",
     "reglages": {
       "stability": 0.5,

@@ -7,20 +7,96 @@
   "moment": "soir",
   "note": "Les balises entre crochets sont des indications de jeu pour ElevenLabs v3 (non prononcées, retirées des sous-titres). 'affiche' = texte des sous-titres quand il diffère de ce qui est prononcé.",
   "repliques": [
-    {"perso": "mohamed", "scene": 1, "texte": "[muttering, reading his phone] Prélèvement… deux cents euros ?! [shouting] YANIS ! VIENS ICI DEUX MINUTES !", "affiche": "Prélèvement… 200 euros ?! YANIS ! VIENS ICI DEUX MINUTES !"},
-    {"perso": "yanis", "scene": 2, "texte": "[casual, walking in] Quoi papa ? J'ai rien fait, moi."},
-    {"perso": "mohamed", "scene": 2, "texte": "[shouting] C'EST QUOI LES DEUX CENTS EUROS SUR MON COMPTE ?", "affiche": "C'EST QUOI LES 200 EUROS SUR MON COMPTE ?"},
-    {"perso": "yanis", "scene": 2, "texte": "[nervous, fast] Mais attends, attends, laisse-moi t'expliquer—"},
-    {"perso": "adam", "scene": 3, "texte": "[laughs] Wallah frérot… t'es fini."},
-    {"perso": "yanis", "scene": 3, "texte": "[annoyed] Mais ferme-la toi, personne t'a parlé !"},
-    {"perso": "nadia", "scene": 3, "texte": "[shouting from the kitchen] VOUS ALLEZ ENCORE CRIER COMME ÇA TOUTE LA SOIRÉE ?"},
-    {"perso": "ines", "scene": 3, "texte": "[whispering, amused] Chut… je filme. Ça part en story direct."},
-    {"perso": "mohamed", "scene": 4, "texte": "[stern, slow] Yanis. Qu'est-ce que t'as acheté ?"},
-    {"perso": "yanis", "scene": 4, "texte": "[proud, confident] Papa… j'ai investi dans mon avenir."},
-    {"perso": "mohamed", "scene": 4, "texte": "[short pause] [shouting] TON AVENIR ?! T'AS ACHETÉ DES BASKETS À DEUX CENTS EUROS !", "affiche": "TON AVENIR ?! T'AS ACHETÉ DES BASKETS À 200 EUROS !"},
-    {"perso": "adam", "scene": 4, "texte": "[bursts out laughing] Nan… j'suis mort !"},
-    {"perso": "yanis", "scene": 4, "texte": "[defensive] Mais c'est une édition limitée, ça prend de la valeur ! C'est du business !"},
-    {"perso": "mohamed", "scene": 4, "texte": "[deadpan] Le business… tu vas le faire au lavage auto. Demain. Six heures."},
-    {"perso": "ines", "scene": 4, "texte": "[laughing] Celle-là, je la poste."}
-  ]
+    {
+      "perso": "mohamed",
+      "scene": 1,
+      "texte": "[muttering, reading his phone] Prélèvement… deux cents euros ?! [shouting] YANIS ! AJI ! VIENS ICI DEUX MINUTES !",
+      "affiche": "Prélèvement… 200 euros ?! YANIS ! AJI ! VIENS ICI DEUX MINUTES !"
+    },
+    {
+      "perso": "yanis",
+      "scene": 2,
+      "texte": "[casual, walking in] Quoi papa ? Wallah j'ai rien fait, moi."
+    },
+    {
+      "perso": "mohamed",
+      "scene": 2,
+      "texte": "[shouting] C'EST QUOI LES DEUX CENTS EUROS SUR MON COMPTE ? HA ?",
+      "affiche": "C'EST QUOI LES 200 EUROS SUR MON COMPTE ? HA ?"
+    },
+    {
+      "perso": "yanis",
+      "scene": 2,
+      "texte": "[nervous, fast] Mais attends, attends, smahli, laisse-moi t'expliquer—"
+    },
+    {
+      "perso": "adam",
+      "scene": 3,
+      "texte": "[laughs] Wallah khoya… t'es fini."
+    },
+    {
+      "perso": "yanis",
+      "scene": 3,
+      "texte": "[annoyed] Mais ferme-la toi, personne t'a parlé !"
+    },
+    {
+      "perso": "nadia",
+      "scene": 3,
+      "texte": "[shouting from the kitchen] BARAKA ! VOUS ALLEZ ENCORE CRIER COMME ÇA TOUTE LA SOIRÉE ?"
+    },
+    {
+      "perso": "ines",
+      "scene": 3,
+      "texte": "[whispering, amused] Chut… je filme. Ça part en story direct."
+    },
+    {
+      "perso": "mohamed",
+      "scene": 4,
+      "texte": "[stern, slow] Yanis. Chnou chriti ? Qu'est-ce que t'as acheté ?"
+    },
+    {
+      "perso": "yanis",
+      "scene": 4,
+      "texte": "[proud, confident] Papa… j'ai investi dans mon avenir."
+    },
+    {
+      "perso": "mohamed",
+      "scene": 4,
+      "texte": "[short pause] [shouting] TON AVENIR ?! T'AS ACHETÉ DES BASKETS À DEUX CENTS EUROS ! HCHOUMA !",
+      "affiche": "TON AVENIR ?! T'AS ACHETÉ DES BASKETS À 200 EUROS ! HCHOUMA !"
+    },
+    {
+      "perso": "adam",
+      "scene": 4,
+      "texte": "[bursts out laughing] Nan… j'suis mort !"
+    },
+    {
+      "perso": "yanis",
+      "scene": 4,
+      "texte": "[defensive] Mais c'est une édition limitée, ça prend de la valeur ! C'est du business !"
+    },
+    {
+      "perso": "mohamed",
+      "scene": 4,
+      "texte": "[deadpan] Le business… tu vas le faire au lavage auto. Demain. Six heures. Safi."
+    },
+    {
+      "perso": "ines",
+      "scene": 4,
+      "texte": "[laughing] Celle-là, je la poste."
+    }
+  ],
+  "lexique_darija": {
+    "aji": "viens",
+    "smahli": "pardon",
+    "khoya": "mon frère",
+    "baraka": "ça suffit",
+    "chnou chriti": "qu'est-ce que t'as acheté",
+    "hchouma": "la honte",
+    "safi": "c'est fini / point final",
+    "wlidi": "mon fils",
+    "chouf": "regarde",
+    "bezzaf": "beaucoup",
+    "wakha": "d'accord"
+  }
 }
